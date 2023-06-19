@@ -23,29 +23,41 @@ export function Sidebar() {
       </div>
       <div className="sidebar-main">
         <ul>
-          <li className="group hover:text-black">
-            <FaUniversity className="icons" />
-            <Link to="/dashboard">Overview</Link>
+          <li>
+            <span className="group hover:text-white flex items-center hover:bg-[#8f3404] p-3 px-8">
+              <FaUniversity className="icons" />
+              <Link to="/dashboard">Overview</Link>
+            </span>
           </li>
-          <li className="group hover:text-black ">
-            <FaUser className="icons" />
-            <Link to="/customers">Customers</Link>
+          <li>
+            <span className="group hover:text-white flex items-center hover:bg-[#8f3404] p-3 px-6">
+              <FaUser className="icons" />
+              <Link to="/customers">Customers</Link>
+            </span>
           </li>
-          <li className="group hover:text-black ">
-            <FaChartPie className="icons" />
-            <Link to="/churn-prediction">Churn Prediction</Link>
+          <li>
+            <span className="group hover:text-white flex items-center hover:bg-[#8f3404] p-3 px-6">
+              <FaChartPie className="icons" />
+              <Link to="/churn-prediction">Churn Prediction</Link>
+            </span>
           </li>
-          <li className="group hover:text-black ">
-            <FaFolderOpen className="icons" />
-            <Link to="/report">Report</Link>
+          <li>
+            <span className="group hover:text-white flex items-center hover:bg-[#8f3404] p-3 px-6 ">
+              <FaFolderOpen className="icons" />
+              <Link to="/report">Report</Link>
+            </span>
           </li>
-          <li className="group hover:text-black ">
-            <FaGithubAlt className="icons" />
-            Churn Bot
+          <li>
+            <span className="group hover:text-white flex items-center hover:bg-[#8f3404] p-3 px-6">
+              <FaGithubAlt className="icons" />
+              Churn Bot
+            </span>
           </li>
-          <li className="group hover:text-black active:text-black">
-            <FaSignOutAlt className="icons" />
-            LogOut
+          <li>
+            <span className="group hover:text-white flex items-center hover:bg-[#8f3404] p-3 px-6">
+              <FaSignOutAlt className="icons" />
+              LogOut
+            </span>
           </li>
         </ul>
       </div>
