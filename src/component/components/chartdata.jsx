@@ -1,47 +1,55 @@
-export const PieData = [
+export const PieDataStatus = [
   {
-    name: "Open",
+    name: "Active",
     value: 40,
     fill: "#cc23b3",
   },
   {
-    name: "Closed",
+    name: "Inactive",
     value: 10,
     fill: "#2394cc",
   },
+];
+
+export const PieDataGender = [
   {
-    name: "Mitigated",
-    value1: 2343,
+    name: "Male",
+    value: 2343,
     fill: "#cc23b3",
   },
   {
-    name: "Unmitigated",
-    value1: 3000,
+    name: "Female",
+    value: 3000,
     fill: "#2394cc",
   },
+];
+
+export const PieDataAge = [
   {
-    name: "Kumasi",
-    value2: 2343,
+    name: "Adolescent",
+    value: 2343,
     fill: "#cc23b3",
   },
   {
-    name: "Takoradi",
-    value2: 3000,
+    name: "Adult",
+    value: 3000,
     fill: "#2394cc",
   },
   {
-    name: "Accra",
-    value2: 4000,
-    fill: "#4524cc",
-  },
-  {
-    name: "Reviewd",
-    value3: 2343,
+    name: "OldAge",
+    value: 2343,
     fill: "#ce4a01",
   },
+];
+export const PieDataCreditcard = [
   {
-    name: "Unreviewed",
-    value3: 1400,
+    name: "Card",
+    value: 2343,
+    fill: "#cc23b3",
+  },
+  {
+    name: "No Card",
+    value: 3000,
     fill: "#2394cc",
   },
 ];

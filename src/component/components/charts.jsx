@@ -17,25 +17,34 @@ import {
   RadarChart,
   PolarAngleAxis,
   PolarGrid,
+  Label,
 } from "recharts";
 import {
-  PieData,
   StatusData,
+  PieDataGender,
   ChurnBarData,
   BarData2,
   ScatterData,
   RadaData,
   ScatterDataBalance,
+  PieDataStatus,
+  PieDataCreditcard,
+  PieDataAge,
 } from "./chartdata";
 
 import "../comstyles/component.css";
 
-export function ActiveVsInactive() {
+export function CustomerStat() {
   return (
     <div className="flex justify-center items-center flex-col">
-      <h3>Customer Status</h3>
+      <h3>Active Vs Inactive</h3>
       <PieChart width={210} height={180}>
-        <Pie dataKey="value" data={PieData} outerRadius={80} innerRadius={65} />
+        <Pie
+          dataKey="value"
+          data={PieDataStatus}
+          outerRadius={80}
+          innerRadius={65}
+        />
       </PieChart>
     </div>
   );
@@ -43,11 +52,11 @@ export function ActiveVsInactive() {
 export function CardVsNoCard() {
   return (
     <div className="flex justify-center items-center flex-col">
-      <h3>Credit Card</h3>
+      <h3>Card Vs No Card</h3>
       <PieChart width={210} height={180}>
         <Pie
-          dataKey="value3"
-          data={PieData}
+          dataKey="value"
+          data={PieDataCreditcard}
           outerRadius={80}
           innerRadius={65}
         />
@@ -58,11 +67,11 @@ export function CardVsNoCard() {
 export function MaleVsFemale() {
   return (
     <div className="flex justify-center items-center flex-col">
-      <h3>Gender</h3>
+      <h3>Male Vs Female</h3>
       <PieChart width={210} height={180}>
         <Pie
-          dataKey="value1"
-          data={PieData}
+          dataKey="value"
+          data={PieDataGender}
           outerRadius={80}
           innerRadius={65}
         />
@@ -73,11 +82,11 @@ export function MaleVsFemale() {
 export function Age() {
   return (
     <div className="flex justify-center items-center flex-col">
-      <h3>Age</h3>
+      <h3>Adolescent, Adult Vs Old Age</h3>
       <PieChart width={210} height={180}>
         <Pie
-          dataKey="value2"
-          data={PieData}
+          dataKey="value"
+          data={PieDataAge}
           outerRadius={80}
           innerRadius={65}
         />
@@ -107,6 +116,7 @@ export function QuatalyChurn() {
         <CartesianGrid strokeDasharray="3 3" />
         <Legend />
         <YAxis />
+        <XAxis />
         <Bar dataKey="retained" fill="#CE4A01" />
         <Bar dataKey="churn" fill="#2394cc" />
       </BarChart>
@@ -121,7 +131,9 @@ export function PredictionChurn() {
       <LineChart width={530} height={300} data={ChurnBarData}>
         <CartesianGrid strokeDasharray="3 3" />
         <YAxis />
+        <XAxis />
         <Legend />
+        <Label />
         <Line type="monotone" dataKey="churn" stroke="#CE4A01" />
       </LineChart>
     </div>

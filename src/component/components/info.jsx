@@ -1,9 +1,9 @@
 import { FaWalking, FaFunnelDollar, FaGem, FaUsers } from "react-icons/fa";
 
-export function RiskAdvice() {
+export function ChurnAdvice() {
   return (
-    <p className="m-5">
-      <h2 className="pb-2 font-medium">RISK ADVISE</h2>
+    <p>
+      <h2 className="pb-2 font-medium">CHURN ADVISE</h2>
       Based on the various parameters placed into consideration its relevant the
       various factors are placed into consideration in order of relevance
       <br />
