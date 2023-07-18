@@ -4,38 +4,35 @@ export const columns = [
   {
     label: "Name",
     field: "Name",
-    width: 250,
+    width: 200,
   },
   {
     label: "Email",
     field: "Email",
-    width: 250,
+    width: 200,
   },
   {
     label: "Gender",
     field: "Gender",
-    width: 200,
+    width: 100,
   },
   {
     label: "Number",
     field: "Number",
-    width: 200,
+    width: 150,
   },
   {
     label: "Churn",
     field: "Churn",
     sort: "asc",
-    width: 100,
   },
   {
     label: "Status",
     field: "Status",
-    width: 100,
   },
   {
     label: "Action",
     field: "Action",
-    width: 100,
   },
 ];
 

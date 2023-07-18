@@ -9,7 +9,7 @@ export function Customer() {
       <Sidebar />
       <div className=" flex flex-col w-screen">
         <Navbar />
-        <div className="flex de-flex mt-10 ml-3 ">
+        <div className="flex de-flex mt-10 mx-auto">
           <CustomerTable />
         </div>
       </div>

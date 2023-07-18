@@ -115,8 +115,8 @@ export default function CustomerTable() {
         </div>
       </div>
       <div
-        style={{ height: 580, width: "100%", backgroundColor: "white" }}
-        className=" shadow-lg"
+        style={{ height: 500, backgroundColor: "white" }}
+        className=" shadow-lg w-auto"
       >
         <DataGrid
           rows={records}
