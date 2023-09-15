@@ -1,2 +1,4 @@
+import axios from "./axios";
+
 //customer url
-export const CUSTOMER_URL = "/customers";
+export const CUSTOMER_URL =  "/customers";
