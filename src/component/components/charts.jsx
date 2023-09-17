@@ -27,24 +27,41 @@ import {
   ScatterData,
   RadaData,
   ScatterDataBalance,
-  PieDataStatus,
   PieDataCreditcard,
   PieDataAge,
 } from "./chartdata";
-
+import { useEffect, useState } from "react";
+import axios from "../../api/axios";
+import { ACTIVE_VS_INACTIVE } from "../../api/routes";
 import "../comstyles/component.css";
 
 export function CustomerStat() {
+
+  const [data, setData] = useState();
+
+  useEffect(() => {
+    axios
+      .get(ACTIVE_VS_INACTIVE, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      })
+      .then((response) =>
+      setData(response.data));
+
+  }, []);
+
   return (
     <div className="flex justify-center items-center flex-col">
       <h3>Active Vs Inactive</h3>
       <PieChart width={180} height={180}>
         <Pie
           dataKey="value"
-          data={PieDataStatus}
+          data={data}
           outerRadius={80}
-          innerRadius={65}
+          innerRadius={45}
         />
+        <Tooltip />
       </PieChart>
     </div>
   );
