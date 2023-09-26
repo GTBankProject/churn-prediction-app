@@ -1,39 +1,11 @@
 import "../comstyles/component.css";
 
 export const columns = [
-  {
-    label: "Name",
-    field: "Name",
-    width: 200,
-  },
-  {
-    label: "Email",
-    field: "Email",
-    width: 200,
-  },
-  {
-    label: "Gender",
-    field: "Gender",
-    width: 100,
-  },
-  {
-    label: "Number",
-    field: "Number",
-    width: 150,
-  },
-  {
-    label: "Churn",
-    field: "Churn",
-    sort: "asc",
-  },
-  {
-    label: "Status",
-    field: "Status",
-  },
-  {
-    label: "Action",
-    field: "Action",
-  },
+  { field: "age", headerName: "age", width: 70 },
+  { field: "deptID", headerName: "Dapartment ID", width: 70 },
+  { field: "name", headerName: "Department Name", width: 150 },
+  { field: "createdAt", headerName: "Created At", width: 150 },
+  { field: "updatedAt", headerName: "Updated At", width: 150 },
 ];
 
 export const rows = [
