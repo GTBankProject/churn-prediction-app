@@ -2,10 +2,10 @@ import { FaWalking, FaFunnelDollar, FaGem, FaUsers } from "react-icons/fa";
 
 export function ChurnAdvice() {
   return (
-    <p>
+    <p className="p-4">
       <h2 className="pb-2 font-medium">CHURN ADVISE</h2>
-      Based on the various parameters placed into consideration its relevant the
-      various factors are placed into consideration in order of relevance
+      Based on the various parameters placed <br/>into consideration its relevant the
+      various factors are placed into <br/>consideration in order of relevance
       <br />
       <br />
       <a href="" className="text-[#ce4a01] font-bold">
@@ -78,6 +78,27 @@ export function ReturnedUsers() {
         <div>
           <h3></h3>
         </div>
+      </div>
+    </div>
+  );
+}
+export function ChurnpredictionTab(){
+  return(
+    <div className="card p-2 grid grid-cols-3 divide-x ">
+      <div className="flex flex-col p-2 justify-center">
+        <div><span className="font-bold">Customer Churn</span> is</div>
+        <div className="text-[#ce4a01] "><span className="text-[114px]">57</span><span className="text-[54px]">%</span></div>
+        <div className="text-[12px]">higher than the average</div>
+      </div>
+      <div className="flex flex-col p-2 justify-center">
+        <div><span className="font-bold">Credit Score</span> is</div>
+        <div className="text-[#ce4a01] "><span className="text-[114px]">57</span><span className="text-[54px]">%</span></div>
+        <div className="text-[12px]">higher than the average</div>
+      </div>
+      <div className="flex flex-col p-2 justify-center">
+        <div><span className="font-bold">Customer Balance</span> is</div>
+        <div className="text-[#ce4a01] "><span className="text-[114px]">57</span><span className="text-[54px]">%</span></div>
+        <div className="text-[12px]">higher than the average</div>
       </div>
     </div>
   );
