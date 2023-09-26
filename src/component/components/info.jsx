@@ -1,4 +1,8 @@
 import { FaWalking, FaFunnelDollar, FaGem, FaUsers } from "react-icons/fa";
+import { useEffect, useState } from "react";
+import axios from "../../api/axios";
+import { ACTIVE_USER, CHURN_USER, TOTAL_USER } from "../../api/routes";
+
 
 export function ChurnAdvice() {
   return (
@@ -21,6 +25,20 @@ export function ChurnAdvice() {
   );
 }
 export function ActiveUsers() {
+  const [data, setData] = useState();
+
+  useEffect(() => {
+    axios
+      .get(ACTIVE_USER, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      })
+      .then((response) =>
+      setData(response.data));
+
+  }, []);
+
   return (
     <div className="flex flex-col card-sm  shadow-md ">
       <h2 className="flex justify-start pl-2 text-[#ce4a01]">Active Users</h2>
@@ -29,12 +47,26 @@ export function ActiveUsers() {
         <div className="bg-[#c2410c] h-10 w-10 flex justify-center items-center rounded-full mr-10 ">
           <FaFunnelDollar className="icons" style={{ height: 25, width: 25 }} />
         </div>
-        <div className="font-bold text-xl"></div>
+        <div className="font-bold text-xl">{data}</div>
       </div>
     </div>
   );
 }
 export function ChurnUsers() {
+  const [data, setData] = useState();
+
+  useEffect(() => {
+    axios
+      .get(CHURN_USER , {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      })
+      .then((response) =>
+      setData(response.data));
+
+  }, []);
+
   return (
     <div className="flex flex-col card-sm  shadow-md ">
       <h2 className="flex justify-start pl-2 text-[#ce4a01]">Churned Users</h2>
@@ -43,14 +75,26 @@ export function ChurnUsers() {
         <div className="bg-[#4d7c0f] h-10 w-10 flex justify-center items-center rounded-full mr-10 ">
           <FaGem className="icons" style={{ height: 25, width: 25 }} />
         </div>
-        <div>
-          <h3></h3>
-        </div>
+        <div className="font-bold text-xl">{data}</div>
       </div>
     </div>
   );
 }
 export function TotalUsers() {
+  const [data, setData] = useState();
+
+  useEffect(() => {
+    axios
+      .get(TOTAL_USER, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      })
+      .then((response) =>
+      setData(response.data));
+
+  }, []);
+
   return (
     <div className="flex flex-col card-sm  shadow-md ">
       <h2 className="flex justify-start pl-2 text-[#ce4a01]">Total Users</h2>
@@ -59,14 +103,13 @@ export function TotalUsers() {
         <div className="bg-[#6d28d9] h-10 w-10 flex justify-center items-center rounded-full mr-10 ">
           <FaUsers className="icons" style={{ height: 25, width: 25 }} />
         </div>
-        <div>
-          <h3></h3>
-        </div>
+        <div className="font-bold text-xl">{data}</div>
       </div>
     </div>
   );
 }
 export function ReturnedUsers() {
+
   return (
     <div className="flex flex-col card-sm  shadow-md ">
       <h2 className="flex justify-start pl-2 text-[#ce4a01]">Returned Users</h2>

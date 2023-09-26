@@ -94,7 +94,7 @@ export function SidebarTable() {
 export default function CustomerTable() {
   const [records, setRecords] = useState(rows);
 
-  const [data, setData] = useState();
+  // const [data, setData] = useState();
 
   useEffect(() => {
     axios
@@ -103,8 +103,12 @@ export default function CustomerTable() {
           "Content-Type": "application/json",
         },
       })
-      .then((data) => console.log(data.data));
-  });
+      .then((response) => {
+        const data = response.data;
+        console.log(data.data);
+      });
+  }, []);
+
 
   function handleSearch(event) {
     const newData = rows.filter((row) => {

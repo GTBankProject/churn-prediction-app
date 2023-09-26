@@ -21,18 +21,15 @@ import {
 } from "recharts";
 import {
   StatusData,
-  PieDataGender,
   ChurnBarData,
   BarData2,
   ScatterData,
   RadaData,
   ScatterDataBalance,
-  PieDataCreditcard,
-  PieDataAge,
 } from "./chartdata";
 import { useEffect, useState } from "react";
 import axios from "../../api/axios";
-import { ACTIVE_VS_INACTIVE } from "../../api/routes";
+import { ACTIVE_VS_INACTIVE, GENDER_URL, CARD, EDUCATION } from "../../api/routes";
 import "../comstyles/component.css";
 
 export function CustomerStat() {
@@ -67,46 +64,91 @@ export function CustomerStat() {
   );
 }
 export function CardVsNoCard() {
+  const [data, setData] = useState();
+
+  useEffect(() => {
+    axios
+      .get(CARD, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      })
+      .then((response) =>
+      setData(response.data));
+
+  }, []);
+
   return (
     <div className="flex justify-center items-center flex-col">
       <h3>Card Vs No Card</h3>
       <PieChart width={180} height={180}>
         <Pie
           dataKey="value"
-          data={PieDataCreditcard}
+          data={data}
           outerRadius={80}
-          innerRadius={65}
+          innerRadius={45}
         />
+        <Tooltip/>
       </PieChart>
     </div>
   );
 }
 export function MaleVsFemale() {
+  const [data, setData] = useState();
+
+  useEffect(() => {
+    axios
+      .get(GENDER_URL, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      })
+      .then((response) =>
+      setData(response.data));
+
+  }, []);
+
   return (
     <div className="flex justify-center items-center flex-col">
       <h3>Male Vs Female</h3>
       <PieChart width={180} height={180}>
         <Pie
           dataKey="value"
-          data={PieDataGender}
+          data={data}
           outerRadius={80}
-          innerRadius={65}
+          innerRadius={45}
         />
+        <Tooltip/>
       </PieChart>
     </div>
   );
 }
 export function Age() {
+  const [data, setData] = useState();
+
+  useEffect(() => {
+    axios
+      .get(EDUCATION, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      })
+      .then((response) =>
+      setData(response.data));
+
+  }, []);
+
   return (
     <div className="flex justify-center items-center flex-col">
-      <h3>Adolescent, Adult Vs Old Age</h3>
+      <h3>Education Level</h3>
       <PieChart width={180} height={180}>
         <Pie
           dataKey="value"
-          data={PieDataAge}
+          data={data}
           outerRadius={80}
-          innerRadius={65}
+          innerRadius={45}
         />
+        <Tooltip/>
       </PieChart>
     </div>
   );
