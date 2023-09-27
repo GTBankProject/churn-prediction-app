@@ -105,7 +105,7 @@ export default function CustomerTable() {
       })
       .then((response) => {
         const data = response.data;
-        console.log(data.data);
+        console.log(data);
       });
   }, []);
 
