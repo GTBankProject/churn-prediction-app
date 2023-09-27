@@ -98,16 +98,12 @@ export const BarData2 = [
 
 export const ChurnBarData = [
   {
-    name: "Page A",
-    retained: 4000,
+    name: "Jan",
     churn: 2400,
-    amt: 2400,
   },
   {
-    name: "Page B",
-    retained: 3000,
+    name: "Feb",
     churn: 1398,
-    amt: 2210,
   },
   {
     name: "Page C",
@@ -162,14 +158,10 @@ export const RadaData = [
   {
     region: "Kumasi",
     A: 120,
-    B: 110,
-    fullMark: 150,
   },
   {
     region: "Accra",
     A: 98,
-    B: 130,
-    fullMark: 150,
   },
   {
     region: "Central",

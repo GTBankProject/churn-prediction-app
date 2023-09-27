@@ -10,8 +10,3 @@ export const ACTIVE_USER =  "/activeUser";
 export const CHURN_USER =  "/churnUser";
 export const TOTAL_USER =  "/totalUser";
 
-
-
-
-
-

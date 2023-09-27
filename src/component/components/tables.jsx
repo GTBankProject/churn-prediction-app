@@ -94,6 +94,7 @@ export function SidebarTable() {
 export default function CustomerTable() {
   const [records, setRecords] = useState(rows);
 
+
   // const [data, setData] = useState();
 
   useEffect(() => {
