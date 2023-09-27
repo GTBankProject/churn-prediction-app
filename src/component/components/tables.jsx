@@ -1,4 +1,6 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import axios from "../../api/axios";
+import { CUSTOMER_URL } from "../../api/routes";
 import { rows, columns, column, dataTable } from "./datatable";
 import { DataGrid } from "@mui/x-data-grid";
 import "../comstyles/component.css";
@@ -92,6 +94,23 @@ export function SidebarTable() {
 export default function CustomerTable() {
   const [records, setRecords] = useState(rows);
 
+
+  // const [data, setData] = useState();
+
+  useEffect(() => {
+    axios
+      .get(CUSTOMER_URL, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      })
+      .then((response) => {
+        const data = response.data;
+        console.log(data.data);
+      });
+  }, []);
+
+
   function handleSearch(event) {
     const newData = rows.filter((row) => {
       return row.Name.toLowerCase().includes(event.target.value.toLowerCase());
@@ -115,8 +134,8 @@ export default function CustomerTable() {
         </div>
       </div>
       <div
-        style={{ height: 580, width: "100%", backgroundColor: "white" }}
-        className=" shadow-lg"
+        style={{ height: 500, backgroundColor: "white" }}
+        className=" shadow-lg w-auto"
       >
         <DataGrid
           rows={records}

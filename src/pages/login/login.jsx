@@ -1,16 +1,21 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import "./login.css";
 
 export function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const navigate = useNavigate();
 
-  const loginBtn = (
-    <Link className="to-login" to="/dashboard">
-      <input className="login" type="submit" value="Login" />
-    </Link>
-  );
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    if (email === "admin@gmail.com" && password === "admin123") {
+      navigate("/dashboard", { replace: true });
+    } else {
+      alert("wrong credentials");
+    }
+  };
 
   return (
     <>
@@ -36,6 +41,7 @@ export function Login() {
                       id="email"
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
+                      autoComplete="false"
                     />
                   </div>
                 </div>
@@ -50,11 +56,14 @@ export function Login() {
                       id="password"
                       value={password}
                       onChange={(e) => setPassword(e.target.value)}
+                      autoComplete="false"
                     />
                   </div>
                 </div>
                 {/* login-btn */}
-                <div>{loginBtn}</div>
+                <button className="login" type="button" onClick={handleSubmit}>
+                  Submit
+                </button>
                 {/* password reset */}
                 <div className="reset">Forgot Password?</div>
                 {/* create new account */}

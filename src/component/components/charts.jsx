@@ -17,9 +17,9 @@ import {
   RadarChart,
   PolarAngleAxis,
   PolarGrid,
+  Label,
 } from "recharts";
 import {
-  PieData,
   StatusData,
   ChurnBarData,
   BarData2,
@@ -27,60 +27,128 @@ import {
   RadaData,
   ScatterDataBalance,
 } from "./chartdata";
-
+import { useEffect, useState } from "react";
+import axios from "../../api/axios";
+import { ACTIVE_VS_INACTIVE, GENDER_URL, CARD, EDUCATION } from "../../api/routes";
 import "../comstyles/component.css";
 
-export function ActiveVsInactive() {
+export function CustomerStat() {
+
+  const [data, setData] = useState();
+
+  useEffect(() => {
+    axios
+      .get(ACTIVE_VS_INACTIVE, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      })
+      .then((response) =>
+      setData(response.data));
+
+  }, []);
+
   return (
     <div className="flex justify-center items-center flex-col">
-      <h3>Customer Status</h3>
-      <PieChart width={210} height={180}>
-        <Pie dataKey="value" data={PieData} outerRadius={80} innerRadius={65} />
+      <h3>Active Vs Inactive</h3>
+      <PieChart width={180} height={180}>
+        <Pie
+          dataKey="value"
+          data={data}
+          outerRadius={80}
+          innerRadius={45}
+        />
+        <Tooltip />
       </PieChart>
     </div>
   );
 }
 export function CardVsNoCard() {
+  const [data, setData] = useState();
+
+  useEffect(() => {
+    axios
+      .get(CARD, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      })
+      .then((response) =>
+      setData(response.data));
+
+  }, []);
+
   return (
     <div className="flex justify-center items-center flex-col">
-      <h3>Credit Card</h3>
-      <PieChart width={210} height={180}>
+      <h3>Card Vs No Card</h3>
+      <PieChart width={180} height={180}>
         <Pie
-          dataKey="value3"
-          data={PieData}
+          dataKey="value"
+          data={data}
           outerRadius={80}
-          innerRadius={65}
+          innerRadius={45}
         />
+        <Tooltip/>
       </PieChart>
     </div>
   );
 }
 export function MaleVsFemale() {
+  const [data, setData] = useState();
+
+  useEffect(() => {
+    axios
+      .get(GENDER_URL, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      })
+      .then((response) =>
+      setData(response.data));
+
+  }, []);
+
   return (
     <div className="flex justify-center items-center flex-col">
-      <h3>Gender</h3>
-      <PieChart width={210} height={180}>
+      <h3>Male Vs Female</h3>
+      <PieChart width={180} height={180}>
         <Pie
-          dataKey="value1"
-          data={PieData}
+          dataKey="value"
+          data={data}
           outerRadius={80}
-          innerRadius={65}
+          innerRadius={45}
         />
+        <Tooltip/>
       </PieChart>
     </div>
   );
 }
 export function Age() {
+  const [data, setData] = useState();
+
+  useEffect(() => {
+    axios
+      .get(EDUCATION, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      })
+      .then((response) =>
+      setData(response.data));
+
+  }, []);
+
   return (
     <div className="flex justify-center items-center flex-col">
-      <h3>Age</h3>
-      <PieChart width={210} height={180}>
+      <h3>Education Level</h3>
+      <PieChart width={180} height={180}>
         <Pie
-          dataKey="value2"
-          data={PieData}
+          dataKey="value"
+          data={data}
           outerRadius={80}
-          innerRadius={65}
+          innerRadius={45}
         />
+        <Tooltip/>
       </PieChart>
     </div>
   );
@@ -89,7 +157,7 @@ export function CustomerStatus() {
   return (
     <div className="card p-5 mt-5 shadow-sm">
       <h3>Active Customers</h3>
-      <BarChart width={350} height={300} data={StatusData}>
+      <BarChart width={300} height={280} data={StatusData}>
         <CartesianGrid strokeDasharray="3 3" />
         <Legend />
         <YAxis />
@@ -103,10 +171,11 @@ export function QuatalyChurn() {
   return (
     <div className="card p-5 mt-5">
       <h3>QUATERLY CUSTOMER MATRIX</h3>
-      <BarChart width={330} height={300} data={BarData2}>
+      <BarChart width={460} height={300} data={BarData2}>
         <CartesianGrid strokeDasharray="3 3" />
         <Legend />
         <YAxis />
+        <XAxis />
         <Bar dataKey="retained" fill="#CE4A01" />
         <Bar dataKey="churn" fill="#2394cc" />
       </BarChart>
@@ -118,10 +187,12 @@ export function PredictionChurn() {
   return (
     <div className="card p-5 mt-5">
       <h3>CHURN PREDICTION</h3>
-      <LineChart width={530} height={300} data={ChurnBarData}>
+      <LineChart width={400} height={300} data={ChurnBarData}>
         <CartesianGrid strokeDasharray="3 3" />
         <YAxis />
+        <XAxis />
         <Legend />
+        <Label />
         <Line type="monotone" dataKey="churn" stroke="#CE4A01" />
       </LineChart>
     </div>
@@ -131,7 +202,7 @@ export function ChurnRate() {
   return (
     <div className="card p-5 mt-5">
       <h3>CHURN RATE</h3>
-      <LineChart width={370} height={200} data={ChurnBarData}>
+      <LineChart width={250} height={180} data={ChurnBarData}>
         <CartesianGrid strokeDasharray="3 3" />
         <YAxis />
         <Legend />
@@ -145,7 +216,7 @@ export function CreditScore() {
   return (
     <div className=" p-5 card">
       <h3>Credit Score</h3>
-      <ResponsiveContainer width={310} height={300}>
+      <ResponsiveContainer width={310} height={280}>
         <ScatterChart>
           <CartesianGrid />
           <XAxis type="number" dataKey="x" name="creditScore" />

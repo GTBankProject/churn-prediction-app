@@ -1,8 +1,5 @@
 import { Sidebar } from "../../component/components/sidebar";
 import {
-  // ActiveVsInactive,
-  // ActiveVsInactive,
-  // LossVsProfit,
   QuatalyChurn,
   PredictionChurn,
 } from "../../component/components/charts";
@@ -14,7 +11,6 @@ import {
   TotalUsers,
 } from "../../component/components/info";
 import { Navbar } from "../../component/components/navbar";
-import { SidebarTable } from "../../component/components/tables";
 
 export function Dashboard() {
   return (
@@ -22,7 +18,7 @@ export function Dashboard() {
       <Sidebar />
       <div className=" flex flex-col w-screen">
         <Navbar />
-        <div className="flex flex-row mt-10 ml-3">
+        <div className="flex flex-row mt-6 mx-auto">
           <div className="flex flex-col m-0">
             <div className="flex flex-row">
               <ActiveUsers />
@@ -35,7 +31,6 @@ export function Dashboard() {
               <QuatalyChurn />
             </div>
           </div>
-          <SidebarTable />
         </div>
       </div>
     </div>

@@ -1,6 +1,6 @@
 .background {
   height: 100vh;
-  background-image: url("https://scontent.facc1-1.fna.fbcdn.net/v/t39.30808-6/350333524_799235781780555_722193383985233782_n.jpg?_nc_cat=107&cb=99be929b-3346023f&ccb=1-7&_nc_sid=8bfeb9&_nc_eui2=AeHf6y3unZO_dD-jaHxhm-FM21fEX1gJS5rbV8RfWAlLmspIfheJT0A-WYC67EDraHQ80zPg1LVJzaAwFuFh-ZP0&_nc_ohc=ru1jI-QQocMAX8rQlLS&_nc_oc=AQlY3isUXwGq0UApSTDBopIB3ZpFhuJDGk-gegcUofhZUgj67NHTBaCtU4Pv49s0U1g&_nc_zt=23&_nc_ht=scontent.facc1-1.fna&oh=00_AfDAbP2tTCJXWbJA4QhHM6yOEYuftUbY4CaiK1MmFOd3QA&oe=64945C13");
+  background-image: url("https://scontent.facc5-1.fna.fbcdn.net/v/t39.30808-6/331919943_242599218096952_7207943534688139125_n.jpg?_nc_cat=110&cb=99be929b-3346023f&ccb=1-7&_nc_sid=a26aad&_nc_ohc=6N95xxXLptcAX_mqHsR&_nc_ht=scontent.facc5-1.fna&oh=00_AfBlcmwr4X4uYJMSOOsJVCHeozLVIYbX2CKqB-7wFemuFQ&oe=64B1B60B");
   background-size: cover;
   background-repeat: no-repeat;
 }
@@ -8,7 +8,7 @@
   align-content: center;
   align-items: center;
   height: 100vh;
-  background-color: whitesmoke;
+  background-color: white;
   display: flex;
   justify-content: center;
 }
@@ -19,7 +19,7 @@
   padding-block: 0.9rem;
   background-color: white;
   outline: none;
-  border: none;
+  border: solid;
   border-radius: 0.5rem;
   font-size: 1rem;
   padding-left: 0.5rem;
