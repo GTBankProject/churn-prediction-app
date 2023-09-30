@@ -3,13 +3,13 @@ import { useEffect, useState } from "react";
 import axios from "../../api/axios";
 import { ACTIVE_USER, CHURN_USER, TOTAL_USER } from "../../api/routes";
 
-
 export function ChurnAdvice() {
   return (
     <p className="p-4">
       <h2 className="pb-2 font-medium">CHURN ADVISE</h2>
-      Based on the various parameters placed <br/>into consideration its relevant the
-      various factors are placed into <br/>consideration in order of relevance
+      Based on the various parameters placed <br />
+      into consideration its relevant the various factors are placed into <br />
+      consideration in order of relevance
       <br />
       <br />
       <a href="" className="text-[#ce4a01] font-bold">
@@ -34,20 +34,19 @@ export function ActiveUsers() {
           "Content-Type": "application/json",
         },
       })
-      .then((response) =>
-      setData(response.data));
-
+      .then((response) => setData(response.data));
   }, []);
 
   return (
-    <div className="flex flex-col card-sm  shadow-md ">
-      <h2 className="flex justify-start pl-2 text-[#ce4a01]">Active Users</h2>
-      <hr />
-      <div className="flex flex-row justify-start p-4 items-center">
-        <div className="bg-[#c2410c] h-10 w-10 flex justify-center items-center rounded-full mr-10 ">
-          <FaFunnelDollar className="icons" style={{ height: 25, width: 25 }} />
+    <div className="flex flex-col card-sm items-center shadow-md xl: w-60 md: w-38 lg: w-50    ">
+      <div className="pt-10">
+        <div className="bg-[#c2410c] h-20 w-24 flex rounded-lg items-center justify-center">
+          <FaFunnelDollar className="icons" style={{ height: 45, width: 55 }} />
         </div>
-        <div className="font-bold text-xl">{data}</div>
+      </div>
+      <div className="flex flex-col">
+        <span className="mt-5 text-[30px]  font-extrabold font-mono">28304823</span>
+        <span>Inactive Users</span>
       </div>
     </div>
   );
@@ -57,25 +56,24 @@ export function ChurnUsers() {
 
   useEffect(() => {
     axios
-      .get(CHURN_USER , {
+      .get(CHURN_USER, {
         headers: {
           "Content-Type": "application/json",
         },
       })
-      .then((response) =>
-      setData(response.data));
-
+      .then((response) => setData(response.data));
   }, []);
 
   return (
-    <div className="flex flex-col card-sm  shadow-md ">
-      <h2 className="flex justify-start pl-2 text-[#ce4a01]">Churned Users</h2>
-      <hr />
-      <div className="flex flex-row justify-start p-4 items-center">
-        <div className="bg-[#4d7c0f] h-10 w-10 flex justify-center items-center rounded-full mr-10 ">
-          <FaGem className="icons" style={{ height: 25, width: 25 }} />
+    <div className="flex flex-col card-sm items-center shadow-md xl: w-60 md: w-38 lg: w-50    ">
+      <div className="pt-10">
+        <div className="bg-[#4d7c0f]  h-20 w-24 flex rounded-lg items-center justify-center">
+          <FaGem className="icons" style={{ height: 45, width: 55 }} />
         </div>
-        <div className="font-bold text-xl">{data}</div>
+      </div>
+      <div className="flex flex-col">
+        <span className="mt-5 text-[30px]  font-extrabold font-mono">28304823</span>
+        <span>Active Users</span>
       </div>
     </div>
   );
@@ -90,57 +88,69 @@ export function TotalUsers() {
           "Content-Type": "application/json",
         },
       })
-      .then((response) =>
-      setData(response.data));
-
+      .then((response) => setData(response.data));
   }, []);
 
   return (
-    <div className="flex flex-col card-sm  shadow-md ">
-      <h2 className="flex justify-start pl-2 text-[#ce4a01]">Total Users</h2>
-      <hr />
-      <div className="flex flex-row justify-start p-4 items-center">
-        <div className="bg-[#6d28d9] h-10 w-10 flex justify-center items-center rounded-full mr-10 ">
-          <FaUsers className="icons" style={{ height: 25, width: 25 }} />
+    <div className="flex flex-col card-sm items-center shadow-md xl: w-60 md: w-38 lg: w-50  ">
+      <div className="pt-10">
+        <div className="bg-[#6d28d9]  h-20 w-24 flex rounded-lg items-center justify-center">
+          <FaUsers className="icons" style={{ height: 45, width: 55 }} />
         </div>
-        <div className="font-bold text-xl">{data}</div>
+      </div>
+      <div className="flex flex-col">
+        <span className="mt-5 text-[30px]  font-extrabold font-mono">28304823</span>
+        <span>Churned Users</span>
       </div>
     </div>
   );
 }
 export function ReturnedUsers() {
-
   return (
-    <div className="flex flex-col card-sm  shadow-md ">
-      <h2 className="flex justify-start pl-2 text-[#ce4a01]">Returned Users</h2>
-      <hr />
-      <div className="flex flex-row justify-start p-4 items-center">
-        <div className="bg-[#1d4ed8] h-10 w-10 flex justify-center items-center rounded-full mr-10 ">
-          <FaWalking className="icons" style={{ height: 25, width: 25 }} />
+    <div className="flex flex-col card-sm items-center shadow-md xl: w-60 md: w-38 lg: w-50  ">
+      <div className="pt-10">
+        <div className="bg-blue-100 h-20 w-24 flex rounded-lg items-center justify-center">
+          <FaWalking className="icons" style={{ height: 45, width: 55 }} />
         </div>
-        <div>
-          <h3></h3>
-        </div>
+      </div>
+      <div className="flex flex-col">
+        <span className="mt-5 text-[30px]  font-extrabold font-mono">28304823</span>
+        <span>Total Users</span>
       </div>
     </div>
   );
 }
-export function ChurnpredictionTab(){
-  return(
+export function ChurnpredictionTab() {
+  return (
     <div className="card p-2 grid grid-cols-3 divide-x ">
       <div className="flex flex-col p-2 justify-center">
-        <div><span className="font-bold">Customer Churn</span> is</div>
-        <div className="text-[#ce4a01] "><span className="text-[114px]">57</span><span className="text-[54px]">%</span></div>
+        <div>
+          <span className="font-bold">Customer Churn</span> is
+        </div>
+        <div className="text-[#ce4a01] ">
+          <span className="text-[114px]">57</span>
+          <span className="text-[54px]">%</span>
+        </div>
         <div className="text-[12px]">higher than the average</div>
       </div>
       <div className="flex flex-col p-2 justify-center">
-        <div><span className="font-bold">Credit Score</span> is</div>
-        <div className="text-[#ce4a01] "><span className="text-[114px]">57</span><span className="text-[54px]">%</span></div>
+        <div>
+          <span className="font-bold">Credit Score</span> is
+        </div>
+        <div className="text-[#ce4a01] ">
+          <span className="text-[114px]">57</span>
+          <span className="text-[54px]">%</span>
+        </div>
         <div className="text-[12px]">higher than the average</div>
       </div>
       <div className="flex flex-col p-2 justify-center">
-        <div><span className="font-bold">Customer Balance</span> is</div>
-        <div className="text-[#ce4a01] "><span className="text-[114px]">57</span><span className="text-[54px]">%</span></div>
+        <div>
+          <span className="font-bold">Customer Balance</span> is
+        </div>
+        <div className="text-[#ce4a01] ">
+          <span className="text-[114px]">57</span>
+          <span className="text-[54px]">%</span>
+        </div>
         <div className="text-[12px]">higher than the average</div>
       </div>
     </div>

@@ -169,9 +169,9 @@ export function CustomerStatus() {
 }
 export function QuatalyChurn() {
   return (
-    <div className="card p-5 mt-5">
+    <div className=" p-5 mt-5 md: w-200px">
       <h3>QUATERLY CUSTOMER MATRIX</h3>
-      <BarChart width={460} height={300} data={BarData2}>
+      <BarChart width={960} height={300} data={BarData2}>
         <CartesianGrid strokeDasharray="3 3" />
         <Legend />
         <YAxis />
