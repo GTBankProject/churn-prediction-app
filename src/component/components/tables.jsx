@@ -92,10 +92,7 @@ export function SidebarTable() {
 }
 
 export default function CustomerTable() {
-  const [records, setRecords] = useState(rows);
-
-
-  // const [data, setData] = useState();
+  const [records, setRecords] = useState([]);
 
   useEffect(() => {
     axios
@@ -106,35 +103,16 @@ export default function CustomerTable() {
       })
       .then((response) => {
         const data = response.data;
-        console.log(data.data);
+        setRecords(data)
       });
   }, []);
 
 
-  function handleSearch(event) {
-    const newData = rows.filter((row) => {
-      return row.Name.toLowerCase().includes(event.target.value.toLowerCase());
-    });
-
-    setRecords(newData);
-  }
+ 
   return (
     <div className="flex flex-col">
-      <div className="flex flex-row-reverse pb-3">
-        <div className="flex items-right h-8 border rounded-lg  bg-white overflow-hidden">
-          <div className="grid h-full w-12 text-gray-300" />
-
-          <input
-            className="peer h-full outline-none text-sm text-gray-700 pr-2"
-            type="text"
-            id="search"
-            placeholder="Search Name"
-            onChange={handleSearch}
-          />
-        </div>
-      </div>
       <div
-        style={{ height: 500, backgroundColor: "white" }}
+        style={{ height: 650, backgroundColor: "white" }}
         className=" shadow-lg w-auto"
       >
         <DataGrid

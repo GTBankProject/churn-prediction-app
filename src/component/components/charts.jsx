@@ -175,7 +175,7 @@ export function QuatalyChurn() {
         <CartesianGrid strokeDasharray="3 3" />
         <Legend />
         <YAxis />
-        <XAxis />
+        <XAxis dataKey="name"/>
         <Bar dataKey="retained" fill="#CE4A01" />
         <Bar dataKey="churn" fill="#2394cc" />
       </BarChart>

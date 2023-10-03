@@ -30,11 +30,11 @@
   margin-right: 5px;
 }
 .card {
-  /* box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1); */
   border-radius: 5px;
   margin: 15px;
   text-align: center;
   background-color: white;
+  
 }
 .card-table {
   box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1);

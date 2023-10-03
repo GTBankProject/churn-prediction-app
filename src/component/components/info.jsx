@@ -45,8 +45,15 @@ export function ActiveUsers() {
         </div>
       </div>
       <div className="flex flex-col">
-        <span className="mt-5 text-[30px]  font-extrabold font-mono">28304823</span>
+        <span className="mt-5 text-[30px]  font-extrabold font-mono">
+          28304823
+        </span>
         <span>Inactive Users</span>
+      </div>
+      <div class="relative h-24 w-60 ...">
+        <div class="absolute inset-x-0 bottom-0 h-8 ... bg-slate-300 text-blue-700">
+          View detail inactive users
+        </div>
       </div>
     </div>
   );
@@ -72,8 +79,15 @@ export function ChurnUsers() {
         </div>
       </div>
       <div className="flex flex-col">
-        <span className="mt-5 text-[30px]  font-extrabold font-mono">28304823</span>
+        <span className="mt-5 text-[30px]  font-extrabold font-mono">
+          28304823
+        </span>
         <span>Active Users</span>
+      </div>
+      <div class="relative h-24 w-60 ...">
+        <div class="absolute inset-x-0 bottom-0 h-8 ... bg-slate-300 text-blue-700">
+          View detail active users
+        </div>
       </div>
     </div>
   );
@@ -99,8 +113,15 @@ export function TotalUsers() {
         </div>
       </div>
       <div className="flex flex-col">
-        <span className="mt-5 text-[30px]  font-extrabold font-mono">28304823</span>
+        <span className="mt-5 text-[30px]  font-extrabold font-mono">
+          28304823
+        </span>
         <span>Churned Users</span>
+      </div>
+      <div class="relative h-24 w-60 ...">
+        <div class="absolute inset-x-0 bottom-0 h-8 ... bg-slate-300 text-blue-700">
+          Check out statistics
+        </div>
       </div>
     </div>
   );
@@ -114,8 +135,15 @@ export function ReturnedUsers() {
         </div>
       </div>
       <div className="flex flex-col">
-        <span className="mt-5 text-[30px]  font-extrabold font-mono">28304823</span>
+        <span className="mt-5 text-[30px]  font-extrabold font-mono">
+          28304823
+        </span>
         <span>Total Users</span>
+      </div>
+      <div class="relative h-24 w-60 ...">
+        <div class="absolute inset-x-0 bottom-0 h-8 ... bg-slate-300 text-blue-700">
+          View all Users
+        </div>
       </div>
     </div>
   );

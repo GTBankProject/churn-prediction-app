@@ -6,6 +6,11 @@ export const columns = [
   { field: "name", headerName: "Department Name", width: 150 },
   { field: "createdAt", headerName: "Created At", width: 150 },
   { field: "updatedAt", headerName: "Updated At", width: 150 },
+  { field: "age1", headerName: "age", width: 70 },
+  { field: "deptID1", headerName: "Dapartment ID", width: 70 },
+  { field: "name1", headerName: "Department Name", width: 150 },
+  { field: "createdAt1", headerName: "Created At", width: 150 },
+  { field: "updatedAt1", headerName: "Updated At", width: 150 },
 ];
 
 export const rows = [

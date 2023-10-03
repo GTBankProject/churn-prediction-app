@@ -56,13 +56,13 @@ export const PieDataCreditcard = [
 
 export const StatusData = [
   {
-    name: "Page A",
+    name: "Jan",
     Active: 4000,
     Inactive: 2400,
     amt: 2400,
   },
   {
-    name: "Page B",
+    name: "Feb",
     Active: 3000,
     Inactive: 1398,
     amt: 2210,
@@ -77,22 +77,69 @@ export const StatusData = [
 
 export const BarData2 = [
   {
-    name: "Page A",
+    name: "Jan",
     retained: 4000,
     churn: 2400,
-    amt: 2400,
   },
   {
-    name: "Page B",
+    name: "Fab",
     retained: 3000,
     churn: 1398,
-    amt: 2210,
   },
   {
-    name: "Page C",
+    name: "March",
     retained: 2000,
     churn: 9800,
-    amt: 2290,
+  },
+  {
+    name: "Aprl",
+    retained: 4000,
+    churn: 2400,
+  },
+  {
+    name: "May",
+    retained: 3000,
+    churn: 1398,
+  },
+  {
+    name: "Jun",
+    retained: 2000,
+    churn: 9800,
+  },
+  {
+    name: "Jul",
+    retained: 4000,
+    churn: 2400,
+  },
+  {
+    name: "Aug",
+    retained: 3000,
+    churn: 1398,
+  },
+  {
+    name: "Sep",
+    retained: 2000,
+    churn: 9800,
+  },
+  {
+    name: "Oct",
+    retained: 4000,
+    churn: 2400,
+  },
+  {
+    name: "Fab",
+    retained: 3000,
+    churn: 1398,
+  },
+  {
+    name: "Nov",
+    retained: 2000,
+    churn: 9800,
+  },
+  {
+    name: "Dec",
+    retained: 2000,
+    churn: 9800,
   },
 ];
 

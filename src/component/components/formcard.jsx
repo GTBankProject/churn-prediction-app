@@ -53,7 +53,7 @@ export function ChurnFormCard(){
 
     return(
         <div className="card py-4">
-        <form className="w-76">
+        <form className="w-76 ">
           <div className=" px-10 py-10">
             <div className="relative mb-6" data-te-input-wrapper-init>
               <input
