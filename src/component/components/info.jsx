@@ -2,6 +2,7 @@ import { FaWalking, FaFunnelDollar, FaGem, FaUsers } from "react-icons/fa";
 import { useEffect, useState } from "react";
 import axios from "../../api/axios";
 import { ACTIVE_USER, CHURN_USER, TOTAL_USER } from "../../api/routes";
+import { PredictionChurn } from "./charts";
 
 export function ChurnAdvice() {
   return (
@@ -150,7 +151,7 @@ export function ReturnedUsers() {
 }
 export function ChurnpredictionTab() {
   return (
-    <div className="card p-2 grid grid-cols-3 divide-x ">
+    <div className="card p-2 flex flex-row divide-x ">
       <div className="flex flex-col p-2 justify-center">
         <div>
           <span className="font-bold">Customer Churn</span> is
@@ -161,26 +162,7 @@ export function ChurnpredictionTab() {
         </div>
         <div className="text-[12px]">higher than the average</div>
       </div>
-      <div className="flex flex-col p-2 justify-center">
-        <div>
-          <span className="font-bold">Credit Score</span> is
-        </div>
-        <div className="text-[#ce4a01] ">
-          <span className="text-[114px]">57</span>
-          <span className="text-[54px]">%</span>
-        </div>
-        <div className="text-[12px]">higher than the average</div>
-      </div>
-      <div className="flex flex-col p-2 justify-center">
-        <div>
-          <span className="font-bold">Customer Balance</span> is
-        </div>
-        <div className="text-[#ce4a01] ">
-          <span className="text-[114px]">57</span>
-          <span className="text-[54px]">%</span>
-        </div>
-        <div className="text-[12px]">higher than the average</div>
-      </div>
+      <PredictionChurn/>
     </div>
   );
 }
