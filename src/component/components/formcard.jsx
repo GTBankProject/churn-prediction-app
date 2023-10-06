@@ -4,26 +4,14 @@ export function ChurnFormCard() {
   const [customerName, setCustomerName] = useState("");
   const [Gender, setGender] = useState("");
   const [Balance, setBalance] = useState("");
-  const [HasCrCardState, setHasCrCardState] = useState("");
-  const [IsActiveMemberState, setIsActiveMemberState] = useState("");
+  const [HasCrCard, setHasCrCard] = useState("");
+  const [IsActiveMember, setIsActiveMember] = useState("");
   const [EstimatedSalary, SetEstimatedSalary] = useState("");
   const [Credit_Limit, setCredit_Limit] = useState("");
-  var HasCrCard;
-  var IsActiveMember;
-
-  if (HasCrCardState == "Yes") {
-    HasCrCard = 1;
-  } else {
-    HasCrCard = 0;
-  }
-  if (IsActiveMemberState == "Yes") {
-    IsActiveMember = 1;
-  } else {
-    IsActiveMember = 0;
-  }
-  const handleSubmit = () => {
+ 
+  const handleSubmit = (e) => {
     e.preventDefault();
-
+    console.log(HasCrCard)
     try {
       axios.post(
         CREATERISKFORM_URL,
@@ -52,13 +40,13 @@ export function ChurnFormCard() {
   };
 
   const reload = () => {
-    customerName(" ");
-    Gender(" ");
-    HasCrCard(" ");
-    Balance(" ");
-    IsActiveMember(" ");
-    EstimatedSalary(" ");
-    Credit_Limit(" ");
+    customerName("");
+    Gender("");
+    HasCrCard("");
+    Balance("");
+    IsActiveMember("");
+    EstimatedSalary("");
+    Credit_Limit("");
   };
 
   return (
@@ -87,9 +75,9 @@ export function ChurnFormCard() {
                 autoComplete="off"
                 onChange={(e) => setGender(e.target.value)}
                 required>
-                <option>Select</option>
-                <option>Yes</option>
-                <option>No</option>
+                <option value="select">Select</option>
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
               </select>
               <label
                 htmlFor="department"
@@ -115,13 +103,13 @@ export function ChurnFormCard() {
           <div className="relative mb-6" data-te-input-wrapper-init>
             <select
               className="peer h-full w-full rounded-[7px] border border-blue-gray-200 border-t-transparent bg-transparent px-3 py-2.5 font-sans text-sm font-normal text-blue-gray-700 outline outline-0 transition-all placeholder-shown:border placeholder-shown:border-blue-gray-200 placeholder-shown:border-t-blue-gray-200 focus:border-2 focus:border-blue-500 focus:border-t-transparent focus:outline-0 disabled:border-0 disabled:bg-blue-gray-50"
-              value={HasCrCardState}
+              value={HasCrCard}
               autoComplete="off"
-              onChange={(e) => setHasCrCardState(e.target.value)}
+              onChange={(e) => setHasCrCard(e.target.value)}
               required>
-              <option>Select</option>
-              <option>Yes</option>
-              <option>No</option>
+              <option value="select">Select</option>
+              <option value="1">Yes</option>
+              <option value="0">No</option>
             </select>
             <label className="before:content[' '] after:content[' '] pointer-events-none absolute left-0 -top-1.5 flex h-full w-full select-none text-[11px] font-normal leading-tight text-blue-gray-400 transition-all before:pointer-events-none before:mt-[6.5px] before:mr-1 before:box-border before:block before:h-1.5 before:w-2.5 before:rounded-tl-md before:border-t before:border-l before:border-blue-gray-200 before:transition-all after:pointer-events-none after:mt-[6.5px] after:ml-1 after:box-border after:block after:h-1.5 after:w-2.5 after:flex-grow after:rounded-tr-md after:border-t after:border-r after:border-blue-gray-200 after:transition-all peer-placeholder-shown:text-sm peer-placeholder-shown:leading-[3.75] peer-placeholder-shown:text-blue-gray-500 peer-placeholder-shown:before:border-transparent peer-placeholder-shown:after:border-transparent peer-focus:text-[11px] peer-focus:leading-tight peer-focus:text-blue-500 peer-focus:before:border-t-2 peer-focus:before:border-l-2 peer-focus:before:border-blue-500 peer-focus:after:border-t-2 peer-focus:after:border-r-2 peer-focus:after:border-blue-500 peer-disabled:text-transparent peer-disabled:before:border-transparent peer-disabled:after:border-transparent peer-disabled:peer-placeholder-shown:text-blue-gray-500">
               has credit card
@@ -131,13 +119,13 @@ export function ChurnFormCard() {
             <div className="relative mb-6" data-te-input-wrapper-init>
               <select
                 className="peer h-full w-full rounded-[7px] border border-blue-gray-200 border-t-transparent bg-transparent px-3 py-2.5 font-sans text-sm font-normal text-blue-gray-700 outline outline-0 transition-all placeholder-shown:border placeholder-shown:border-blue-gray-200 placeholder-shown:border-t-blue-gray-200 focus:border-2 focus:border-blue-500 focus:border-t-transparent focus:outline-0 disabled:border-0 disabled:bg-blue-gray-50"
-                value={IsActiveMemberState}
+                value={IsActiveMember}
                 autoComplete="off"
-                onChange={(e) => setIsActiveMemberState(e.target.value)}
+                onChange={(e) => setIsActiveMember(e.target.value)}
                 required>
                 <option>Select</option>
-                <option>Yes</option>
-                <option>No</option>
+                <option value="1">Yes</option>
+                <option value="0">No</option>
               </select>
               <label className="before:content[' '] after:content[' '] pointer-events-none absolute left-0 -top-1.5 flex h-full w-full select-none text-[11px] font-normal leading-tight text-blue-gray-400 transition-all before:pointer-events-none before:mt-[6.5px] before:mr-1 before:box-border before:block before:h-1.5 before:w-2.5 before:rounded-tl-md before:border-t before:border-l before:border-blue-gray-200 before:transition-all after:pointer-events-none after:mt-[6.5px] after:ml-1 after:box-border after:block after:h-1.5 after:w-2.5 after:flex-grow after:rounded-tr-md after:border-t after:border-r after:border-blue-gray-200 after:transition-all peer-placeholder-shown:text-sm peer-placeholder-shown:leading-[3.75] peer-placeholder-shown:text-blue-gray-500 peer-placeholder-shown:before:border-transparent peer-placeholder-shown:after:border-transparent peer-focus:text-[11px] peer-focus:leading-tight peer-focus:text-blue-500 peer-focus:before:border-t-2 peer-focus:before:border-l-2 peer-focus:before:border-blue-500 peer-focus:after:border-t-2 peer-focus:after:border-r-2 peer-focus:after:border-blue-500 peer-disabled:text-transparent peer-disabled:before:border-transparent peer-disabled:after:border-transparent peer-disabled:peer-placeholder-shown:text-blue-gray-500">
                 is active member
