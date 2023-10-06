@@ -11,7 +11,7 @@ import { Link } from "react-router-dom";
 
 export function Sidebar() {
   return (
-    <div className="sidebar-container">
+    <div className="sidebar-container ">
       <div className="sidebar-header drop-shadow-lg h-20">
         <img
           src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/14/GTBank_logo.svg/1200px-GTBank_logo.svg.png"
