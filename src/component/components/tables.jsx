@@ -112,7 +112,7 @@ export default function CustomerTable() {
   return (
     <div className="flex flex-col">
       <div
-        style={{ height: 650, backgroundColor: "white" }}
+        style={{ height: 650, width: 1200, backgroundColor: "white" }}
         className=" shadow-lg w-auto"
       >
         <DataGrid

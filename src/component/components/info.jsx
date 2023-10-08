@@ -1,4 +1,4 @@
-import { FaWalking, FaFunnelDollar, FaGem, FaUsers } from "react-icons/fa";
+import { FaWalking, FaUsersSlash, FaGem, FaUsers } from "react-icons/fa";
 import { useEffect, useState } from "react";
 import axios from "../../api/axios";
 import { ACTIVE_USER, CHURN_USER, TOTAL_USER } from "../../api/routes";
@@ -41,12 +41,12 @@ export function ActiveUsers() {
   return (
     <div className="flex flex-col card-sm items-center shadow-md xl: w-60 md: w-38 lg: w-50    ">
       <div className="pt-10">
-        <div className="bg-[#c2410c] h-20 w-24 flex rounded-lg items-center justify-center">
-          <FaFunnelDollar className="icons" style={{ height: 45, width: 55 }} />
+        <div className="bg-[#c2410c] h-16 w-20  flex rounded-lg items-center justify-center">
+          <FaUsersSlash className="icons" style={{ height: 24, width: 30 }} />
         </div>
       </div>
       <div className="flex flex-col">
-        <span className="mt-5 text-[30px]  font-extrabold font-mono">
+        <span className="mt-8 text-[30px]  font-extrabold font-mono">
           28304823
         </span>
         <span>Inactive Users</span>
@@ -75,12 +75,12 @@ export function ChurnUsers() {
   return (
     <div className="flex flex-col card-sm items-center shadow-md xl: w-60 md: w-38 lg: w-50    ">
       <div className="pt-10">
-        <div className="bg-[#4d7c0f]  h-20 w-24 flex rounded-lg items-center justify-center">
-          <FaGem className="icons" style={{ height: 45, width: 55 }} />
+        <div className="bg-[#4d7c0f]  h-16 w-20 flex rounded-lg items-center justify-center">
+          <FaGem className="icons" style={{ height: 24, width: 30 }} />
         </div>
       </div>
       <div className="flex flex-col">
-        <span className="mt-5 text-[30px]  font-extrabold font-mono">
+        <span className="mt-8 text-[30px]  font-extrabold font-mono">
           28304823
         </span>
         <span>Active Users</span>
@@ -109,12 +109,12 @@ export function TotalUsers() {
   return (
     <div className="flex flex-col card-sm items-center shadow-md xl: w-60 md: w-38 lg: w-50  ">
       <div className="pt-10">
-        <div className="bg-[#6d28d9]  h-20 w-24 flex rounded-lg items-center justify-center">
-          <FaUsers className="icons" style={{ height: 45, width: 55 }} />
+        <div className="bg-[#6d28d9]  h-16 w-20  flex rounded-lg items-center justify-center">
+          <FaWalking className="icons" style={{ height: 24, width: 30 }} />
         </div>
       </div>
       <div className="flex flex-col">
-        <span className="mt-5 text-[30px]  font-extrabold font-mono">
+        <span className="mt-8 text-[30px]  font-extrabold font-mono">
           28304823
         </span>
         <span>Churned Users</span>
@@ -131,12 +131,12 @@ export function ReturnedUsers() {
   return (
     <div className="flex flex-col card-sm items-center shadow-md xl: w-60 md: w-38 lg: w-50  ">
       <div className="pt-10">
-        <div className="bg-blue-100 h-20 w-24 flex rounded-lg items-center justify-center">
-          <FaWalking className="icons" style={{ height: 45, width: 55 }} />
+        <div className="bg-blue-100 h-16 w-20  flex rounded-lg items-center justify-center">
+          <FaUsers className="icons" style={{ height: 24, width: 30 }} />
         </div>
       </div>
       <div className="flex flex-col">
-        <span className="mt-5 text-[30px]  font-extrabold font-mono">
+        <span className="mt-8 text-[30px]  font-extrabold font-mono">
           28304823
         </span>
         <span>Total Users</span>
