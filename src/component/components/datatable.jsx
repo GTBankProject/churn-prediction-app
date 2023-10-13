@@ -1,16 +1,14 @@
 import "../comstyles/component.css";
 
 export const columns = [
-  { field: "age", headerName: "age", width: 70 },
-  { field: "deptID", headerName: "Dapartment ID", width: 70 },
-  { field: "name", headerName: "Department Name", width: 150 },
-  { field: "createdAt", headerName: "Created At", width: 150 },
-  { field: "updatedAt", headerName: "Updated At", width: 150 },
-  { field: "age1", headerName: "age", width: 70 },
-  { field: "deptID1", headerName: "Dapartment ID", width: 70 },
-  { field: "name1", headerName: "Department Name", width: 150 },
-  { field: "createdAt1", headerName: "Created At", width: 150 },
-  { field: "updatedAt1", headerName: "Updated At", width: 150 },
+  { field: "id", headerName: "age", width: 70 },
+  { field: "customerId", headerName: "Customer ID", width: 150 },
+  { field: "age", headerName: "Age", width: 70 },
+  { field: "cardType", headerName: "Card Type", width: 70 },
+  { field: "creditLimit", headerName: "Credit Limit", width: 150 },
+  { field: "gender", headerName: "Gender", width: 150 },
+  { field: "location", headerName: "Location", width: 150 },
+  { field: "numofProducts", headerName: "Number of Products", width: 150 },
 ];
 
 export const rows = [
