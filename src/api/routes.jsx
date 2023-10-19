@@ -9,4 +9,6 @@ export const EDUCATION =  "/education";
 export const ACTIVE_USER =  "/activeUser";
 export const CHURN_USER =  "/churnUser";
 export const TOTAL_USER =  "/totalUser";
+export const PREDICT =  "http://127.0.0.1:8000/api/predict";
+
 

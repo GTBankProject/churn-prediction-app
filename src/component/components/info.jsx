@@ -47,12 +47,12 @@ export function ActiveUsers() {
       </div>
       <div className="flex flex-col">
         <span className="mt-8 text-[30px]  font-extrabold font-mono">
-          28304823
+          {data}
         </span>
-        <span>Inactive Users</span>
+        <span>Active Users</span>
       </div>
-      <div class="relative h-24 w-60 ...">
-        <div class="absolute inset-x-0 bottom-0 h-8 ... bg-slate-300 text-blue-700">
+      <div className="relative h-24 w-60 ...">
+        <div className="absolute inset-x-0 bottom-0 h-8 ... bg-slate-300 text-blue-700">
           View detail inactive users
         </div>
       </div>
@@ -81,12 +81,12 @@ export function ChurnUsers() {
       </div>
       <div className="flex flex-col">
         <span className="mt-8 text-[30px]  font-extrabold font-mono">
-          28304823
+          {data}
         </span>
-        <span>Active Users</span>
+        <span>Churned Users</span>
       </div>
-      <div class="relative h-24 w-60 ...">
-        <div class="absolute inset-x-0 bottom-0 h-8 ... bg-slate-300 text-blue-700">
+      <div className="relative h-24 w-60 ...">
+        <div className="absolute inset-x-0 bottom-0 h-8 ... bg-slate-300 text-blue-700">
           View detail active users
         </div>
       </div>
@@ -115,12 +115,12 @@ export function TotalUsers() {
       </div>
       <div className="flex flex-col">
         <span className="mt-8 text-[30px]  font-extrabold font-mono">
-          28304823
+          {data}
         </span>
-        <span>Churned Users</span>
+        <span>Total Users</span>
       </div>
-      <div class="relative h-24 w-60 ...">
-        <div class="absolute inset-x-0 bottom-0 h-8 ... bg-slate-300 text-blue-700">
+      <div className="relative h-24 w-60 ...">
+        <div className="absolute inset-x-0 bottom-0 h-8 ... bg-slate-300 text-blue-700">
           Check out statistics
         </div>
       </div>
@@ -128,6 +128,17 @@ export function TotalUsers() {
   );
 }
 export function ReturnedUsers() {
+  const [data, setData] = useState();
+
+  useEffect(() => {
+    axios
+      .get(TOTAL_USER, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      })
+      .then((response) => setData(response.data));
+  }, []);
   return (
     <div className="flex flex-col card-sm items-center shadow-md xl: w-60 md: w-38 lg: w-50  ">
       <div className="pt-10">
@@ -137,12 +148,12 @@ export function ReturnedUsers() {
       </div>
       <div className="flex flex-col">
         <span className="mt-8 text-[30px]  font-extrabold font-mono">
-          28304823
+          {data}
         </span>
-        <span>Total Users</span>
+        <span>Returned Users</span>
       </div>
-      <div class="relative h-24 w-60 ...">
-        <div class="absolute inset-x-0 bottom-0 h-8 ... bg-slate-300 text-blue-700">
+      <div className="relative h-24 w-60 ...">
+        <div className="absolute inset-x-0 bottom-0 h-8 ... bg-slate-300 text-blue-700">
           View all Users
         </div>
       </div>

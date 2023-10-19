@@ -1,46 +1,51 @@
 import { useState } from "react";
+import axios from "axios";
+import { PREDICT } from "../../api/routes";
 
 export function ChurnFormCard() {
-  const [customerName, setCustomerName] = useState("");
+  const [Geography, setGeography] = useState("");
   const [Gender, setGender] = useState("");
   const [Balance, setBalance] = useState("");
   const [HasCrCard, setHasCrCard] = useState("");
   const [IsActiveMember, setIsActiveMember] = useState("");
   const [EstimatedSalary, setEstimatedSalary] = useState("");
   const [Credit_Limit, setCredit_Limit] = useState("");
- 
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(HasCrCard)
-    try {
-      axios.post(
-        CREATERISKFORM_URL,
-        JSON.stringify({
-          customerName,
+    console.log(HasCrCard);
+
+    axios
+      .post(
+        PREDICT,
+        {
+          Geography,
           Gender,
           HasCrCard,
-          Balance,
           IsActiveMember,
-          EstimatedSalary,
           Credit_Limit,
-        }),
+          EstimatedSalary,
+          Balance,
+        },
         {
           headers: {
             "Content-Type": "application/json",
+            "Accept": "application/json",
           },
-          withCredentials: true,
+          withCredentials: false,
         }
-      );
-      alert("Churn Result Ready");
-      reload();
-    } catch (error) {
-      alert(error);
-      reload();
-    }
+      )
+      .then((response) => {
+        console.log("Response Data:", response);
+        reload();
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+      });
   };
 
   const reload = () => {
-    setCustomerName("");
+    setGeography("");
     setGender("");
     setHasCrCard("");
     setBalance("");
@@ -49,22 +54,26 @@ export function ChurnFormCard() {
     setCredit_Limit("");
   };
 
+
+
   return (
     <div className="card py-4">
       <form className="w-76 ">
         <div className=" px-10 py-10">
           <div className="relative mb-6" data-te-input-wrapper-init>
-            <input
-              type="text"
+            <select
               className="peer h-full w-full rounded-[7px] border border-blue-gray-200 border-t-transparent bg-transparent px-3 py-2.5 font-sans text-sm font-normal text-blue-gray-700 outline outline-0 transition-all placeholder-shown:border placeholder-shown:border-blue-gray-200 placeholder-shown:border-t-blue-gray-200 focus:border-2 focus:border-blue-500 focus:border-t-transparent focus:outline-0 disabled:border-0 disabled:bg-blue-gray-50"
-              id="customerName"
-              value={customerName}
+              value={Geography}
               autoComplete="off"
-              onChange={(e) => setCustomerName(e.target.value)}
-              required
-            />
+              onChange={(e) => setGeography(e.target.value)}
+              required>
+              <option value="0">Select</option>
+              <option value="2">Kumasi</option>
+              <option value="3">Accra</option>
+              <option value="4">Cape Coast</option>
+            </select>
             <label className="before:content[' '] after:content[' '] pointer-events-none absolute left-0 -top-1.5 flex h-full w-full select-none text-[11px] font-normal leading-tight text-blue-gray-400 transition-all before:pointer-events-none before:mt-[6.5px] before:mr-1 before:box-border before:block before:h-1.5 before:w-2.5 before:rounded-tl-md before:border-t before:border-l before:border-blue-gray-200 before:transition-all after:pointer-events-none after:mt-[6.5px] after:ml-1 after:box-border after:block after:h-1.5 after:w-2.5 after:flex-grow after:rounded-tr-md after:border-t after:border-r after:border-blue-gray-200 after:transition-all peer-placeholder-shown:text-sm peer-placeholder-shown:leading-[3.75] peer-placeholder-shown:text-blue-gray-500 peer-placeholder-shown:before:border-transparent peer-placeholder-shown:after:border-transparent peer-focus:text-[11px] peer-focus:leading-tight peer-focus:text-blue-500 peer-focus:before:border-t-2 peer-focus:before:border-l-2 peer-focus:before:border-blue-500 peer-focus:after:border-t-2 peer-focus:after:border-r-2 peer-focus:after:border-blue-500 peer-disabled:text-transparent peer-disabled:before:border-transparent peer-disabled:after:border-transparent peer-disabled:peer-placeholder-shown:text-blue-gray-500">
-              customer-name
+              Location
             </label>
           </div>
           <div className="grid grid-cols-2 gap-2">
@@ -75,9 +84,9 @@ export function ChurnFormCard() {
                 autoComplete="off"
                 onChange={(e) => setGender(e.target.value)}
                 required>
-                <option value="select">Select</option>
-                <option value="Male">Male</option>
-                <option value="Female">Female</option>
+                <option value="0">Select</option>
+                <option value="2">Male</option>
+                <option value="3">Female</option>
               </select>
               <label
                 htmlFor="department"
@@ -171,7 +180,8 @@ export function ChurnFormCard() {
             className="inline-block w-full rounded bg-[#ce4a01] px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#3b71ca] transition duration-150 ease-in-out hover:bg-[#2a36b8] hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:bg-primary-600 focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:outline-none focus:ring-0 active:bg-primary-700 active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)]"
             data-te-ripple-init
             data-te-ripple-color="light"
-            onClick={handleSubmit}>
+            onClick={handleSubmit}
+          >
             Submit
           </button>
         </div>
