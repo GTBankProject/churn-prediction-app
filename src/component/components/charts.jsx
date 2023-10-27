@@ -28,6 +28,7 @@ import {
   IncomeCategoryBar,
   PieDataGender,
   PieDataGeography,
+  PieDataCreditcard,
 } from "./chartdata";
 import { useEffect, useState } from "react";
 import axios from "../../api/axios";
@@ -306,7 +307,7 @@ export function CardCategory() {
       <PieChart width={320} height={320}>
         <Pie
           dataKey="value"
-          data={PieDataGender}
+          data={PieDataCreditcard}
           outerRadius={90}
           innerRadius={45}
         />

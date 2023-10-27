@@ -25,18 +25,18 @@ export const PieDataGender = [
 ];
 export const PieDataGeography = [
   {
-    name: "Temale",
-    value: 2343,
+    name: "Takoradi",
+    value: 246,
     fill: "#cc23b3",
   },
   {
     name: "Kumasi",
-    value: 3000,
-    fill: "#2394cc",
+    value: 279,
+    fill: "#B3411B",
   },
   {
     name: "Accra",
-    value: 2343,
+    value: 493,
     fill: "#4d7c0f",
   },
 ];
@@ -49,7 +49,7 @@ export const PieDataCardCategory = [
   {
     name: "Female",
     value: 3000,
-    fill: "#2394cc",
+    fill: "#E6D806",
   },
 ];
 
@@ -73,13 +73,13 @@ export const PieDataAge = [
 export const PieDataCreditcard = [
   {
     name: "Card",
-    value: 2343,
-    fill: "#cc23b3",
+    value: 28437,
+    fill: "#060DE6",
   },
   {
     name: "No Card",
-    value: 3000,
-    fill: "#2394cc",
+    value: 68347,
+    fill: "#E6D806",
   },
 ];
 

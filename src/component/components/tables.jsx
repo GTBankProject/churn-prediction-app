@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import axios from "../../api/axios";
 import { CUSTOMER_URL } from "../../api/routes";
-import { rows, columns, column, dataTable } from "./datatable";
+import { rows, columns, column, dataTable, customerrow } from "./datatable";
 import { DataGrid } from "@mui/x-data-grid";
 import "../comstyles/component.css";
 
@@ -103,12 +103,10 @@ export default function CustomerTable() {
       })
       .then((response) => {
         const data = response.data;
-        setRecords(data)
+        setRecords(data);
       });
   }, []);
 
-
- 
   return (
     <div className="flex flex-col">
       <div
@@ -116,7 +114,7 @@ export default function CustomerTable() {
         className=" shadow-lg w-auto"
       >
         <DataGrid
-          rows={records}
+          rows={customerrow}
           columns={columns}
           initialState={{
             pagination: {

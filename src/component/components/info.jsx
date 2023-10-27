@@ -7,7 +7,7 @@ import { PredictionChurn } from "./charts";
 export function ChurnAdvice() {
   return (
     <p className="p-4">
-      <span className="pb-2 font-medium">CHURN ADVISE</span>
+      <span className="pb-2 font-medium">CHURN ADVISE: </span>
       Based on the various parameters placed <br />
       into consideration its relevant the various factors are placed into <br />
       consideration in order of relevance
@@ -168,7 +168,7 @@ export function ChurnpredictionTab() {
           <span className="font-bold">The Customer is Likely to</span>
         </div>
         <div className="text-[#ce4a01] ">
-          <span className="text-[114px]">Churn</span>
+          <span className="text-[54px]">Churn</span>
         </div>
       </div>
     </div>

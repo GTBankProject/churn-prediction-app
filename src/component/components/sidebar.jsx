@@ -41,12 +41,12 @@ export function Sidebar() {
               <Link to="/churn-prediction">Churn Prediction</Link>
             </span>
           </li>
-          <li>
+          {/* <li>
             <span className="group hover:text-white flex items-center hover:bg-[#8f3404] p-3 px-6 ">
               <FaFolderOpen className="icons" />
               <Link to="/report">Report</Link>
             </span>
-          </li>
+          </li> */}
           <li>
             <span className="group hover:text-white flex items-center hover:bg-[#8f3404] p-3 px-6">
               <FaGithubAlt className="icons" />
