@@ -579,7 +579,7 @@
     semver "^7.5.4"
     ts-api-utils "^1.0.1"
 
-"@typescript-eslint/utils@^6.6.0":
+"@typescript-eslint/utils@^6.6.0", "@typescript-eslint/utils@6.7.4":
   version "6.7.4"
   resolved "https://registry.npmjs.org/@typescript-eslint/utils/-/utils-6.7.4.tgz"
   integrity sha512-PRQAs+HUn85Qdk+khAxsVV+oULy3VkbH3hQ8hxLRJXWBEd7iI+GbQxH5SEUSH7kbEoTp6oT1bOwyga24ELALTA==
