@@ -23,6 +23,35 @@ export const PieDataGender = [
     fill: "#2394cc",
   },
 ];
+export const PieDataGeography = [
+  {
+    name: "Temale",
+    value: 2343,
+    fill: "#cc23b3",
+  },
+  {
+    name: "Kumasi",
+    value: 3000,
+    fill: "#2394cc",
+  },
+  {
+    name: "Accra",
+    value: 2343,
+    fill: "#4d7c0f",
+  },
+];
+export const PieDataCardCategory = [
+  {
+    name: "Male",
+    value: 2343,
+    fill: "#cc23b3",
+  },
+  {
+    name: "Female",
+    value: 3000,
+    fill: "#2394cc",
+  },
+];
 
 export const PieDataAge = [
   {
@@ -75,71 +104,36 @@ export const StatusData = [
   },
 ];
 
-export const BarData2 = [
+export const IncomeCategoryBar = [
   {
-    name: "Jan",
-    retained: 4000,
-    churn: 2400,
+    name: "less than 40k",
+    existing: 4000,
+    attrited: 2400,
   },
   {
-    name: "Fab",
-    retained: 3000,
-    churn: 1398,
+    name: "40k - 60k",
+    existing: 4000,
+    attrited: 2400,
   },
   {
-    name: "March",
-    retained: 2000,
-    churn: 9800,
+    name: "60k - 80k",
+    existing: 3000,
+    attrited: 1398,
   },
   {
-    name: "Aprl",
-    retained: 4000,
-    churn: 2400,
+    name: "80k - 120k",
+    existing: 2000,
+    attrited: 9800,
   },
   {
-    name: "May",
-    retained: 3000,
-    churn: 1398,
+    name: "120k +",
+    existing: 3000,
+    attrited: 1398,
   },
   {
-    name: "Jun",
-    retained: 2000,
-    churn: 9800,
-  },
-  {
-    name: "Jul",
-    retained: 4000,
-    churn: 2400,
-  },
-  {
-    name: "Aug",
-    retained: 3000,
-    churn: 1398,
-  },
-  {
-    name: "Sep",
-    retained: 2000,
-    churn: 9800,
-  },
-  {
-    name: "Oct",
-    retained: 4000,
-    churn: 2400,
-  },
-  {
-    name: "Fab",
-    retained: 3000,
-    churn: 1398,
-  },
-  {
-    name: "Nov",
-    retained: 2000,
-    churn: 9800,
-  },
-  {
-    name: "Dec",
-    retained: 2000,
-    churn: 9800,
+    name: "Unknown",
+    existing: 2000,
+    attrited: 9800,
   },
 ];
 

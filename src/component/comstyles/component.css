@@ -15,7 +15,7 @@
 }
 .sidebar-main {
   margin-top: 20px;
-  display: flex;
+  display: flex-start;
   justify-content: center;
   color: white;
 }
@@ -34,7 +34,6 @@
   margin: 15px;
   text-align: center;
   background-color: white;
-  
 }
 .card-table {
   box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1);
@@ -62,6 +61,6 @@
 .MuiDataGrid-row:nth-child(even) {
   background-color: rgb(243, 243, 243);
 }
-.main-container{
+.main-container {
   padding-left: 20%;
 }

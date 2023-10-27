@@ -41,8 +41,8 @@ export function ActiveUsers() {
   return (
     <div className="flex flex-col card-sm items-center shadow-md xl: w-60 md: w-38 lg: w-50    ">
       <div className="pt-10">
-        <div className="bg-[#c2410c] h-16 w-20  flex rounded-lg items-center justify-center">
-          <FaUsersSlash className="icons" style={{ height: 24, width: 30 }} />
+        <div className="bg-[#4d7c0f]  h-16 w-20 flex rounded-lg items-center justify-center">
+          <FaGem className="icons" style={{ height: 24, width: 30 }} />
         </div>
       </div>
       <div className="flex flex-col">
@@ -75,8 +75,8 @@ export function ChurnUsers() {
   return (
     <div className="flex flex-col card-sm items-center shadow-md xl: w-60 md: w-38 lg: w-50    ">
       <div className="pt-10">
-        <div className="bg-[#4d7c0f]  h-16 w-20 flex rounded-lg items-center justify-center">
-          <FaGem className="icons" style={{ height: 24, width: 30 }} />
+        <div className="bg-[#c2410c] h-16 w-20  flex rounded-lg items-center justify-center">
+          <FaUsersSlash className="icons" style={{ height: 24, width: 30 }} />
         </div>
       </div>
       <div className="flex flex-col">
@@ -109,8 +109,8 @@ export function TotalUsers() {
   return (
     <div className="flex flex-col card-sm items-center shadow-md xl: w-60 md: w-38 lg: w-50  ">
       <div className="pt-10">
-        <div className="bg-[#6d28d9]  h-16 w-20  flex rounded-lg items-center justify-center">
-          <FaWalking className="icons" style={{ height: 24, width: 30 }} />
+        <div className="bg-blue-100 h-16 w-20  flex rounded-lg items-center justify-center">
+          <FaUsers className="icons" style={{ height: 24, width: 30 }} />
         </div>
       </div>
       <div className="flex flex-col">
@@ -142,8 +142,8 @@ export function ReturnedUsers() {
   return (
     <div className="flex flex-col card-sm items-center shadow-md xl: w-60 md: w-38 lg: w-50  ">
       <div className="pt-10">
-        <div className="bg-blue-100 h-16 w-20  flex rounded-lg items-center justify-center">
-          <FaUsers className="icons" style={{ height: 24, width: 30 }} />
+        <div className="bg-[#6d28d9]  h-16 w-20  flex rounded-lg items-center justify-center">
+          <FaWalking className="icons" style={{ height: 24, width: 30 }} />
         </div>
       </div>
       <div className="flex flex-col">
@@ -162,18 +162,15 @@ export function ReturnedUsers() {
 }
 export function ChurnpredictionTab() {
   return (
-    <div className="card p-2 flex flex-row divide-x ">
-      <div className="flex flex-col p-2 justify-center">
+    <div className="card p-2 flex flex-row items-center">
+      <div className="flex flex-col p-2 justify-center ">
         <div>
-          <span className="font-bold">Customer Churn</span> is
+          <span className="font-bold">The Customer is Likely to</span>
         </div>
         <div className="text-[#ce4a01] ">
-          <span className="text-[114px]">57</span>
-          <span className="text-[54px]">%</span>
+          <span className="text-[114px]">Churn</span>
         </div>
-        <div className="text-[12px]">higher than the average</div>
       </div>
-      <PredictionChurn/>
     </div>
   );
 }

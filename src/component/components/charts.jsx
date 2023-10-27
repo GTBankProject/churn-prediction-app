@@ -22,18 +22,24 @@ import {
 import {
   StatusData,
   ChurnBarData,
-  BarData2,
   ScatterData,
   RadaData,
   ScatterDataBalance,
+  IncomeCategoryBar,
+  PieDataGender,
+  PieDataGeography,
 } from "./chartdata";
 import { useEffect, useState } from "react";
 import axios from "../../api/axios";
-import { ACTIVE_VS_INACTIVE, GENDER_URL, CARD, EDUCATION } from "../../api/routes";
+import {
+  ACTIVE_VS_INACTIVE,
+  GENDER_URL,
+  CARD,
+  EDUCATION,
+} from "../../api/routes";
 import "../comstyles/component.css";
 
 export function CustomerStat() {
-
   const [data, setData] = useState();
 
   useEffect(() => {
@@ -43,21 +49,14 @@ export function CustomerStat() {
           "Content-Type": "application/json",
         },
       })
-      .then((response) =>
-      setData(response.data));
-
+      .then((response) => setData(response.data));
   }, []);
 
   return (
     <div className="flex justify-center items-center flex-col">
       <h3>Active Vs Inactive</h3>
       <PieChart width={180} height={180}>
-        <Pie
-          dataKey="value"
-          data={data}
-          outerRadius={80}
-          innerRadius={45}
-        />
+        <Pie dataKey="value" data={data} outerRadius={80} innerRadius={45} />
         <Tooltip />
       </PieChart>
     </div>
@@ -73,22 +72,15 @@ export function CardVsNoCard() {
           "Content-Type": "application/json",
         },
       })
-      .then((response) =>
-      setData(response.data));
-
+      .then((response) => setData(response.data));
   }, []);
 
   return (
     <div className="flex justify-center items-center flex-col">
       <h3>Card Vs No Card</h3>
       <PieChart width={180} height={180}>
-        <Pie
-          dataKey="value"
-          data={data}
-          outerRadius={80}
-          innerRadius={45}
-        />
-        <Tooltip/>
+        <Pie dataKey="value" data={data} outerRadius={80} innerRadius={45} />
+        <Tooltip />
       </PieChart>
     </div>
   );
@@ -103,22 +95,15 @@ export function MaleVsFemale() {
           "Content-Type": "application/json",
         },
       })
-      .then((response) =>
-      setData(response.data));
-
+      .then((response) => setData(response.data));
   }, []);
 
   return (
     <div className="flex justify-center items-center flex-col">
       <h3>Male Vs Female</h3>
       <PieChart width={180} height={180}>
-        <Pie
-          dataKey="value"
-          data={data}
-          outerRadius={80}
-          innerRadius={45}
-        />
-        <Tooltip/>
+        <Pie dataKey="value" data={data} outerRadius={80} innerRadius={45} />
+        <Tooltip />
       </PieChart>
     </div>
   );
@@ -133,22 +118,15 @@ export function Age() {
           "Content-Type": "application/json",
         },
       })
-      .then((response) =>
-      setData(response.data));
-
+      .then((response) => setData(response.data));
   }, []);
 
   return (
     <div className="flex justify-center items-center flex-col">
       <h3>Education Level</h3>
       <PieChart width={180} height={180}>
-        <Pie
-          dataKey="value"
-          data={data}
-          outerRadius={80}
-          innerRadius={45}
-        />
-        <Tooltip/>
+        <Pie dataKey="value" data={data} outerRadius={80} innerRadius={45} />
+        <Tooltip />
       </PieChart>
     </div>
   );
@@ -167,17 +145,20 @@ export function CustomerStatus() {
     </div>
   );
 }
-export function QuatalyChurn() {
+export function IncomeCategory() {
   return (
-    <div className=" p-5 mt-5 md: w-200px">
-      <h3>QUATERLY CUSTOMER MATRIX</h3>
-      <BarChart width={960} height={300} data={BarData2}>
+    <div className=" p-5  md: w-200px">
+      <div className="pb-12 text-[18px]">
+        <h1>Income Category</h1>
+        <hr />
+      </div>
+      <BarChart width={950} height={300} data={IncomeCategoryBar}>
         <CartesianGrid strokeDasharray="3 3" />
         <Legend />
         <YAxis />
-        <XAxis dataKey="name"/>
-        <Bar dataKey="retained" fill="#CE4A01" />
-        <Bar dataKey="churn" fill="#2394cc" />
+        <XAxis dataKey="name" />
+        <Bar dataKey="existing" fill="#CE4A01" />
+        <Bar dataKey="attrited" fill="#2394cc" />
       </BarChart>
     </div>
   );
@@ -247,6 +228,91 @@ export function Locations() {
           />
         </RadarChart>
       </ResponsiveContainer>
+    </div>
+  );
+}
+
+export function Geography() {
+  const [data, setData] = useState();
+
+  useEffect(() => {
+    axios
+      .get(EDUCATION, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      })
+      .then((response) => setData(response.data));
+  }, []);
+
+  return (
+    <div className="flex justify-center items-center flex-col">
+      <PieChart width={320} height={320}>
+        <Pie
+          dataKey="value"
+          data={PieDataGeography}
+          outerRadius={90}
+          innerRadius={45}
+        />
+        <Tooltip />
+      </PieChart>
+      <h3>Geography Distribution</h3>
+    </div>
+  );
+}
+export function Gender() {
+  const [data, setData] = useState();
+
+  useEffect(() => {
+    axios
+      .get(EDUCATION, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      })
+      .then((response) => setData(response.data));
+  }, []);
+
+  return (
+    <div className="flex justify-center items-center flex-col">
+      <PieChart width={330} height={320}>
+        <Pie
+          dataKey="value"
+          data={PieDataGender}
+          outerRadius={90}
+          innerRadius={45}
+        />
+        <Tooltip />
+      </PieChart>
+      <h3>Gender</h3>
+    </div>
+  );
+}
+export function CardCategory() {
+  const [data, setData] = useState();
+
+  useEffect(() => {
+    axios
+      .get(EDUCATION, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      })
+      .then((response) => setData(response.data));
+  }, []);
+
+  return (
+    <div className="flex justify-center items-center flex-col">
+      <PieChart width={320} height={320}>
+        <Pie
+          dataKey="value"
+          data={PieDataGender}
+          outerRadius={90}
+          innerRadius={45}
+        />
+        <Tooltip />
+      </PieChart>
+      <h3>Card Category</h3>
     </div>
   );
 }
