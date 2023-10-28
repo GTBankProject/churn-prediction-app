@@ -4,8 +4,6 @@ import Box from '@mui/material/Box';
 import Link from '@mui/material/Link';
 import Card from '@mui/material/Card';
 import Stack from '@mui/material/Stack';
-import Button from '@mui/material/Button';
-import Divider from '@mui/material/Divider';
 import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
 import IconButton from '@mui/material/IconButton';
@@ -27,21 +25,36 @@ export default function LoginView() {
 
   const router = useRouter();
 
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
 
-  const handleClick = () => {
-    router.push('/dashboard');
+  const handleClick = (e) => {
+    e.preventDefault();
+    if (email === "admin@gmail.com" && password === "admin123") {
+      router.push("/dashboard", { replace: true });
+    } else {
+      alert("wrong credentials");
+    }
   };
 
   const renderForm = (
     <>
       <Stack spacing={3}>
-        <TextField name="email" label="Email address" />
+        <TextField
+          name="email"
+          label="Email address"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          autoComplete="false" />
 
         <TextField
           name="password"
           label="Password"
           type={showPassword ? 'text' : 'password'}
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          autoComplete="false"
           InputProps={{
             endAdornment: (
               <InputAdornment position="end">
@@ -77,8 +90,8 @@ export default function LoginView() {
     <Box
       sx={{
         ...bgGradient({
-          color: alpha(theme.palette.background.default, 0.9),
-          imgUrl: '/assets/background/overlay_4.jpg',
+          color: alpha(theme.palette.background.default, 0.5),
+          imgUrl: '/assets/background/overlay_6.jpg',
         }),
         height: 1,
       }}
@@ -90,8 +103,7 @@ export default function LoginView() {
           left: { xs: 16, md: 24 },
         }}
       />
-
-      <Stack alignItems="center" justifyContent="center" sx={{ height: 1 }}>
+      <Stack alignItems="left" justifyContent="center" sx={{ height: 1, marginLeft: 20 }}>
         <Card
           sx={{
             p: 5,
@@ -99,56 +111,21 @@ export default function LoginView() {
             maxWidth: 420,
           }}
         >
-          <Typography variant="h4">Sign in to Minimal</Typography>
+          <Typography variant="h4">Login</Typography>
 
           <Typography variant="body2" sx={{ mt: 2, mb: 5 }}>
-            Don’t have an account?
+            This site is for only GT bank Staff?
             <Link variant="subtitle2" sx={{ ml: 0.5 }}>
-              Get started
+              Not a Staff
             </Link>
           </Typography>
 
-          <Stack direction="row" spacing={2}>
-            <Button
-              fullWidth
-              size="large"
-              color="inherit"
-              variant="outlined"
-              sx={{ borderColor: alpha(theme.palette.grey[500], 0.16) }}
-            >
-              <Iconify icon="eva:google-fill" color="#DF3E30" />
-            </Button>
-
-            <Button
-              fullWidth
-              size="large"
-              color="inherit"
-              variant="outlined"
-              sx={{ borderColor: alpha(theme.palette.grey[500], 0.16) }}
-            >
-              <Iconify icon="eva:facebook-fill" color="#1877F2" />
-            </Button>
-
-            <Button
-              fullWidth
-              size="large"
-              color="inherit"
-              variant="outlined"
-              sx={{ borderColor: alpha(theme.palette.grey[500], 0.16) }}
-            >
-              <Iconify icon="eva:twitter-fill" color="#1C9CEA" />
-            </Button>
-          </Stack>
-
-          <Divider sx={{ my: 3 }}>
-            <Typography variant="body2" sx={{ color: 'text.secondary' }}>
-              OR
-            </Typography>
-          </Divider>
 
           {renderForm}
         </Card>
       </Stack>
+
     </Box>
+
   );
 }

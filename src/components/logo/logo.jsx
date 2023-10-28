@@ -35,7 +35,7 @@ const Logo = forwardRef(({ disabledLink = false, sx, ...other }, ref) => {
     >
       <img
         src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/14/GTBank_logo.svg/1200px-GTBank_logo.svg.png"
-        alt="Paris"
+        alt="Ghana"
         className="w-55 h-20"
       />    </Box>
   );
