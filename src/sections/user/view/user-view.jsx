@@ -96,8 +96,6 @@ export default function UserPage() {
     <Container>
       <Stack direction="row" alignItems="center" justifyContent="space-between" mb={5}>
         <Typography variant="h4">Users</Typography>
-
-
       </Stack>
 
       <Card>
@@ -118,11 +116,13 @@ export default function UserPage() {
                 onRequestSort={handleSort}
                 onSelectAllClick={handleSelectAllClick}
                 headLabel={[
-                  { id: 'name', label: 'Name' },
-                  { id: 'company', label: 'Company' },
-                  { id: 'role', label: 'Role' },
-                  { id: 'isVerified', label: 'Verified', align: 'center' },
-                  { id: 'status', label: 'Status' },
+                  { id: 'customerId', label: 'Customer ID', width: 150 },
+                  { id: 'age', label: 'Age', width: 70 },
+                  { id: 'cardType', label: 'Card Type', width: 70 },
+                  { id: 'creditLimit', label: 'Credit Limit', width: 150 },
+                  { id: 'gender', label: 'Gender', width: 150 },
+                  { id: 'location', label: 'Location', width: 150 },
+                  { id: 'numofProducts', label: 'Number of Products', width: 150 },
                   { id: '' },
                 ]}
               />
@@ -132,12 +132,13 @@ export default function UserPage() {
                   .map((row) => (
                     <UserTableRow
                       key={row.id}
-                      name={row.name}
-                      role={row.role}
-                      status={row.status}
-                      company={row.company}
-                      avatarUrl={row.avatarUrl}
-                      isVerified={row.isVerified}
+                      customerId={row.customerId}
+                      age={row.age}
+                      cardType={row.cardType}
+                      creditLimit={row.creditLimit}
+                      gender={row.gender}
+                      location={row.location}
+                      numofProducts={row.numofProducts}
                       selected={selected.indexOf(row.name) !== -1}
                       handleClick={(event) => handleClick(event, row.name)}
                     />
