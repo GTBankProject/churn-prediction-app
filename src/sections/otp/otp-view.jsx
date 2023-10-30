@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 import Box from '@mui/material/Box';
 import Link from '@mui/material/Link';
@@ -24,13 +24,34 @@ export default function LoginView() {
 
   const [otp, setOtp] = useState("");
 
+  const [seconds, setSeconds] = useState(90);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      if (seconds > 0) {
+        setSeconds(seconds - 1);
+      } else {
+        clearInterval(timer);
+      }
+    }, 1000);
+
+    return () => {
+      clearInterval(timer);
+    };
+  }, [seconds]);
+
 
   const handleClick = (e) => {
     e.preventDefault();
-    if (otp === "admin@gmail.com") {
+
+    if (otp.trim() === "") {
+      alert("Please enter a valid OTP");
+    }
+    // else if (/* Add additional validation if needed */) {
+    //   // Handle the case where the OTP is invalid (e.g., doesn't meet specific criteria)
+    //   alert("Invalid OTP. Please check and try again."); }
+     else {
       router.push("/dashboard", { replace: true });
-    } else {
-      alert("wrong credentials");
     }
   };
 
@@ -40,13 +61,16 @@ export default function LoginView() {
         <TextField
           name="otp"
           label="otp code"
-          type='number'
+          type="number"
           value={otp}
           onChange={(e) => setOtp(e.target.value)}
-          autoComplete="false"
-          required />
+          autoComplete="false" />
 
       </Stack>
+
+        <Typography variant="body2" sx={{ mt: 2 }} style={{ display: 'flex', justifyContent: 'center', alignItems: 'center'}} >
+          {seconds} sec
+        </Typography>
 
       <Stack direction="row" alignItems="center" justifyContent="flex-end" sx={{ my: 3 }}>
         <Link variant="subtitle2" underline="hover">
