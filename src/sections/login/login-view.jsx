@@ -35,17 +35,19 @@ export default function LoginView() {
     localStorage.clear();
     try {
       const response = await axios.post(Login_URl, JSON.stringify({ email, password }), {
-        headers: { 'Accept': 'application/json' },
+        headers: { 'Content-Type': 'application/json' },
         withCredentials: false,
       });
-
+      if (response.status === 500) {
+        alert('Server Down ');
+      } else {
         const token = response.data.access_token;
         navigate('/verification', { replace: true });
         localStorage.setItem('token', token);
         alert('kindly verify your email');
-
+      }
     } catch (err) {
-      alert('Internal server error');
+      alert('Unauthorized User');
     }
   };
   const renderForm = (

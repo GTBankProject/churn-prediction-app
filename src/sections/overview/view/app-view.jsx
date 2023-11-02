@@ -23,7 +23,6 @@ export default function AppView() {
         responseType: 'json',
         headers: {
           Accept: 'application/json',
-          'Content-Type': 'application/json',
           Authorization: localStorage.getItem('token'),
         },
       })
@@ -35,7 +34,6 @@ export default function AppView() {
         responseType: 'json',
         headers: {
           Accept: 'application/json',
-          'Content-Type': 'application/json',
           Authorization: localStorage.getItem('token'),
         },
       })
