@@ -20,6 +20,7 @@ export default function AppView() {
   useEffect(() => {
     axios
       .get(CUSTOMERSTATISTICS_URL, {
+        responseType: 'json',
         headers: {
           Accept: 'application/json',
           'Content-Type': 'application/json',
@@ -31,6 +32,7 @@ export default function AppView() {
   useEffect(() => {
     axios
       .get(CUSTOMERS_URL, {
+        responseType: 'json',
         headers: {
           Accept: 'application/json',
           'Content-Type': 'application/json',
