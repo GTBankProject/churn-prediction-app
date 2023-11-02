@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 import Box from '@mui/material/Box';
 import Link from '@mui/material/Link';
@@ -8,9 +9,10 @@ import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
 import LoadingButton from '@mui/lab/LoadingButton';
 import { alpha, useTheme } from '@mui/material/styles';
+import InputAdornment from '@mui/material/InputAdornment';
 
-import { useRouter } from 'src/routes/hooks';
-
+import axios from 'src/api/axios';
+import { OTP_URL } from 'src/api/routes';
 import { bgGradient } from 'src/theme/css';
 
 import Logo from 'src/components/logo';
@@ -20,32 +22,42 @@ import Logo from 'src/components/logo';
 export default function LoginView() {
   const theme = useTheme();
 
-  const router = useRouter();
+  const [otp, setOtp] = useState('');
+  const navigate = useNavigate();
 
-  const [otp, setOtp] = useState("");
-
-
-  const handleClick = (e) => {
-    e.preventDefault();
-    if (otp === "admin@gmail.com") {
-      router.push("/dashboard", { replace: true });
-    } else {
-      alert("wrong credentials");
+  const handleClick = async (e) => {
+    try {
+      const response = await axios.post(OTP_URL, JSON.stringify({ otp }), {
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: localStorage.getItem('token'),
+        },
+        withCredentials: false,
+      });
+      if (response.status === 202) {
+        alert('logged in successfully');
+        navigate('/dashboard ', { replace: true });
+      } else {
+        alert('Authorization returned null');
+      }
+    } catch (err) {
+      alert('Acess Denied');
     }
   };
 
   const renderForm = (
     <>
-      <Stack spacing={3}>
+      <Stack>
         <TextField
-          name="otp"
-          label="otp code"
-          type='number'
+          type="text"
           value={otp}
           onChange={(e) => setOtp(e.target.value)}
           autoComplete="false"
-          required />
-
+          required
+          InputProps={{
+            startAdornment: <InputAdornment position="start">GTB- </InputAdornment>,
+          }}
+        />
       </Stack>
 
       <Stack direction="row" alignItems="center" justifyContent="flex-end" sx={{ my: 3 }}>
@@ -64,7 +76,6 @@ export default function LoginView() {
       >
         Confirm OTP
       </LoadingButton>
-
     </>
   );
 
@@ -99,12 +110,9 @@ export default function LoginView() {
             Check your email for otp code
           </Typography>
 
-
           {renderForm}
         </Card>
       </Stack>
-
     </Box>
-
   );
 }

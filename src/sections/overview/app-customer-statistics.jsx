@@ -8,7 +8,7 @@ import Chart, { useChart } from 'src/components/chart';
 
 // ----------------------------------------------------------------------
 
-export default function AppWebsiteVisits({ title, subheader, chart, ...other }) {
+export default function AppCustomerStatistics({ title, subheader, chart, ...other }) {
   const { labels, colors, series, options } = chart;
 
   const chartOptions = useChart({
@@ -58,7 +58,7 @@ export default function AppWebsiteVisits({ title, subheader, chart, ...other }) 
   );
 }
 
-AppWebsiteVisits.propTypes = {
+AppCustomerStatistics.propTypes = {
   chart: PropTypes.object,
   subheader: PropTypes.string,
   title: PropTypes.string,

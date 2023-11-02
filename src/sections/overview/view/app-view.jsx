@@ -1,27 +1,55 @@
+import { useEffect } from 'react';
+
 import Container from '@mui/material/Container';
 import Grid from '@mui/material/Unstable_Grid2';
 import Typography from '@mui/material/Typography';
 
+import axios from 'src/api/axios';
+import { CUSTOMERS_URL, CUSTOMERSTATISTICS_URL } from 'src/api/routes';
+
 import AppCurrentVisits from '../app-current-visits';
-import AppWebsiteVisits from '../app-website-visits';
 import AppWidgetSummary from '../app-widget-summary';
 import AppCurrentSubject from '../app-current-subject';
 import AppConversionRates from '../app-conversion-rates';
+import AppCustomerStatistics from '../app-customer-statistics';
 
 // ----------------------------------------------------------------------
 
 export default function AppView() {
+  console.log(localStorage.getItem('token'));
+  useEffect(() => {
+    axios
+      .get(CUSTOMERSTATISTICS_URL, {
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+          Authorization: localStorage.getItem('token'),
+        },
+      })
+      .then((data) => console.log(data.data));
+  });
+  useEffect(() => {
+    axios
+      .get(CUSTOMERS_URL, {
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+          Authorization: localStorage.getItem('token'),
+        },
+      })
+      .then((response) => console.log(response.data));
+  }, []);
   return (
     <Container maxWidth="xl">
       <Typography variant="h4" sx={{ mb: 5 }}>
-        Hi, Welcome back 👋
+        Hi, Welcome 👋
       </Typography>
 
       <Grid container spacing={3}>
         <Grid xs={12} sm={6} md={3}>
           <AppWidgetSummary
             title="Active Users"
-            total={714000}
+            total={234242}
             color="success"
             icon={<img alt="icon" src="/assets/icons/glass/ic_glass_users.png" />}
           />
@@ -30,7 +58,7 @@ export default function AppView() {
         <Grid xs={12} sm={6} md={3}>
           <AppWidgetSummary
             title="Churned Users"
-            total={1352831}
+            total={23434}
             color="info"
             icon={<img alt="icon" src="/assets/icons/glass/ic_glass_churn.png" />}
           />
@@ -47,15 +75,15 @@ export default function AppView() {
 
         <Grid xs={12} sm={6} md={3}>
           <AppWidgetSummary
-            title="Bug Reports"
-            total={234}
+            title="Total Users"
+            total={434234532}
             color="error"
             icon={<img alt="icon" src="/assets/icons/glass/ic_glass_message.png" />}
           />
         </Grid>
 
         <Grid xs={12} md={6} lg={8}>
-          <AppWebsiteVisits
+          <AppCustomerStatistics
             title="Customer Statistics"
             subheader="(+43%) than last year"
             chart={{
@@ -74,21 +102,24 @@ export default function AppView() {
               ],
               series: [
                 {
-                  name: 'Team A',
+                  name: 'Attritted',
                   type: 'column',
                   fill: 'solid',
+                  color: '#e53935',
                   data: [23, 11, 22, 27, 13, 22, 37, 21, 44, 22, 30],
                 },
                 {
-                  name: 'Team B',
+                  name: 'Active',
                   type: 'area',
                   fill: 'gradient',
+                  color: '#4caf50',
                   data: [44, 55, 41, 67, 22, 43, 21, 41, 56, 27, 43],
                 },
                 {
-                  name: 'Team C',
+                  name: 'Likely to Churn',
                   type: 'line',
                   fill: 'solid',
+                  color: '#ffeb3b',
                   data: [30, 25, 36, 30, 45, 35, 64, 52, 59, 36, 39],
                 },
               ],
@@ -98,13 +129,12 @@ export default function AppView() {
 
         <Grid xs={12} md={6} lg={4}>
           <AppCurrentVisits
-            title="Current Visits"
+            title="Locations"
             chart={{
               series: [
-                { label: 'America', value: 4344 },
-                { label: 'Asia', value: 5435 },
-                { label: 'Europe', value: 1443 },
-                { label: 'Africa', value: 4443 },
+                { label: 'Takoradi', value: 4344 },
+                { label: 'Accra', value: 5435 },
+                { label: 'Kumasi', value: 1443 },
               ],
             }}
           />
@@ -116,16 +146,14 @@ export default function AppView() {
             subheader="(+43%) than last year"
             chart={{
               series: [
-                { label: 'Italy', value: 400 },
-                { label: 'Japan', value: 430 },
-                { label: 'China', value: 448 },
-                { label: 'Canada', value: 470 },
-                { label: 'France', value: 540 },
-                { label: 'Germany', value: 580 },
-                { label: 'South Korea', value: 690 },
-                { label: 'Netherlands', value: 1100 },
-                { label: 'United States', value: 1200 },
-                { label: 'United Kingdom', value: 1380 },
+                { label: 'East Legon', value: 400 },
+                { label: 'Accra', value: 430 },
+                { label: 'Lapaz', value: 448 },
+                { label: 'Nima', value: 470 },
+                { label: 'Legon', value: 540 },
+                { label: 'Cantonment', value: 580 },
+                { label: 'Tesano', value: 690 },
+                { label: 'Sakumono', value: 1100 },
               ],
             }}
           />
@@ -135,7 +163,14 @@ export default function AppView() {
           <AppCurrentSubject
             title="Performance Radar"
             chart={{
-              categories: ['Fin. Advisory', 'Customers', 'Insurance', 'User feedbacks', 'Loans', 'Investments'],
+              categories: [
+                'Fin. Advisory',
+                'Customers',
+                'Insurance',
+                'User feedbacks',
+                'Loans',
+                'Investments',
+              ],
               series: [
                 { name: '2021', data: [80, 50, 30, 40, 100, 20] },
                 { name: '2022', data: [20, 30, 40, 80, 20, 80] },

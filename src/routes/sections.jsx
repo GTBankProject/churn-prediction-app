@@ -22,7 +22,7 @@ export default function Router() {
     },
     {
       index: true,
-      path: '/otp',
+      path: '/verification',
       element: <OtpPage />,
     },
     {

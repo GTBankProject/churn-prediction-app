@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import Box from '@mui/material/Box';
 import Card from '@mui/material/Card';
 import Stack from '@mui/material/Stack';
-import { alpha } from '@mui/material/styles';
 import Typography from '@mui/material/Typography';
 
 import { fShortenNumber } from 'src/utils/format-number';
@@ -11,7 +10,7 @@ import { fShortenNumber } from 'src/utils/format-number';
 // ----------------------------------------------------------------------
 export default function AppWidgetSummary({ title, total, icon, color = 'primary', sx, ...other }) {
   const cardStyle = {
-    backgroundColor:  (theme) => alpha(theme.palette.primary.orange, 0.08), // Orange color from the Material-UI color palette
+    backgroundColor: '#ffe0b2', // Orange color from the Material-UI color palette
   };
 
   return (

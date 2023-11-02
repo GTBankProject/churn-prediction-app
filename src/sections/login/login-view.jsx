@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 import Box from '@mui/material/Box';
 import Link from '@mui/material/Link';
@@ -11,9 +12,9 @@ import LoadingButton from '@mui/lab/LoadingButton';
 import { alpha, useTheme } from '@mui/material/styles';
 import InputAdornment from '@mui/material/InputAdornment';
 
-import { useRouter } from 'src/routes/hooks';
-
+import axios from 'src/api/axios';
 import { bgGradient } from 'src/theme/css';
+import { Login_URl } from 'src/api/routes';
 
 import Logo from 'src/components/logo';
 import Iconify from 'src/components/iconify';
@@ -23,21 +24,32 @@ import Iconify from 'src/components/iconify';
 export default function LoginView() {
   const theme = useTheme();
 
-  const router = useRouter();
-
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
 
-  const handleClick = (e) => {
+  const navigate = useNavigate();
+
+  const handleClick = async (e) => {
     e.preventDefault();
-    if (email === "admin@gmail.com" && password === "admin123") {
-      router.push("/otp", { replace: true });
-    } else {
-      alert("wrong credentials");
+    localStorage.clear();
+    try {
+      const response = await axios.post(Login_URl, JSON.stringify({ email, password }), {
+        headers: { 'Content-Type': 'application/json' },
+        withCredentials: false,
+      });
+      if (response.status === 500) {
+        alert('Server Down ');
+      } else {
+        const token = response.data.access_token;
+        navigate('/verification', { replace: true });
+        localStorage.setItem('token', token);
+        alert('kindly verify your email');
+      }
+    } catch (err) {
+      alert('Unauthorized User');
     }
   };
-
   const renderForm = (
     <>
       <Stack spacing={3}>
@@ -46,7 +58,8 @@ export default function LoginView() {
           label="Email address"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
-          autoComplete="false" />
+          autoComplete="false"
+        />
 
         <TextField
           name="password"
@@ -83,7 +96,6 @@ export default function LoginView() {
       >
         Login
       </LoadingButton>
-
     </>
   );
 
@@ -121,12 +133,9 @@ export default function LoginView() {
             </Link>
           </Typography>
 
-
           {renderForm}
         </Card>
       </Stack>
-
     </Box>
-
   );
 }
