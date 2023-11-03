@@ -96,8 +96,6 @@ export default function UserPage() {
     <Container>
       <Stack direction="row" alignItems="center" justifyContent="space-between" mb={5}>
         <Typography variant="h4">Users</Typography>
-
-
       </Stack>
 
       <Card>
@@ -132,10 +130,10 @@ export default function UserPage() {
                   .map((row) => (
                     <UserTableRow
                       key={row.id}
-                      name={row.name}
-                      role={row.role}
+                      customerid={row.ID}
+                      dataofBirth={row.DoB}
                       status={row.status}
-                      company={row.company}
+                      branch={row.Branch}
                       avatarUrl={row.avatarUrl}
                       isVerified={row.isVerified}
                       selected={selected.indexOf(row.name) !== -1}

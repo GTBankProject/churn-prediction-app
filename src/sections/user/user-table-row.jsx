@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 
 import Stack from '@mui/material/Stack';
@@ -27,6 +27,10 @@ export default function UserTableRow({
   handleClick,
 }) {
   const [open, setOpen] = useState(null);
+  const [data, setData] = useState([]);
+  const ID = data.usid;
+  const DoB = data.birthday;
+  const Branch = data.branchMember;
 
   const handleOpenMenu = (event) => {
     setOpen(event.currentTarget);
@@ -35,6 +39,18 @@ export default function UserTableRow({
   const handleCloseMenu = () => {
     setOpen(null);
   };
+
+  useEffect(() => {
+    axios
+      .get(CUSTOMERS_URL, {
+        responseType: 'json',
+        headers: {
+          Accept: 'application/json',
+          Authorization: localStorage.getItem('token'),
+        },
+      })
+      .then((data) => setData(data.data));
+  }, []);
 
   return (
     <>
@@ -45,16 +61,16 @@ export default function UserTableRow({
 
         <TableCell component="th" scope="row" padding="none">
           <Stack direction="row" alignItems="center" spacing={2}>
-            <Avatar alt={name} src={avatarUrl} />
+            <Avatar alt={ID} src={avatarUrl} />
             <Typography variant="subtitle2" noWrap>
-              {name}
+              {ID}
             </Typography>
           </Stack>
         </TableCell>
 
-        <TableCell>{company}</TableCell>
+        <TableCell>{DoB}</TableCell>
 
-        <TableCell>{role}</TableCell>
+        <TableCell>{Branch}</TableCell>
 
         <TableCell align="center">{isVerified ? 'Yes' : 'No'}</TableCell>
 
@@ -95,11 +111,11 @@ export default function UserTableRow({
 
 UserTableRow.propTypes = {
   avatarUrl: PropTypes.any,
-  company: PropTypes.any,
+  Branch: PropTypes.any,
   handleClick: PropTypes.func,
   isVerified: PropTypes.any,
-  name: PropTypes.any,
-  role: PropTypes.any,
+  ID: PropTypes.any,
+  DOB: PropTypes.any,
   selected: PropTypes.any,
   status: PropTypes.string,
 };
