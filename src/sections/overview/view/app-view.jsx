@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 import Container from '@mui/material/Container';
 import Grid from '@mui/material/Unstable_Grid2';
@@ -16,7 +16,7 @@ import AppCustomerStatistics from '../app-customer-statistics';
 // ----------------------------------------------------------------------
 
 export default function AppView() {
-  console.log(localStorage.getItem('token'));
+  const [data, setData] = useState([]);
   useEffect(() => {
     axios
       .get(CUSTOMERSTATISTICS_URL, {
@@ -26,19 +26,8 @@ export default function AppView() {
           Authorization: localStorage.getItem('token'),
         },
       })
-      .then((data) => console.log(data.data));
+      .then((data) => setData(data.data));
   });
-  useEffect(() => {
-    axios
-      .get(CUSTOMERS_URL, {
-        responseType: 'json',
-        headers: {
-          Accept: 'application/json',
-          Authorization: localStorage.getItem('token'),
-        },
-      })
-      .then((response) => console.log(response.data));
-  }, []);
   return (
     <Container maxWidth="xl">
       <Typography variant="h4" sx={{ mb: 5 }}>
@@ -49,7 +38,7 @@ export default function AppView() {
         <Grid xs={12} sm={6} md={3}>
           <AppWidgetSummary
             title="Active Users"
-            total={234242}
+            total={data.activeUsers}
             color="success"
             icon={<img alt="icon" src="/assets/icons/glass/ic_glass_users.png" />}
           />
@@ -58,7 +47,7 @@ export default function AppView() {
         <Grid xs={12} sm={6} md={3}>
           <AppWidgetSummary
             title="Churned Users"
-            total={23434}
+            total={data.churnUsers}
             color="info"
             icon={<img alt="icon" src="/assets/icons/glass/ic_glass_churn.png" />}
           />
@@ -67,7 +56,7 @@ export default function AppView() {
         <Grid xs={12} sm={6} md={3}>
           <AppWidgetSummary
             title="Bank Branches"
-            total={1723315}
+            total={data.bankBranches}
             color="warning"
             icon={<img alt="icon" src="/assets/icons/glass/ic_glass_bank.png" />}
           />
@@ -75,8 +64,8 @@ export default function AppView() {
 
         <Grid xs={12} sm={6} md={3}>
           <AppWidgetSummary
-            title="Total Users"
-            total={434234532}
+            title="Bug Reports"
+            total={data.bugReport}
             color="error"
             icon={<img alt="icon" src="/assets/icons/glass/ic_glass_message.png" />}
           />
