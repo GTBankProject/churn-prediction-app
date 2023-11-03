@@ -1,11 +1,11 @@
-import { useEffect, useState } from 'react';
+import { useState, useEffect } from 'react';
 
 import Container from '@mui/material/Container';
 import Grid from '@mui/material/Unstable_Grid2';
 import Typography from '@mui/material/Typography';
 
 import axios from 'src/api/axios';
-import { CUSTOMERS_URL, CUSTOMERSTATISTICS_URL } from 'src/api/routes';
+import { CUSTOMERSTATISTICS_URL } from 'src/api/routes';
 
 import AppCurrentVisits from '../app-current-visits';
 import AppWidgetSummary from '../app-widget-summary';
@@ -26,7 +26,7 @@ export default function AppView() {
           Authorization: localStorage.getItem('token'),
         },
       })
-      .then((data) => setData(data.data));
+      .then((response) => setData(response.data));
   });
   return (
     <Container maxWidth="xl">

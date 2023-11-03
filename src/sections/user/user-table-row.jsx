@@ -1,5 +1,5 @@
-import { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
+import { useState, useEffect } from 'react';
 
 import Stack from '@mui/material/Stack';
 import Avatar from '@mui/material/Avatar';
@@ -11,6 +11,9 @@ import TableCell from '@mui/material/TableCell';
 import Typography from '@mui/material/Typography';
 import IconButton from '@mui/material/IconButton';
 
+import axios from 'src/api/axios';
+import { CUSTOMERS_URL } from 'src/api/routes';
+
 import Label from 'src/components/label';
 import Iconify from 'src/components/iconify';
 
@@ -18,10 +21,7 @@ import Iconify from 'src/components/iconify';
 
 export default function UserTableRow({
   selected,
-  name,
   avatarUrl,
-  company,
-  role,
   isVerified,
   status,
   handleClick,
@@ -49,7 +49,7 @@ export default function UserTableRow({
           Authorization: localStorage.getItem('token'),
         },
       })
-      .then((data) => setData(data.data));
+      .then((response) => setData(response.data));
   }, []);
 
   return (
@@ -111,11 +111,8 @@ export default function UserTableRow({
 
 UserTableRow.propTypes = {
   avatarUrl: PropTypes.any,
-  Branch: PropTypes.any,
   handleClick: PropTypes.func,
   isVerified: PropTypes.any,
-  ID: PropTypes.any,
-  DOB: PropTypes.any,
   selected: PropTypes.any,
   status: PropTypes.string,
 };
