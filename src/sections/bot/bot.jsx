@@ -1,5 +1,6 @@
 import * as React from 'react';
 import PropTypes from 'prop-types';
+import { Icon } from '@iconify/react';
 
 import { Box, Grid, Paper, Button, Avatar, TextField, Typography } from '@mui/material';
 
@@ -50,7 +51,13 @@ export default function ChatUI() {
             />
           </Grid>
           <Grid item xs={2}>
-            <Button fullWidth color="primary" variant="contained" onClick={handleSend}>
+            <Button
+              fullWidth
+              color="primary"
+              variant="contained"
+              endIcon={<Icon icon="ant-design:send-outlined" />}
+              onClick={handleSend}
+            >
               Send
             </Button>
           </Grid>
