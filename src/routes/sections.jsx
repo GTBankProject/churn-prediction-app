@@ -10,6 +10,7 @@ export const LoginPage = lazy(() => import('src/pages/login'));
 export const OtpPage = lazy(() => import('src/pages/otp'));
 export const PredictPage = lazy(() => import('src/pages/predict'));
 export const Page404 = lazy(() => import('src/pages/page-not-found'));
+export const BotPage = lazy(() => import('src/pages/bot'));
 
 // ----------------------------------------------------------------------
 
@@ -38,6 +39,7 @@ export default function Router() {
         { path: 'user', element: <UserPage /> },
         { path: 'predict', element: <PredictPage /> },
         { path: 'report', element: <ReportPage /> },
+        { path: 'bot', element: <BotPage /> },
       ],
     },
     {

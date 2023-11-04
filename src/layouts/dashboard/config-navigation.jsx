@@ -10,21 +10,26 @@ const navConfig = [
   {
     title: 'dashboard',
     path: '/dashboard',
-    icon: icon('ic_analytics'),
+    icon: icon('ic_dashboard'),
   },
   {
-    title: 'user',
+    title: 'customers',
     path: '/user',
     icon: icon('ic_user'),
   },
   {
     title: 'predict',
     path: '/predict',
-    icon: icon('ic_cart'),
+    icon: icon('ic_analytics'),
   },
   {
     title: 'report',
     path: '/report',
+    icon: icon('ic_report'),
+  },
+  {
+    title: 'Bot',
+    path: '/bot',
     icon: icon('ic_blog'),
   },
 ];
