@@ -1,4 +1,6 @@
 import { useState } from 'react';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import { useNavigate } from 'react-router-dom';
 
 import Box from '@mui/material/Box';
@@ -27,10 +29,24 @@ export default function LoginView() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
+  const [loading, setLoading] = useState(false);
+
+  const showToast = (message, type) => {
+    toast[type](message, {
+      position: 'top-right',
+      autoClose: 3000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+    });
+  };
+
 
   const navigate = useNavigate();
 
   const handleClick = async (e) => {
+    setLoading(true);
     e.preventDefault();
     localStorage.clear();
     try {
@@ -44,10 +60,11 @@ export default function LoginView() {
         const token = response.data.access_token;
         navigate('/verification', { replace: true });
         localStorage.setItem('token', token);
-        alert('kindly verify your email');
       }
     } catch (err) {
-      alert('Unauthorized User');
+      showToast('User or Password is wrong!', 'error');
+    } finally {
+      setLoading(false);
     }
   };
   const renderForm = (
@@ -93,6 +110,8 @@ export default function LoginView() {
         variant="contained"
         color="inherit"
         onClick={handleClick}
+        loading={loading}
+        disableElevation
       >
         Login
       </LoadingButton>

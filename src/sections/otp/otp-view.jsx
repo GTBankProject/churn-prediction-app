@@ -1,4 +1,6 @@
 import { useState } from 'react';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import { useNavigate } from 'react-router-dom';
 
 import Box from '@mui/material/Box';
@@ -24,8 +26,21 @@ export default function LoginView() {
 
   const [otp, setOtp] = useState('');
   const navigate = useNavigate();
+  const [loading, setLoading] = useState(false);
+
+  const showToast = (message, type) => {
+    toast[type](message, {
+      position: 'top-right',
+      autoClose: 3000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+    });
+  };
 
   const handleClick = async (e) => {
+    setLoading(true);
     try {
       const response = await axios.post(OTP_URL, JSON.stringify({ otp }), {
         headers: {
@@ -35,13 +50,15 @@ export default function LoginView() {
         withCredentials: false,
       });
       if (response.status === 202) {
-        alert('logged in successfully');
         navigate('/dashboard ', { replace: true });
       } else {
         alert('Authorization returned null');
       }
     } catch (err) {
       alert('Acess Denied');
+      showToast('User or Password is wrong!', 'error');
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -73,6 +90,8 @@ export default function LoginView() {
         variant="contained"
         color="inherit"
         onClick={handleClick}
+        loading={loading}
+        disableElevation
       >
         Confirm OTP
       </LoadingButton>

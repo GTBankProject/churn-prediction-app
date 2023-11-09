@@ -1,6 +1,5 @@
 import PropTypes from 'prop-types';
 import { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
 
 import Stack from '@mui/material/Stack';
 import Avatar from '@mui/material/Avatar';
@@ -26,7 +25,6 @@ export default function UserTableRow({ selected, avatarUrl, isVerified, status, 
   const ID = data.uuid;
   const DoB = data.birthday;
   const Branch = data.branchMember;
-  console.log(ID);
   const handleOpenMenu = (event) => {
     setOpen(event.currentTarget);
   };
@@ -35,29 +33,26 @@ export default function UserTableRow({ selected, avatarUrl, isVerified, status, 
     setOpen(null);
   };
 
-  const navigate = useNavigate();
-
   useEffect(() => {
-    try {
-      axios
-        .get(CUSTOMERS_URL, {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(CUSTOMERS_URL, {
           responseType: 'json',
           headers: {
             Accept: 'application/json',
             Authorization: localStorage.getItem('token'),
           },
-        })
-        .then((response) => {
-          setData(response.data);
-          console.log(response);
-          if (response.status === 401) {
-            navigate('/login', { replace: true });
-          }
         });
-    } catch (err) {
-      console.log(err);
-    }
-  }, [navigate]);
+        setData(response.data);
+        console.log(response.data);
+      } catch (err) {
+        console.error(err);
+      }
+    };
+
+    fetchData();
+  }, []);
+
 
   return (
     <>
