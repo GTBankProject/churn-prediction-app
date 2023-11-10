@@ -26,6 +26,15 @@ export const primary = {
   dark: '#0C44AE',
   darker: '#042174',
   contrastText: '#FFFFFF',
+  bot: '#FFFFFF',
+  pBot: '#F0B86E',
+};
+
+export const chat = {
+  bot: '#F3B664',
+  pBot: '#EC8F5E',
+  user: '#1877F2',
+  pUser: '#ff5630',
 };
 
 export const secondary = {

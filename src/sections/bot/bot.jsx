@@ -4,21 +4,57 @@ import { Icon } from '@iconify/react';
 
 import { Box, Grid, Paper, Button, Avatar, TextField, Typography } from '@mui/material';
 
-const messages = [
-  { id: 1, text: 'Hi there!', sender: 'bot' },
-  { id: 2, text: 'Hello!', sender: 'user' },
-  { id: 3, text: 'How can I assist you today?', sender: 'bot' },
-];
+import axios from 'src/api/axios';
+import { Login_URl } from 'src/api/routes';
 
 export default function ChatUI() {
   const [input, setInput] = React.useState('');
+  const [userName, setUserName] = React.useState('');
+  const [messages, setMessages] = React.useState([]);
 
-  const handleSend = () => {
-    if (input.trim() !== '') {
-      console.log(input);
+  const checkInput = (e) => {
+    const { type, key } = e;
+    const value = input.trim();
+
+    if (!value) return;
+
+    const message = { name: userName, message: value };
+
+    if (type === 'click' || key === 'Enter') {
+      if (!userName) {
+        setUserName(value);
+        message.name = value;
+        updateChatText(message);
+      } else {
+        updateChatText(message);
+        onSendButton(message);
+      }
+
       setInput('');
     }
   };
+
+  const onSendButton = async (data) => {
+    try {
+      // Assuming baseUrl is defined somewhere in your code
+      const response = await axios.post(Login_URl, data, {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+      const { answer } = response.data;
+      const returnMessage = { name: userName, message: answer };
+      updateChatText(returnMessage);
+    } catch (error) {
+      console.error('Error:', error);
+      updateChatText({ name: userName, message: 'Error occurred...' });
+    }
+  };
+
+  const updateChatText = (newMessage) => {
+    setMessages([...messages, newMessage]);
+  };
+
 
   const handleInputChange = (event) => {
     setInput(event.target.value);
@@ -27,18 +63,37 @@ export default function ChatUI() {
   return (
     <Box
       sx={{
-        height: '100vh',
         display: 'flex',
         flexDirection: 'column',
+        overflow: 'hidden',
         bgcolor: 'grey.200',
+        position: 'relative',
       }}
     >
-      <Box sx={{ flexGrow: 1, overflow: 'auto', p: 2 }}>
-        {messages.map((message) => (
-          <Message key={message.id} message={message} />
+      <Box
+        sx={{
+          flexGrow: 1,
+          height: '87vh',
+          p: 2,
+          position: 'relative',
+        }}
+      >
+        {messages.map((message, index) => (
+          <Message key={index} message={message} />
         ))}
       </Box>
-      <Box sx={{ p: 2, backgroundColor: 'background.default' }}>
+      <Box
+        sx={{
+          position: 'fixed',
+          width: '80%',
+          bottom: 0,
+          p: 2,
+          backgroundColor: 'background.default',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+        }}
+      >
         <Grid container spacing={2}>
           <Grid item xs={10}>
             <TextField
@@ -48,15 +103,16 @@ export default function ChatUI() {
               variant="outlined"
               value={input}
               onChange={handleInputChange}
+              onKeyUp={checkInput}
             />
           </Grid>
           <Grid item xs={2}>
             <Button
               fullWidth
-              color="primary"
+              color="warning"
               variant="contained"
               endIcon={<Icon icon="ant-design:send-outlined" />}
-              onClick={handleSend}
+              onClick={() => onSendButton({ name: userName, message: input })}
             >
               Send
             </Button>
@@ -85,7 +141,7 @@ const Message = ({ message }) => {
           alignItems: 'center',
         }}
       >
-        <Avatar sx={{ bgcolor: isBot ? 'primary.main' : 'secondary.main' }}>
+        <Avatar sx={{ backgroundColor: isBot ? 'primary.darkOrange' : 'primary.pBot' }}>
           {isBot ? 'B' : 'U'}
         </Avatar>
         <Paper
@@ -94,16 +150,17 @@ const Message = ({ message }) => {
             p: 2,
             ml: isBot ? 1 : 0,
             mr: isBot ? 0 : 1,
-            backgroundColor: isBot ? 'primary.light' : 'secondary.light',
+            backgroundColor: isBot ? 'grey.0' : 'primary.bot',
             borderRadius: isBot ? '20px 20px 20px 5px' : '20px 20px 5px 20px',
           }}
         >
-          <Typography variant="body1">{message.text}</Typography>
+          <Typography variant="body1">{message.message}</Typography>
         </Paper>
       </Box>
     </Box>
   );
 };
+
 Message.propTypes = {
   message: PropTypes.object,
 };
