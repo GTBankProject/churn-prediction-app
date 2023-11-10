@@ -9,7 +9,7 @@ import { Login_URl } from 'src/api/routes';
 
 export default function ChatUI() {
   const [input, setInput] = React.useState('');
-  const [userName, setUserName] = React.useState('');
+  const [userName] = React.useState('user');
   const [messages, setMessages] = React.useState([]);
 
   const checkInput = (e) => {
@@ -22,7 +22,6 @@ export default function ChatUI() {
 
     if (type === 'click' || key === 'Enter') {
       if (!userName) {
-        setUserName(value);
         message.name = value;
         updateChatText(message);
       } else {
@@ -36,29 +35,31 @@ export default function ChatUI() {
 
   const onSendButton = async (data) => {
     try {
+      const botResponse = await (data.message);
+      const returnMessage = { name: 'bot', message: botResponse };
+      updateChatText(returnMessage);
+
       // Assuming baseUrl is defined somewhere in your code
-      const response = await axios.post(Login_URl, data, {
+      await axios.post(Login_URl, data, {
         headers: {
           'Content-Type': 'application/json',
         },
       });
-      const { answer } = response.data;
-      const returnMessage = { name: userName, message: answer };
-      updateChatText(returnMessage);
     } catch (error) {
       console.error('Error:', error);
-      updateChatText({ name: userName, message: 'Error occurred...' });
+      updateChatText({ name: 'bot', message: 'Error occurred...' });
     }
   };
 
-  const updateChatText = (newMessage) => {
-    setMessages([...messages, newMessage]);
-  };
 
+  const updateChatText = (newMessage) => {
+    setMessages((prevMessages) => [...prevMessages, newMessage]);
+  };
 
   const handleInputChange = (event) => {
     setInput(event.target.value);
   };
+
 
   return (
     <Box
@@ -124,7 +125,7 @@ export default function ChatUI() {
 }
 
 const Message = ({ message }) => {
-  const isBot = message.sender === 'bot';
+  const isBot = message.name === 'bot';
 
   return (
     <Box
