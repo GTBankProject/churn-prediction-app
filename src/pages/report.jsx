@@ -8,7 +8,7 @@ export default function ReportPage() {
   return (
     <>
       <Helmet>
-        <title> Blog | GT Bank </title>
+        <title> Report | GT Bank </title>
       </Helmet>
 
       <ReportView />

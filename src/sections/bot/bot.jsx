@@ -2,10 +2,12 @@ import * as React from 'react';
 import PropTypes from 'prop-types';
 import { Icon } from '@iconify/react';
 
-import { Box, Grid, Paper, Button, Avatar, TextField, Typography } from '@mui/material';
+import { Box, Card, Grid, Paper, Stack, Button, Avatar, TextField, Container, Typography } from '@mui/material';
 
 import axios from 'src/api/axios';
 import { BOT_URL } from 'src/api/routes';
+
+
 
 export default function ChatUI() {
   const [input, setInput] = React.useState('');
@@ -63,7 +65,7 @@ export default function ChatUI() {
 
 
   return (
-    <Box
+    <Card
       sx={{
         display: 'flex',
         flexDirection: 'column',
@@ -72,19 +74,23 @@ export default function ChatUI() {
         position: 'relative',
       }}
     >
-      <Box
+      <Stack direction="row" alignItems="center" justifyContent="space-between" mb={3}>
+        <Typography variant="h4">Churn Bot</Typography>
+      </Stack>
+      <Card
         sx={{
           flexGrow: 1,
-          height: '87vh',
+          height: '70vh',
           p: 2,
+          overflowY: 'scroll',
           position: 'relative',
         }}
       >
         {messages.map((message, index) => (
           <Message key={index} message={message} />
         ))}
-      </Box>
-      <Box
+      </Card>
+      <Card
         sx={{
           position: 'fixed',
           width: '80%',
@@ -122,8 +128,8 @@ export default function ChatUI() {
             </Button>
           </Grid>
         </Grid>
-      </Box>
-    </Box>
+      </Card>
+    </Card>
   );
 }
 
@@ -131,38 +137,39 @@ const Message = ({ message }) => {
   const isBot = message.name === 'bot';
 
   return (
-    <Box
-      sx={{
-        display: 'flex',
-        justifyContent: isBot ? 'flex-start' : 'flex-end',
-        mb: 2,
-        overflowY: 'auto',  // Add this line to make it scrollable
-      }}
-    >
+    <Container>
       <Box
         sx={{
           display: 'flex',
-          flexDirection: isBot ? 'row' : 'row-reverse',
-          alignItems: 'center',
+          justifyContent: isBot ? 'flex-start' : 'flex-end',
+          mb: 2,
         }}
       >
-        <Avatar sx={{ backgroundColor: isBot ? 'primary.darkOrange' : 'primary.pBot' }}>
-          {isBot ? 'B' : 'U'}
-        </Avatar>
-        <Paper
-          variant="outlined"
+        <Box
           sx={{
-            p: 2,
-            ml: isBot ? 1 : 0,
-            mr: isBot ? 0 : 1,
-            backgroundColor: isBot ? 'grey.0' : 'primary.bot',
-            borderRadius: isBot ? '20px 20px 20px 5px' : '20px 20px 5px 20px',
+            display: 'flex',
+            flexDirection: isBot ? 'row' : 'row-reverse',
+            alignItems: 'center',
           }}
         >
-          <Typography variant="body1">{message.message}</Typography>
-        </Paper>
+          <Avatar sx={{ backgroundColor: isBot ? 'primary.darkOrange' : 'primary.pBot' }}>
+            {isBot ? 'B' : 'U'}
+          </Avatar>
+          <Paper
+            variant="outlined"
+            sx={{
+              p: 2,
+              ml: isBot ? 1 : 0,
+              mr: isBot ? 0 : 1,
+              backgroundColor: isBot ? 'grey.0' : 'primary.bot',
+              borderRadius: isBot ? '20px 20px 20px 5px' : '20px 20px 5px 20px',
+            }}
+          >
+            <Typography variant="body1">{message.message}</Typography>
+          </Paper>
+        </Box>
       </Box>
-    </Box>
+    </Container>
   );
 };
 
