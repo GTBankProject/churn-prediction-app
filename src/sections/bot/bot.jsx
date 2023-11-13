@@ -5,7 +5,7 @@ import { Icon } from '@iconify/react';
 import { Box, Grid, Paper, Button, Avatar, TextField, Typography } from '@mui/material';
 
 import axios from 'src/api/axios';
-import { Login_URl } from 'src/api/routes';
+import { BOT_URL } from 'src/api/routes';
 
 export default function ChatUI() {
   const [input, setInput] = React.useState('');
@@ -24,6 +24,7 @@ export default function ChatUI() {
       if (!userName) {
         message.name = value;
         updateChatText(message);
+        onSendButton(message);
       } else {
         updateChatText(message);
         onSendButton(message);
@@ -35,19 +36,19 @@ export default function ChatUI() {
 
   const onSendButton = async (data) => {
     try {
-      const botResponse = await (data.message);
-      const returnMessage = { name: 'bot', message: botResponse };
-      updateChatText(returnMessage);
-
-      // Assuming baseUrl is defined somewhere in your code
-      await axios.post(Login_URl, data, {
+      const response = await axios.post(BOT_URL, data, {
         headers: {
           'Content-Type': 'application/json',
         },
       });
+      if (response.status === 500) {
+        updateChatText({ name: 'bot', message: 'Bot internal server error!' })
+      } else {
+        updateChatText({ name: 'bot', message: response.data.answer });
+      }
     } catch (error) {
       console.error('Error:', error);
-      updateChatText({ name: 'bot', message: 'Error occurred...' });
+      updateChatText({ name: 'bot', message: 'Bot service is currently down!' });
     }
   };
 
@@ -113,6 +114,8 @@ export default function ChatUI() {
               color="warning"
               variant="contained"
               endIcon={<Icon icon="ant-design:send-outlined" />}
+              onChange={handleInputChange}
+              onKeyUp={checkInput}
               onClick={() => onSendButton({ name: userName, message: input })}
             >
               Send
@@ -133,6 +136,7 @@ const Message = ({ message }) => {
         display: 'flex',
         justifyContent: isBot ? 'flex-start' : 'flex-end',
         mb: 2,
+        overflowY: 'auto',  // Add this line to make it scrollable
       }}
     >
       <Box
