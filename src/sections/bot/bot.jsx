@@ -158,6 +158,8 @@ const Message = ({ message }) => {
           <Paper
             variant="outlined"
             sx={{
+              maxWidth: message.message.length > 200 ? '60%' : '80%',
+              width: '100%',
               p: 2,
               ml: isBot ? 1 : 0,
               mr: isBot ? 0 : 1,

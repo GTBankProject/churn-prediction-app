@@ -26,7 +26,7 @@ export const primary = {
   dark: '#0C44AE',
   darker: '#042174',
   contrastText: '#FFFFFF',
-  bot: '#FFFFFF',
+  bot: '#fff3ef',
   pBot: '#F0B86E',
 };
 
