@@ -33,7 +33,7 @@ export default function UserPage() {
 
   const [filterName, setFilterName] = useState('');
 
-  const [rowsPerPage, setRowsPerPage] = useState(5);
+  const [rowsPerPage, setRowsPerPage] = useState(20);
 
   const handleSort = (event, id) => {
     const isAsc = orderBy === id && order === 'asc';
@@ -116,11 +116,11 @@ export default function UserPage() {
                 onRequestSort={handleSort}
                 onSelectAllClick={handleSelectAllClick}
                 headLabel={[
+                  { id: 'profile', label: 'Profile' },
                   { id: 'name', label: 'Name' },
-                  { id: 'company', label: 'Company' },
-                  { id: 'role', label: 'Role' },
-                  { id: 'isVerified', label: 'Verified', align: 'center' },
+                  { id: 'branch', label: 'Branch' },
                   { id: 'status', label: 'Status' },
+                  { id: 'action', label: 'Action' },
                   { id: '' },
                 ]}
               />
@@ -130,12 +130,11 @@ export default function UserPage() {
                   .map((row) => (
                     <UserTableRow
                       key={row.id}
-                      customerid={row.ID}
-                      dataofBirth={row.DoB}
+                      // customerid={row.ID}
                       status={row.status}
+                      action={row.action}
                       branch={row.Branch}
                       avatarUrl={row.avatarUrl}
-                      isVerified={row.isVerified}
                       selected={selected.indexOf(row.name) !== -1}
                       handleClick={(event) => handleClick(event, row.name)}
                     />
@@ -158,7 +157,7 @@ export default function UserPage() {
           count={users.length}
           rowsPerPage={rowsPerPage}
           onPageChange={handleChangePage}
-          rowsPerPageOptions={[5, 10, 25]}
+          rowsPerPageOptions={[5, 10, 20]}
           onRowsPerPageChange={handleChangeRowsPerPage}
         />
       </Card>

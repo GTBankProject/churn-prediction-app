@@ -1,33 +1,22 @@
 import PropTypes from 'prop-types';
 import { useState, useEffect } from 'react';
 
+import { Button } from '@mui/material';
 import Stack from '@mui/material/Stack';
 import Avatar from '@mui/material/Avatar';
 import Popover from '@mui/material/Popover';
 import TableRow from '@mui/material/TableRow';
 import Checkbox from '@mui/material/Checkbox';
-import MenuItem from '@mui/material/MenuItem';
 import TableCell from '@mui/material/TableCell';
-import Typography from '@mui/material/Typography';
-import IconButton from '@mui/material/IconButton';
 
 import axios from 'src/api/axios';
 import { CUSTOMERS_URL } from 'src/api/routes';
 
 import Label from 'src/components/label';
-import Iconify from 'src/components/iconify';
 
-// ----------------------------------------------------------------------
-
-export default function UserTableRow({ selected, avatarUrl, isVerified, status, handleClick }) {
+export default function UserTableRow({ selected, avatarUrl, handleClick, status }) {
   const [open, setOpen] = useState(null);
   const [data, setData] = useState([]);
-  const ID = data.uuid;
-  const DoB = data.birthday;
-  const Branch = data.branchMember;
-  const handleOpenMenu = (event) => {
-    setOpen(event.currentTarget);
-  };
 
   const handleCloseMenu = () => {
     setOpen(null);
@@ -40,11 +29,12 @@ export default function UserTableRow({ selected, avatarUrl, isVerified, status, 
           responseType: 'json',
           headers: {
             Accept: 'application/json',
-            Authorization: localStorage.getItem('token'),
+            // Authorization: localStorage.getItem('token'),
           },
         });
-        setData(response.data);
-        console.log(response.data);
+
+        setData(response.data.content);
+        console.log(response.data.content);
       } catch (err) {
         console.error(err);
       }
@@ -53,39 +43,42 @@ export default function UserTableRow({ selected, avatarUrl, isVerified, status, 
     fetchData();
   }, []);
 
+  const buttonStyle = {
+    backgroundColor: '#eca796',
+    color: '#FFF',
+  };
 
   return (
     <>
-      <TableRow hover tabIndex={-1} role="checkbox" selected={selected}>
-        <TableCell padding="checkbox">
-          <Checkbox disableRipple checked={selected} onChange={handleClick} />
-        </TableCell>
+      {data.map((item) => (
+        <TableRow key={item.uuid} hover tabIndex={-1} role="checkbox" selected={selected}>
+          <TableCell padding="checkbox">
+            <Checkbox disableRipple checked={selected} onChange={handleClick} />
+          </TableCell>
 
-        <TableCell component="th" scope="row" padding="none">
-          <Stack direction="row" alignItems="center" spacing={2}>
-            <Avatar alt={ID} src={avatarUrl} />
-            <Typography variant="subtitle2" noWrap>
-              {ID}
-            </Typography>
-          </Stack>
-        </TableCell>
+          <TableCell component="th" scope="row" padding="none">
+            <Stack direction="row" alignItems="center" spacing={2}>
+              <Avatar alt={item.uuid} src={item.profile} />
+            </Stack>
+          </TableCell>
 
-        <TableCell>{DoB}</TableCell>
+          <TableCell key={item.uuid}>{item.fullName}</TableCell>
 
-        <TableCell>{Branch}</TableCell>
+          <TableCell>{item.branchMember}</TableCell>
 
-        <TableCell align="center">{isVerified ? 'Yes' : 'No'}</TableCell>
+          <TableCell>
+          <Label color={item.churnFlag === '0' ? 'success' : 'error'}>
+              {item.churnFlag === '0' ? 'Active' : 'Likely Churned'}
+            </Label>
+                      </TableCell>
 
-        <TableCell>
-          <Label color={(status === 'likely churned' && 'error') || 'success'}>{status}</Label>
-        </TableCell>
-
-        <TableCell align="right">
-          <IconButton onClick={handleOpenMenu}>
-            <Iconify icon="eva:more-vertical-fill" />
-          </IconButton>
-        </TableCell>
-      </TableRow>
+          <TableCell align="left">
+            <Button href="/" size="small" variant="contained" sx={buttonStyle}>
+              View
+            </Button>
+          </TableCell>
+        </TableRow>
+      ))}
 
       <Popover
         open={!!open}
@@ -97,15 +90,7 @@ export default function UserTableRow({ selected, avatarUrl, isVerified, status, 
           sx: { width: 140 },
         }}
       >
-        <MenuItem onClick={handleCloseMenu}>
-          <Iconify icon="eva:edit-fill" sx={{ mr: 2 }} />
-          Edit
-        </MenuItem>
-
-        <MenuItem onClick={handleCloseMenu} sx={{ color: 'error.main' }}>
-          <Iconify icon="eva:trash-2-outline" sx={{ mr: 2 }} />
-          Delete
-        </MenuItem>
+        {/* ... (popover menu items) */}
       </Popover>
     </>
   );
@@ -114,7 +99,6 @@ export default function UserTableRow({ selected, avatarUrl, isVerified, status, 
 UserTableRow.propTypes = {
   avatarUrl: PropTypes.any,
   handleClick: PropTypes.func,
-  isVerified: PropTypes.any,
   selected: PropTypes.any,
-  status: PropTypes.string,
+  status: PropTypes.string.isRequired,
 };
