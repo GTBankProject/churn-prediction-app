@@ -14,22 +14,16 @@ import { CUSTOMERS_URL } from 'src/api/routes';
 
 import Label from 'src/components/label';
 
-export default function UserTableRow({ selected, avatarUrl, handleClick, status }) {
-  const [open, setOpen] = useState(null);
+export default function UserTableRow({ selected, handleClick }) {
   const [data, setData] = useState([]);
 
-  const handleCloseMenu = () => {
-    setOpen(null);
-  };
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await axios.get(CUSTOMERS_URL, {
-          responseType: 'json',
           headers: {
-            Accept: 'application/json',
-            // Authorization: localStorage.getItem('token'),
+            Authorization: localStorage.getItem('token'),
           },
         });
 
@@ -43,10 +37,12 @@ export default function UserTableRow({ selected, avatarUrl, handleClick, status 
     fetchData();
   }, []);
 
+
   const buttonStyle = {
     backgroundColor: '#eca796',
     color: '#FFF',
   };
+
 
   return (
     <>
@@ -81,9 +77,6 @@ export default function UserTableRow({ selected, avatarUrl, handleClick, status 
       ))}
 
       <Popover
-        open={!!open}
-        anchorEl={open}
-        onClose={handleCloseMenu}
         anchorOrigin={{ vertical: 'top', horizontal: 'left' }}
         transformOrigin={{ vertical: 'top', horizontal: 'right' }}
         PaperProps={{
@@ -97,8 +90,6 @@ export default function UserTableRow({ selected, avatarUrl, handleClick, status 
 }
 
 UserTableRow.propTypes = {
-  avatarUrl: PropTypes.any,
   handleClick: PropTypes.func,
   selected: PropTypes.any,
-  status: PropTypes.string.isRequired,
 };

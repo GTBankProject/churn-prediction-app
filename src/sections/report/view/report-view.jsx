@@ -20,16 +20,11 @@ export default function ReportView() {
     <Container>
       <Stack direction="row" alignItems="center" justifyContent="space-between" mb={5}>
         <Typography variant="h4">Report</Typography>
-
       </Stack>
 
       <Box
           sx={{
-            py: 12,
-            maxWidth: 480,
-            mx: 'auto',
             display: 'flex',
-            minHeight: '100vh',
             textAlign: 'center',
             alignItems: 'center',
             flexDirection: 'column',

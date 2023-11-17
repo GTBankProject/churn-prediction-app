@@ -1,53 +1,79 @@
-import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
-import Container from '@mui/material/Container';
-import Typography from '@mui/material/Typography';
+import React, { useState } from 'react';
 
-import { RouterLink } from 'src/routes/components';
+import { Grid, Button, Divider, Container, Typography } from '@mui/material';
 
-// ----------------------------------------------------------------------
+import AppCurrentProfile from '../app-current-profile';
+import AppAnalysisReport from '../app-analysis-report';
+import AppCurrentBankDetails from '../app-current-bank-details';
 
 export default function PredictionView() {
+  const [showProfile, setShowProfile] = useState(false);
 
   const buttonStyle = {
+    marginTop: -50,
     backgroundColor: '#f1512e',
     color: '#FFF',
   };
 
+  const handleAnalyzeClick = () => {
+    setShowProfile(true);
+  };
+
   return (
-    <Container>
+    <Container maxWidth="xl">
       <Typography variant="h4" sx={{ mb: 5 }}>
-        Predictions
+        User Info
       </Typography>
 
-      <Box
-          sx={{
-            py: 12,
-            maxWidth: 480,
-            mx: 'auto',
-            display: 'flex',
-            minHeight: '100vh',
-            textAlign: 'center',
-            alignItems: 'center',
-            flexDirection: 'column',
-            justifyContent: 'center',
-          }}
-        >
-          <Box
-            component="img"
-            src="/assets/illustrations/under-construction.jpg"
-            sx={{
-              mx: 'auto',
-              height: 260,
-              my: { xs: 5, sm: 10 },
-            }}
+      <Grid container spacing={3}>
+        <Grid xs={12} md={6} lg={5} sx={{ pr: 3 }}>
+          <AppCurrentProfile
+            title="Personal Information"
+            fullName="Redeemer Dela"
+            age={70}
+            phoneNumber="+233 54 791 5491"
+            email="redeemerdela419wew@gmail.com"
+            address="Adenta Housing"
           />
+        </Grid>
 
-          <Button href="/" size="large" variant="contained" component={RouterLink} style={buttonStyle}>
-            Go to Home
-          </Button>
-        </Box>
+        <Grid xs={12} md={6} lg={7}>
+          <AppCurrentBankDetails
+            title="Bank Details"
+            balance="GHC 2,000.00"
+            estimated_salary="GHC 9,500.00"
+            branch="Tema"
+            totalTransCt="54"
+            vat="50455338904"
+            creditLimit="GHC 4,000.00"
+          />
+        </Grid>
 
+        <Button size="large" variant="contained" style={buttonStyle} onClick={handleAnalyzeClick}>
+          Analyze User Data
+        </Button>
+
+        <Divider
+          style={{
+            marginTop: 20,
+            width: '100%',
+            height: 1,
+            backgroundImage: 'linear-gradient(to right, #ccc 33%, transparent 0%)',
+            backgroundSize: '6px 1px',
+            backgroundRepeat: 'repeat',
+            borderStyle: 'dashed',
+            borderWidth: 1,
+          }}
+        />
+
+        {showProfile && (
+          <Grid mt={5} md={6} lg={14} sx={{ pr: 3 }}>
+            <AppAnalysisReport
+              title="Analysis Reports"
+            />
+          </Grid>
+        )}
+      </Grid>
     </Container>
   );
 }

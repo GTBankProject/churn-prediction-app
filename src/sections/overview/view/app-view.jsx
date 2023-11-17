@@ -12,7 +12,6 @@ import AppWidgetSummary from '../app-widget-summary';
 import AppCurrentSubject from '../app-current-subject';
 import AppConversionRates from '../app-conversion-rates';
 import AppCustomerStatistics from '../app-customer-statistics';
-
 // ----------------------------------------------------------------------
 
 export default function AppView() {
