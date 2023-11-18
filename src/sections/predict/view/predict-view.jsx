@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 
 import { Grid, Button, Divider, Container, Typography } from '@mui/material';
 
+import AppBotReport from '../app-bot-report';
 import AppCurrentProfile from '../app-current-profile';
 import AppAnalysisReport from '../app-analysis-report';
 import AppCurrentBankDetails from '../app-current-bank-details';
@@ -65,15 +66,38 @@ export default function PredictionView() {
             borderWidth: 1,
           }}
         />
+      </Grid>
 
         {showProfile && (
-          <Grid mt={5} md={6} lg={14} sx={{ pr: 3 }}>
-            <AppAnalysisReport
+          <Grid container spacing={3}>
+
+            <Grid
+              mt={7}
+              md={6}
+              lg={15}
+              sx={{
+                pr: 3,
+                display: 'flex',
+                justifyContent: 'space-between',
+              }}
+            >
+
+              <AppAnalysisReport
               title="Analysis Reports"
-            />
+              subheader="Insights in Customer Churn Analysis Reports"
+
+              sx={{ flex: 1.5, mr: 3 }} />
+              <AppBotReport
+              title="Bot Report"
+              subheader="The A.I consultancy report on customer"
+
+
+              sx={{ flex: 1, lg: 10 }} />
+            </Grid>
           </Grid>
+
+
         )}
-      </Grid>
     </Container>
   );
 }

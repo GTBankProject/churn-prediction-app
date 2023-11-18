@@ -7,17 +7,17 @@ export default function AppAnalysisReport({ title, subheader, churnRate, churnAc
     <Card {...other}>
       <CardHeader title={title} subheader={subheader} />
 
-      <Box sx={{ p: 3, display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
+      <Box sx={{ p: 3, display: 'flex', flexDirection: 'row', alignItems: 'center', mt: 2 }}>
         <Box sx={{ display: 'flex', flexDirection: 'column', marginLeft: 2 }}>
           <Typography variant="body2" color="text.secondary">
-            {`Email `}
-            <Typography variant="body2" color="text.primary" sx={{ mb: 4 }}>
+            {`Churn Status `}
+            <Typography variant="body2" color="text.primary" sx={{ mb: 8 }}>
               {/* {`${email}`} */}
             </Typography>
           </Typography>
 
           <Typography variant="body2" color="text.secondary">
-            {`Phone `}
+            {`Churn Rate `}
             <Typography variant="body2" color="text.primary">
               {/* {`${phoneNumber}`} */}
             </Typography>
@@ -33,16 +33,16 @@ export default function AppAnalysisReport({ title, subheader, churnRate, churnAc
           }}
         />
 
-        <Box sx={{ display: 'flex', flexDirection: 'column', marginLeft: 5 }}>
+        <Box sx={{ display: 'flex', flexDirection: 'column', marginLeft: 20 }}>
           <Typography variant="body2" color="text.secondary">
-            {`Age `}
-            <Typography variant="body2" color="text.primary" sx={{ mb: 4 }}>
+            {`Satisfactory Rate `}
+            <Typography variant="body2" color="text.primary" sx={{ mb: 8 }}>
               {/* {`${age} years`} */}
             </Typography>
           </Typography>
 
           <Typography variant="body2" color="text.secondary">
-            {`Address `}
+            {`Churn Accuracy `}
             <Typography variant="body2" color="text.primary">
               {/* {`${address}`} */}
             </Typography>

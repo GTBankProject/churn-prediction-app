@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 import Card from '@mui/material/Card';
 import Stack from '@mui/material/Stack';
@@ -9,7 +9,9 @@ import Typography from '@mui/material/Typography';
 import TableContainer from '@mui/material/TableContainer';
 import TablePagination from '@mui/material/TablePagination';
 
-import { users } from 'src/_mock/user';
+import axios from 'src/api/axios';
+// import { users } from 'src/_mock/user';
+import { CUSTOMERS_URL } from 'src/api/routes';
 
 import Scrollbar from 'src/components/scrollbar';
 
@@ -23,7 +25,11 @@ import { emptyRows, applyFilter, getComparator } from '../utils';
 // ----------------------------------------------------------------------
 
 export default function UserPage() {
-  const [page, setPage] = useState(0);
+  const [content, setContent] = useState([]);
+
+  const [data, setData] = useState([]);
+
+  const [page, setPage] = useState(1);
 
   const [order, setOrder] = useState('asc');
 
@@ -33,7 +39,30 @@ export default function UserPage() {
 
   const [filterName, setFilterName] = useState('');
 
-  const [rowsPerPage, setRowsPerPage] = useState(20);
+  const [rowsPerPage, setRowsPerPage] = useState(10);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(CUSTOMERS_URL, {
+          headers: {
+            Authorization: localStorage.getItem('token'),
+          },
+        });
+
+        // console.log(response);
+        setData(response.data)
+        setContent(response.data.content)
+        setPage(response.data.pageable.pageNumber)
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    };
+
+    fetchData();
+
+  }, []);
+
 
   const handleSort = (event, id) => {
     const isAsc = orderBy === id && order === 'asc';
@@ -45,7 +74,7 @@ export default function UserPage() {
 
   const handleSelectAllClick = (event) => {
     if (event.target.checked) {
-      const newSelecteds = users.map((n) => n.name);
+      const newSelecteds = content.map((n) => n.name);
       setSelected(newSelecteds);
       return;
     }
@@ -75,20 +104,22 @@ export default function UserPage() {
   };
 
   const handleChangeRowsPerPage = (event) => {
-    setPage(0);
+    setPage(page);
     setRowsPerPage(parseInt(event.target.value, 10));
   };
 
   const handleFilterByName = (event) => {
-    setPage(0);
+    setPage(page);
     setFilterName(event.target.value);
   };
 
   const dataFiltered = applyFilter({
-    inputData: users,
+    inputData: content,
     comparator: getComparator(order, orderBy),
     filterName,
   });
+
+
 
   const notFound = !dataFiltered.length && !!filterName;
 
@@ -111,7 +142,7 @@ export default function UserPage() {
               <UserTableHead
                 order={order}
                 orderBy={orderBy}
-                rowCount={users.length}
+                rowCount={data.totalElements}
                 numSelected={selected.length}
                 onRequestSort={handleSort}
                 onSelectAllClick={handleSelectAllClick}
@@ -121,19 +152,14 @@ export default function UserPage() {
                   { id: 'branch', label: 'Branch' },
                   { id: 'status', label: 'Status' },
                   { id: 'action', label: 'Action' },
-                  { id: '' },
                 ]}
               />
               <TableBody>
                 {dataFiltered
-                  .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                   .map((row) => (
                     <UserTableRow
-                      key={row.id}
-                      // customerid={row.ID}
-                      status={row.status}
-                      action={row.action}
-                      branch={row.Branch}
+                      key={row.uuid}
+                      item={row}
                       avatarUrl={row.avatarUrl}
                       selected={selected.indexOf(row.name) !== -1}
                       handleClick={(event) => handleClick(event, row.name)}
@@ -142,7 +168,7 @@ export default function UserPage() {
 
                 <TableEmptyRows
                   height={77}
-                  emptyRows={emptyRows(page, rowsPerPage, users.length)}
+                  emptyRows={emptyRows(page, rowsPerPage, data.totalElements)}
                 />
 
                 {notFound && <TableNoData query={filterName} />}
@@ -154,7 +180,7 @@ export default function UserPage() {
         <TablePagination
           page={page}
           component="div"
-          count={users.length}
+          count={data.totalElements}
           rowsPerPage={rowsPerPage}
           onPageChange={handleChangePage}
           rowsPerPageOptions={[5, 10, 20]}
