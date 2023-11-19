@@ -7,29 +7,32 @@ import AppCurrentCard from './app-current-card';
 // ----------------------------------------------------------------------
 
 
-export default function AppCurrentBankDetails({ title, subheader, totalTransCt, branch, balance, fullName, creditLimit, profilePicture, estimated_salary, vat, ...other }) {
-
-
+export default function AppCurrentBankDetails({ title, subheader, totalTransCt, branch, balance, fullName, creditLimit, profilePicture, estimated_salary, cardExp, cardNumber, cardType, vat, ...other }) {
 
     return (
         <Card {...other}>
             <CardHeader title={title} subheader={subheader} sx={{ mb: 5 }} />
 
             <Box sx={{ p: 3, display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
-                <AppCurrentCard />
+                <AppCurrentCard
+                name={`${fullName}`}
+                cardExp={`${cardExp}`}
+                cardNumber={`${cardNumber}`}
+                cardType={`${cardType}`}
+                />
 
                 <Box sx={{ display: 'flex', flexDirection: 'column', marginLeft: 5 }}>
                     <Typography variant="body2" color="text.secondary">
                         {`Balance `}
                         <Typography variant="body2" color="text.primary" sx={{ mb: 4 }}>
-                            {`${balance}`}
+                            {`GHC ${balance}`}
                         </Typography>
                     </Typography>
 
                     <Typography variant="body2" color="text.secondary">
                         {`Estimated Salary `}
                         <Typography variant="body2" color="text.primary">
-                            {`${estimated_salary}`}
+                            {`GHC ${estimated_salary}`}
                         </Typography>
                     </Typography>
                 </Box>
@@ -56,7 +59,7 @@ export default function AppCurrentBankDetails({ title, subheader, totalTransCt, 
                     <Typography variant="body2" color="text.secondary">
                         {`Credit Limit `}
                         <Typography variant="body2" color="text.primary" sx={{ mb: 4 }}>
-                            {`${creditLimit}`}
+                            {`GHC ${creditLimit}`}
                         </Typography>
                     </Typography>
 
@@ -78,7 +81,10 @@ AppCurrentBankDetails.propTypes = {
     subheader: PropTypes.string,
     title: PropTypes.string,
     fullName: PropTypes.string,
+    cardExp: PropTypes.string,
+    cardNumber: PropTypes.string,
     creditLimit: PropTypes.number,
+    cardType: PropTypes.string,
     profilePicture: PropTypes.string,
     estimated_salary: PropTypes.string,
     totalTransCt: PropTypes.string,

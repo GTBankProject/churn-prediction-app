@@ -45,7 +45,7 @@ export default function AppCurrentProfile({ title, subheader, dob, email, fullNa
           </Typography>
 
           <Typography variant="body2" color="text.secondary">
-            {`Address `}
+            {`City `}
             <Typography variant="body2" color="text.primary">
               {`${address}`}
             </Typography>
