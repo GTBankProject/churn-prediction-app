@@ -11,7 +11,7 @@ import TableCell from '@mui/material/TableCell';
 import Label from 'src/components/label';
 
 export default function UserTableRow({ selected, handleClick, item }) {
-  console.log(item)
+
 
   const buttonStyle = {
     backgroundColor: '#eca796',
@@ -65,5 +65,5 @@ export default function UserTableRow({ selected, handleClick, item }) {
 UserTableRow.propTypes = {
   handleClick: PropTypes.func,
   selected: PropTypes.any,
-  item: PropTypes.any,
+  item: PropTypes.any
 };

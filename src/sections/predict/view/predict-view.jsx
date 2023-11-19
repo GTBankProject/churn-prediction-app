@@ -77,7 +77,7 @@ export default function PredictionView() {
   const age = calculateAge(data.birthday);
 
   return (
-    <Container maxWidth="xl" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+    <Container maxWidth="xl" style={{ display: 'flex', flexDirection: 'column' }}>
       {loading ? (
         <Box
           style={{
@@ -91,7 +91,7 @@ export default function PredictionView() {
         </Box>
       ) : (
         <>
-          <Typography variant="h4" sx={{ mb: 5 }}>
+          <Typography variant="h4" sx={{ mb: 5,}}>
             User Info
           </Typography>
 
