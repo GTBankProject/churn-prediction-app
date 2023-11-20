@@ -132,7 +132,7 @@ export default function LoginView() {
         sx={{
           position: 'fixed',
           top: { xs: 16, md: 24 },
-          left: { xs: 16, md: 24 },
+          right: { xs: 16, md: 24 },
         }}
       />
       <Stack alignItems="left" justifyContent="center" sx={{ height: 1, marginLeft: 20 }}>
