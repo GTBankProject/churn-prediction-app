@@ -20,7 +20,7 @@ export default function UserSearchbar() {
         onChange={handleChange}
         sx={{ width: 700, }}
       />
-      <Button variant="contained" size="large" sx={{ ml:2, backgroundColor: '#a52a2a', }}>
+      <Button variant="contained" size="large" href='/predict' sx={{ ml:2, backgroundColor: '#a52a2a', }}>
         {' '}
         <Icon icon="icon-park:search" style={{ fontSize: '40px',  }} />
       </Button>
