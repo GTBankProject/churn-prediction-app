@@ -1,7 +1,6 @@
 import { useState } from 'react';
-import { Icon } from '@iconify/react';
 
-import { Button, Container, TextField } from '@mui/material';
+import { Grid, Button, TextField } from '@mui/material';
 
 export default function UserSearchbar() {
   const [searchTerm, setSearchTerm] = useState('');
@@ -11,19 +10,19 @@ export default function UserSearchbar() {
   };
 
   return (
-    <Container maxWidth="md" sx={{ mt: 20 }}>
+    <Grid container maxWidth="md" sx={{ mt: 15, justifyContent: 'center', alignItems: 'center' }}>
       <TextField
         id="search"
         type="search"
-        label="Search Customer...."
+        label="Type Customer Name ...."
         value={searchTerm}
         onChange={handleChange}
-        sx={{ width: 700, }}
+        sx={{ width: 700, ml: 10 }}
       />
-      <Button variant="contained" size="large" href='/predict' sx={{ ml:2, backgroundColor: '#a52a2a', }}>
-        {' '}
-        <Icon icon="icon-park:search" style={{ fontSize: '40px',  }} />
+      <Button variant="contained" size="large" href='/predict' sx={{ ml: 2, backgroundColor: '#df4900', borderRadius: '10%',           '&:hover': {
+            backgroundColor: 'orange',} }}>
+        <img src="public/assets/icons/ic_search.svg" alt="Search Icon" style={{ width: 20, height: 20, color: 'white' }} />
       </Button>
-    </Container>
+    </Grid>
   );
 }
