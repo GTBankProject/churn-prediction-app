@@ -29,6 +29,7 @@ const Chart = styled(ApexChart)(({ theme }) => ({
         color: theme.palette.background.default,
       }),
       borderColor: 'transparent',
+      
       color: theme.palette.text.primary,
       boxShadow: theme.customShadows.dropdown,
       borderRadius: theme.shape.borderRadius * 1.25,
