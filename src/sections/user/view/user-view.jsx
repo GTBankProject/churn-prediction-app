@@ -50,19 +50,16 @@ export default function UserPage() {
           },
         });
 
-        // console.log(response);
-        setData(response.data)
-        setContent(response.data.content)
-        setPage(response.data.pageable.pageNumber)
+        setData(response.data);
+        setContent(response.data);
+        setPage(response.data.pageable.pageNumber);
       } catch (error) {
         console.error('Error fetching data:', error);
       }
     };
 
     fetchData();
-
   }, []);
-
 
   const handleSort = (event, id) => {
     const isAsc = orderBy === id && order === 'asc';
@@ -119,8 +116,6 @@ export default function UserPage() {
     filterName,
   });
 
-
-
   const notFound = !dataFiltered.length && !!filterName;
 
   return (
@@ -155,16 +150,15 @@ export default function UserPage() {
                 ]}
               />
               <TableBody>
-                {dataFiltered
-                  .map((row) => (
-                    <UserTableRow
-                      key={row.uuid}
-                      item={row}
-                      avatarUrl={row.avatarUrl}
-                      selected={selected.indexOf(row.name) !== -1}
-                      handleClick={(event) => handleClick(event, row.name)}
-                    />
-                  ))}
+                {dataFiltered.map((row) => (
+                  <UserTableRow
+                    key={row.uuid}
+                    item={row}
+                    avatarUrl={row.avatarUrl}
+                    selected={selected.indexOf(row.name) !== -1}
+                    handleClick={(event) => handleClick(event, row.name)}
+                  />
+                ))}
 
                 <TableEmptyRows
                   height={77}

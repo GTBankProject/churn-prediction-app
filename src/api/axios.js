@@ -1,5 +1,5 @@
 import axios from 'axios';
 
 export default axios.create({
-  baseURL: 'http://localhost:9000/api',
+  baseURL: 'https://strong-socks-care.loca.lt/api',
 });

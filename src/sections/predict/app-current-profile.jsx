@@ -3,8 +3,8 @@ import PropTypes from 'prop-types';
 import { Box, Card, Avatar, CardHeader, Typography } from '@mui/material';
 
 
-export default function AppCurrentProfile({ title, subheader, dob, email, fullName, age, profilePicture, phoneNumber, address, ...other }) {
-
+export default function AppCurrentProfile({ title, subheader, dob, email, fullName, age, profilePicture, phoneNumber, address,...other }) {
+  
   return (
     <Card {...other}>
       <CardHeader title={title} subheader={subheader} />
@@ -67,5 +67,6 @@ AppCurrentProfile.propTypes = {
   address: PropTypes.string,
   dob: PropTypes.string,
   email: PropTypes.string,
+  item: PropTypes.any
   // Add more PropTypes for additional fields
 };

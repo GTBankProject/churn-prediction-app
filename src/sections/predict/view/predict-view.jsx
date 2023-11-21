@@ -1,3 +1,4 @@
+import { useParams } from 'react-router-dom';
 import React, { useState, useEffect } from 'react';
 
 import {
@@ -37,6 +38,7 @@ function calculateAge(birthday) {
 }
 
 export default function PredictionView() {
+  const { userId } = useParams(); 
   const [showProfile, setShowProfile] = useState(false);
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -49,11 +51,12 @@ export default function PredictionView() {
             Authorization: localStorage.getItem('token'),
           },
           params: {
-            id: '0084bf8c-5a24-33fa-8aff-f458ffd0f635',
+            id: userId,
           },
         });
 
         setData(response.data);
+        console.log(data)
         setLoading(false);
       } catch (error) {
         console.error('Error fetching data:', error);
@@ -62,7 +65,7 @@ export default function PredictionView() {
     };
 
     fetchData();
-  }, []);
+  },[userId,data]);
 
   const buttonStyle = {
     marginTop: -50,

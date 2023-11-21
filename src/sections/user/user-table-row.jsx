@@ -1,4 +1,5 @@
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 
 import { Button } from '@mui/material';
 import Stack from '@mui/material/Stack';
@@ -10,6 +11,7 @@ import TableCell from '@mui/material/TableCell';
 
 import Label from 'src/components/label';
 
+
 export default function UserTableRow({ selected, handleClick, item }) {
 
 
@@ -17,6 +19,7 @@ export default function UserTableRow({ selected, handleClick, item }) {
     backgroundColor: '#eca796',
     color: '#FFF',
   };
+
 
 
   return (
@@ -43,7 +46,7 @@ export default function UserTableRow({ selected, handleClick, item }) {
           </TableCell>
 
           <TableCell align="left">
-            <Button href="/predict" size="small" variant="contained" sx={buttonStyle}>
+            <Button size="small" variant="contained" sx={buttonStyle} component={Link} to={`/predict/${item.uuid}`} >
               View
             </Button>
           </TableCell>
