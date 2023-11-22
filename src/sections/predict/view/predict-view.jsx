@@ -38,10 +38,12 @@ function calculateAge(birthday) {
 }
 
 export default function PredictionView() {
-  const { userId } = useParams(); 
+  const  userId  = useParams(); 
   const [showProfile, setShowProfile] = useState(false);
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
+
+  const userIdentification = userId.uuid
 
   useEffect(() => {
     const fetchData = async () => {
@@ -51,12 +53,11 @@ export default function PredictionView() {
             Authorization: localStorage.getItem('token'),
           },
           params: {
-            id: userId,
+            id: userIdentification ,
           },
         });
 
         setData(response.data);
-        console.log(data)
         setLoading(false);
       } catch (error) {
         console.error('Error fetching data:', error);
@@ -65,7 +66,7 @@ export default function PredictionView() {
     };
 
     fetchData();
-  },[userId,data]);
+  },[userId,userIdentification ]);
 
   const buttonStyle = {
     marginTop: -50,

@@ -1,5 +1,5 @@
 import axios from 'axios';
 
 export default axios.create({
-  baseURL: 'https://strong-socks-care.loca.lt/api',
+  baseURL: 'https://fuzzy-pots-end.loca.lt/api',
 });

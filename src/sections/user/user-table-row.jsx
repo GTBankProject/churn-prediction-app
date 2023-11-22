@@ -21,7 +21,6 @@ export default function UserTableRow({ selected, handleClick, item }) {
   };
 
 
-
   return (
     <>
         <TableRow key={item.uuid} hover tabIndex={-1} role="checkbox" selected={selected}>
