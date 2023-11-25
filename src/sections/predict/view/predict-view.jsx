@@ -1,3 +1,4 @@
+import { useParams } from 'react-router-dom';
 import React, { useState, useEffect } from 'react';
 
 import {
@@ -37,9 +38,12 @@ function calculateAge(birthday) {
 }
 
 export default function PredictionView() {
+  const  userId  = useParams();
   const [showProfile, setShowProfile] = useState(false);
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
+
+  const userIdentification = userId.uuid
 
   useEffect(() => {
     const fetchData = async () => {
@@ -49,9 +53,11 @@ export default function PredictionView() {
             Authorization: localStorage.getItem('token'),
           },
           params: {
-            id: '0084bf8c-5a24-33fa-8aff-f458ffd0f635',
+            id: userIdentification ,
           },
         });
+
+        console.log(response)
 
         setData(response.data);
         setLoading(false);
@@ -62,7 +68,7 @@ export default function PredictionView() {
     };
 
     fetchData();
-  }, []);
+  },[userId,userIdentification ]);
 
   const buttonStyle = {
     marginTop: -50,
@@ -101,7 +107,7 @@ export default function PredictionView() {
                 title="Personal Information"
                 fullName={data.fullName}
                 profilePicture={data.profile}
-                age={age + 20}
+                age={age}
                 phoneNumber="+233 54 791 5491"
                 email={data.email}
                 address={data.city}
@@ -109,6 +115,8 @@ export default function PredictionView() {
             </Grid>
 
             <Grid xs={12} md={6} lg={7}>
+            {console.log(data.cardType)}
+
               <AppCurrentBankDetails
                 title="Bank Details"
                 fullName={data.fullName}

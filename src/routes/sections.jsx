@@ -37,10 +37,10 @@ export default function Router() {
       children: [
         { path: '/dashboard', element: <IndexPage /> },
         { path: 'user', element: <UserPage /> },
-        { path: 'predict', element: <PredictPage /> },
+        { path: 'predict/:uuid', element: <PredictPage /> },
         { path: 'report', element: <ReportPage /> },
         { path: 'bot', element: <BotPage /> },
-        {path: 'search-customer', element: <SearchUsers/>},
+        {path: 'predict/search', element: <SearchUsers/>},
       ],
     },
     {

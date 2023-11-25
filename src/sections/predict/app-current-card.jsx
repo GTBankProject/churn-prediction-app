@@ -13,42 +13,47 @@ function maskCardNumber(cardNumber) {
   return maskedCardNumber;
 }
 
-export default function AppCurrentCard({name, cardExp, cardType, cardNumber, ...other }) {
-
+export default function AppCurrentCard({ name, cardExp, cardType, cardNumber, ...other }) {
   const getCardImageSource = () => {
     switch (cardType) {
-      case "Visa":
-        return "/assets/Cards/card1.svg";
-      case 'Master':
+      case 'Visa':
+        return '/assets/Cards/card1.svg';
+      case 'MasterCard':
+        return '/assets/Cards/card2.svg';
+      case 'Discover Card':
+        return '/assets/Cards/card4.svg';
+      case 'American Express':
         return '/assets/Cards/card2.svg';
       default:
-        return "/assets/Cards/card3.svg";
+        return '/assets/Cards/card4.svg';
     }
   };
 
+  const shouldHideCardContent = getCardImageSource() === '/assets/Cards/card4.svg';
+
   return (
     <Card {...other} sx={{ position: 'relative', maxWidth: 345, color: '#fff' }}>
-      <CardActionArea >
+      <CardActionArea>
         <img
           src={getCardImageSource()}
           alt="credit card"
           style={{ width: '100%', objectFit: 'cover' }}
         />
-        <CardContent gutterBottom>
-          <Typography  style={{ position: 'absolute', top: 100, left: 0, width: '100%', marginLeft: 20 }} variant="h4" component="div">
-            {maskCardNumber(cardNumber)}
+        {!shouldHideCardContent && (
+          <CardContent gutterBottom>
+            <Typography style={{ position: 'absolute', top: 100, left: 0, width: '100%', marginLeft: 20 }} variant="h4" component="div">
+              {maskCardNumber(cardNumber)}
+            </Typography>
 
-          </Typography>
+            <Typography style={{ position: 'absolute', bottom: 30, right: 0, marginRight: 20, marginBottom: 20 }} variant="h9" component="div" >
+              {`${cardExp}`}
+            </Typography>
 
-          <Typography style={{ position: 'absolute', bottom: 30, right: 0, marginRight: 20, marginBottom: 20 }} variant="h9" component="div" >
-          {`${cardExp}`}
-          </Typography>
-
-          <Typography style={{ position: 'absolute', bottom: 30, left: 0, marginLeft: 20, marginBottom: 20 }} variant="h9" component="div" >
-          {`${name}`}
-          </Typography>
-        </CardContent>
-
+            <Typography style={{ position: 'absolute', bottom: 30, left: 0, marginLeft: 20, marginBottom: 20 }} variant="h9" component="div" >
+              {`${name}`}
+            </Typography>
+          </CardContent>
+        )}
       </CardActionArea>
     </Card>
   );
@@ -59,4 +64,4 @@ AppCurrentCard.propTypes = {
   cardExp: PropTypes.string,
   cardNumber: PropTypes.string,
   cardType: PropTypes.any,
-}
+};

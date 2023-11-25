@@ -19,7 +19,7 @@ const navConfig = [
   },
   {
     title: 'predict',
-    path: '/predict',
+    path: '/predict/search',
     icon: icon('ic_analytics'),
   },
   {

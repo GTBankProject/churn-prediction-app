@@ -1,4 +1,5 @@
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 
 import { Button } from '@mui/material';
 import Stack from '@mui/material/Stack';
@@ -43,7 +44,7 @@ export default function UserTableRow({ selected, handleClick, item }) {
           </TableCell>
 
           <TableCell align="left">
-            <Button href="/predict" size="small" variant="contained" sx={buttonStyle}>
+          <Button size="small" variant="contained" sx={buttonStyle} component={Link} to={`/predict/${item.uuid}`} >
               View
             </Button>
           </TableCell>

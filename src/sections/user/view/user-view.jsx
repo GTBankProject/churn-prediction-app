@@ -1,16 +1,18 @@
-import { useState, useEffect } from 'react';
+import * as React from 'react';
 
 import Card from '@mui/material/Card';
 import Stack from '@mui/material/Stack';
 import Table from '@mui/material/Table';
+import TableRow from '@mui/material/TableRow';
 import Container from '@mui/material/Container';
 import TableBody from '@mui/material/TableBody';
+import TableCell from '@mui/material/TableCell';
 import Typography from '@mui/material/Typography';
 import TableContainer from '@mui/material/TableContainer';
 import TablePagination from '@mui/material/TablePagination';
+import CircularProgress from '@mui/material/CircularProgress';
 
 import axios from 'src/api/axios';
-// import { users } from 'src/_mock/user';
 import { CUSTOMERS_URL } from 'src/api/routes';
 
 import Scrollbar from 'src/components/scrollbar';
@@ -22,26 +24,18 @@ import TableEmptyRows from '../table-empty-rows';
 import UserTableToolbar from '../user-table-toolbar';
 import { emptyRows, applyFilter, getComparator } from '../utils';
 
-// ----------------------------------------------------------------------
-
 export default function UserPage() {
-  const [content, setContent] = useState([]);
+  const [loading, setLoading] = React.useState(true);
+  const [content, setContent] = React.useState([]);
+  const [data, setData] = React.useState([]);
+  const [page, setPage] = React.useState(1);
+  const [order, setOrder] = React.useState('asc');
+  const [selected, setSelected] = React.useState([]);
+  const [orderBy, setOrderBy] = React.useState('name');
+  const [filterName, setFilterName] = React.useState('');
+  const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
-  const [data, setData] = useState([]);
-
-  const [page, setPage] = useState(1);
-
-  const [order, setOrder] = useState('asc');
-
-  const [selected, setSelected] = useState([]);
-
-  const [orderBy, setOrderBy] = useState('name');
-
-  const [filterName, setFilterName] = useState('');
-
-  const [rowsPerPage, setRowsPerPage] = useState(10);
-
-  useEffect(() => {
+  React.useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await axios.get(CUSTOMERS_URL, {
@@ -50,19 +44,18 @@ export default function UserPage() {
           },
         });
 
-        // console.log(response);
-        setData(response.data)
-        setContent(response.data.content)
-        setPage(response.data.pageable.pageNumber)
+        setData(response.data);
+        setContent(response.data.content);
+        setPage(response.data.pageable.pageNumber);
+        setLoading(false);
       } catch (error) {
         console.error('Error fetching data:', error);
+        setLoading(false);
       }
     };
 
     fetchData();
-
   }, []);
-
 
   const handleSort = (event, id) => {
     const isAsc = orderBy === id && order === 'asc';
@@ -99,8 +92,23 @@ export default function UserPage() {
     setSelected(newSelected);
   };
 
-  const handleChangePage = (event, newPage) => {
-    setPage(newPage);
+  const handleChangePage = async (event, newPage) => {
+    try {
+      const response = await axios.get(CUSTOMERS_URL, {
+        headers: {
+          Authorization: localStorage.getItem('token'),
+        },
+        params: {
+          page: newPage + 1,
+        },
+      });
+
+      setData(response.data);
+      setContent(response.data.content);
+      setPage(response.data.pageable.pageNumber);
+    } catch (error) {
+      console.error('Error fetching data:', error);
+    }
   };
 
   const handleChangeRowsPerPage = (event) => {
@@ -118,8 +126,6 @@ export default function UserPage() {
     comparator: getComparator(order, orderBy),
     filterName,
   });
-
-
 
   const notFound = !dataFiltered.length && !!filterName;
 
@@ -155,23 +161,32 @@ export default function UserPage() {
                 ]}
               />
               <TableBody>
-                {dataFiltered
-                  .map((row) => (
-                    <UserTableRow
-                      key={row.uuid}
-                      item={row}
-                      avatarUrl={row.avatarUrl}
-                      selected={selected.indexOf(row.name) !== -1}
-                      handleClick={(event) => handleClick(event, row.name)}
+                {loading ? (
+                  <TableRow>
+                    <TableCell colSpan={5} align="center">
+                      <CircularProgress />
+                    </TableCell>
+                  </TableRow>
+                ) : (
+                  <>
+                    {dataFiltered.map((row) => (
+                      <UserTableRow
+                        key={row.uuid}
+                        item={row}
+                        avatarUrl={row.avatarUrl}
+                        selected={selected.indexOf(row.name) !== -1}
+                        handleClick={(event) => handleClick(event, row.name)}
+                      />
+                    ))}
+
+                    <TableEmptyRows
+                      height={77}
+                      emptyRows={emptyRows(page, rowsPerPage, data.totalElements)}
                     />
-                  ))}
 
-                <TableEmptyRows
-                  height={77}
-                  emptyRows={emptyRows(page, rowsPerPage, data.totalElements)}
-                />
-
-                {notFound && <TableNoData query={filterName} />}
+                    {notFound && <TableNoData query={filterName} />}
+                  </>
+                )}
               </TableBody>
             </Table>
           </TableContainer>
@@ -190,3 +205,4 @@ export default function UserPage() {
     </Container>
   );
 }
+
