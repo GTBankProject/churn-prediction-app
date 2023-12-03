@@ -22,16 +22,7 @@ export default function AppBotReport({ title, subheader, botReport, ...other }) 
                 }}
             >
                 <Typography>
-                    Lorem Ipsum is commonly used as a placeholder text in the
-                    printing and typesetting industry. Feel free to use it as
-                    needed. If you need a specific amount of Lorem Ipsum text
-                    or want variations, you can generate it using online
-                    Lorem Ipsum generators.
-                    Lorem Ipsum is commonly used as a placeholder text in the
-                    printing and typesetting industry. Feel free to use it as
-                    needed. If you need a specific amount of Lorem Ipsum text
-                    or want variations, you can generate it using online
-                    Lorem Ipsum generators.
+                {`${botReport}`}
                 </Typography>
             </Card>
 

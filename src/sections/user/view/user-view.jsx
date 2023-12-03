@@ -110,6 +110,7 @@ export default function UserPage() {
       console.error('Error fetching data:', error);
     }
   };
+  console.log(content)
 
   const handleChangeRowsPerPage = (event) => {
     setPage(page);

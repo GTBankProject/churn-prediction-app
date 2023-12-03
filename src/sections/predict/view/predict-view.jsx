@@ -1,18 +1,10 @@
 import { useParams } from 'react-router-dom';
 import React, { useState, useEffect } from 'react';
 
-import {
-  Box,
-  Grid,
-  Button,
-  Divider,
-  Container,
-  Typography,
-  CircularProgress,
-} from '@mui/material';
+import { Box, Grid, Button, Divider, Container, Typography, CircularProgress } from '@mui/material';
 
 import axios from 'src/api/axios';
-import { CUSTOMER_ONE_URL } from 'src/api/routes';
+import { BOT_URL, CHURN_ANALYSIS, CUSTOMER_ONE_URL} from 'src/api/routes';
 
 import AppBotReport from '../app-bot-report';
 import AppCurrentProfile from '../app-current-profile';
@@ -26,10 +18,7 @@ function calculateAge(birthday) {
   let age = currentDate.getFullYear() - birthDate.getFullYear();
   const monthDiff = currentDate.getMonth() - birthDate.getMonth();
 
-  if (
-    monthDiff < 0 ||
-    (monthDiff === 0 && currentDate.getDate() < birthDate.getDate())
-  ) {
+  if (monthDiff < 0 || (monthDiff === 0 && currentDate.getDate() < birthDate.getDate())) {
     // eslint-disable-next-line no-plusplus
     age--;
   }
@@ -37,14 +26,57 @@ function calculateAge(birthday) {
   return age;
 }
 
+
+
 export default function PredictionView() {
-  const  userId  = useParams();
+  const userId = useParams();
   const [showProfile, setShowProfile] = useState(false);
   const [data, setData] = useState([]);
+  const [churn, setChurn] = useState('');
   const [loading, setLoading] = useState(true);
+  const [BotResponse, setBotResponse] = useState('')
 
-  const userIdentification = userId.uuid
+  
+  
+  const HasCrCardOriginal = data.hasCrCard;
+  const IsActiveMemberOriginal = data.isActiveMember;
+  const Credit_LimitOriginal = data.creditLimit;
+  const EstimatedSalaryOriginal = data.estimatedSalary;
+  const BalanceOriginal = data.balance;
+  const Name = data.fullName
 
+  const HasCrCard = parseInt(HasCrCardOriginal, 10);
+  const IsActiveMember = parseInt(IsActiveMemberOriginal, 10);
+  const Credit_Limit = parseInt(Credit_LimitOriginal, 10);
+  const EstimatedSalary = parseInt(EstimatedSalaryOriginal, 10);
+  const Balance = parseInt(BalanceOriginal, 10);
+
+  const userIdentification = userId.uuid;
+  const Gender = GenderMain()
+  const Geography = GeographyMain()
+
+  function GenderMain(){
+    const Genders = data.gender;
+    if (Genders === "M"){
+      return 1
+    }
+  }
+  console.log(Gender)
+
+  function GeographyMain(){
+    const Geographys = data.city;
+    if (Geographys !== " "){
+      return 1
+    }
+  }
+
+  function CreateSentence() {
+    const sentence = `'Write an expert churn report and solution on the user ${Name}. with the details follwoing details:  Has credit card: ${HasCrCardOriginal}, Is an active member ${IsActiveMemberOriginal}. Note that al the 1s means Yes'`;
+    return sentence;
+  }
+  const message ="List the name of 10 customers who are in Kumasi"
+  
+console.log(CreateSentence())
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -53,11 +85,9 @@ export default function PredictionView() {
             Authorization: localStorage.getItem('token'),
           },
           params: {
-            id: userIdentification ,
+            id: userIdentification,
           },
         });
-
-        console.log(response)
 
         setData(response.data);
         setLoading(false);
@@ -68,7 +98,73 @@ export default function PredictionView() {
     };
 
     fetchData();
-  },[userId,userIdentification ]);
+  }, [userId, userIdentification]);
+  
+
+  useEffect(() => {
+    
+    const fetchData = async () => {
+      try {
+        const response = await axios.post(
+          BOT_URL,
+          JSON.stringify({
+            message
+          }),
+          {
+            headers: {
+              Authorization: localStorage.getItem('token'),
+            },
+          }
+        );
+
+        setBotResponse(response.data);
+        setLoading(false);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+        setLoading(false);
+      }
+    };
+
+    fetchData();
+  }, [message]);
+  console.log(BotResponse)
+  console.log('Converted Request Body:',{
+    message
+  })
+
+  useEffect(() => {
+    
+    const fetchData = async () => {
+      try {
+        const response = await axios.post(
+          CHURN_ANALYSIS,
+          {
+            HasCrCard,
+            IsActiveMember,
+            Credit_Limit,
+            EstimatedSalary,
+            Geography,
+            Gender,
+            Balance
+            
+          },
+          {
+            headers: {
+              Authorization: localStorage.getItem('token'),
+            },
+          }
+        );
+
+        setChurn(response.data);
+        setLoading(false);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+        setLoading(false);
+      }
+    };
+
+    fetchData();
+  }, [HasCrCard, IsActiveMember, Credit_Limit, EstimatedSalary, Geography,Gender, Balance]);
 
   const buttonStyle = {
     marginTop: -50,
@@ -79,6 +175,8 @@ export default function PredictionView() {
   const handleAnalyzeClick = () => {
     setShowProfile(true);
   };
+
+
 
   const age = calculateAge(data.birthday);
 
@@ -97,7 +195,7 @@ export default function PredictionView() {
         </Box>
       ) : (
         <>
-          <Typography variant="h4" sx={{ mb: 5,}}>
+          <Typography variant="h4" sx={{ mb: 5 }}>
             User Info
           </Typography>
 
@@ -115,7 +213,7 @@ export default function PredictionView() {
             </Grid>
 
             <Grid xs={12} md={6} lg={7}>
-            {console.log(data.cardType)}
+              {console.log(data.cardType)}
 
               <AppCurrentBankDetails
                 title="Bank Details"
@@ -146,8 +244,7 @@ export default function PredictionView() {
                 marginTop: 20,
                 width: '100%',
                 height: 1,
-                backgroundImage:
-                  'linear-gradient(to right, #ccc 33%, transparent 0%)',
+                backgroundImage: 'linear-gradient(to right, #ccc 33%, transparent 0%)',
                 backgroundSize: '6px 1px',
                 backgroundRepeat: 'repeat',
                 borderStyle: 'dashed',
@@ -172,11 +269,16 @@ export default function PredictionView() {
                   title="Analysis Reports"
                   subheader="Insights in Customer Churn Analysis Reports"
                   sx={{ flex: 1.5, mr: 3 }}
+                  churnStatus={churn.prediction}
+                  churnRate={churn.churnRate}
+                  churnAccuracy={churn.churnAccuracy}
+                  satisfactoryRate={churn.satisfactoryRate}
                 />
                 <AppBotReport
                   title="Bot Report"
                   subheader="The A.I consultancy report on customer"
                   sx={{ flex: 1, lg: 10 }}
+                  botReport = {BotResponse}
                 />
               </Grid>
             </Grid>

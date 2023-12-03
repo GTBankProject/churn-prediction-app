@@ -12,14 +12,14 @@ export default function AppAnalysisReport({ title, subheader, churnRate, churnAc
           <Typography variant="body2" color="text.secondary">
             {`Churn Status `}
             <Typography variant="body2" color="text.primary" sx={{ mb: 8 }}>
-              {/* {`${email}`} */}
+              {`${churnStatus}`}
             </Typography>
           </Typography>
 
           <Typography variant="body2" color="text.secondary">
             {`Churn Rate `}
             <Typography variant="body2" color="text.primary">
-              {/* {`${phoneNumber}`} */}
+              {`${churnRate}`}
             </Typography>
           </Typography>
         </Box>
@@ -37,14 +37,14 @@ export default function AppAnalysisReport({ title, subheader, churnRate, churnAc
           <Typography variant="body2" color="text.secondary">
             {`Satisfactory Rate `}
             <Typography variant="body2" color="text.primary" sx={{ mb: 8 }}>
-              {/* {`${age} years`} */}
+              {`${satisfactoryRate} `}
             </Typography>
           </Typography>
 
           <Typography variant="body2" color="text.secondary">
             {`Churn Accuracy `}
             <Typography variant="body2" color="text.primary">
-              {/* {`${address}`} */}
+              {`${churnAccuracy}`}
             </Typography>
           </Typography>
         </Box>
