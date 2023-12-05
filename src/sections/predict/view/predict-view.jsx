@@ -1,10 +1,18 @@
 import { useParams } from 'react-router-dom';
 import React, { useState, useEffect } from 'react';
 
-import { Box, Grid, Button, Divider, Container, Typography, CircularProgress } from '@mui/material';
+import {
+  Box,
+  Grid,
+  Button,
+  Divider,
+  Container,
+  Typography,
+  CircularProgress,
+} from '@mui/material';
 
 import axios from 'src/api/axios';
-import { BOT_URL, CHURN_ANALYSIS, CUSTOMER_ONE_URL} from 'src/api/routes';
+import { BOT_REPORT_URL, CHURN_ANALYSIS, CUSTOMER_ONE_URL } from 'src/api/routes';
 
 import AppBotReport from '../app-bot-report';
 import AppCurrentProfile from '../app-current-profile';
@@ -26,24 +34,22 @@ function calculateAge(birthday) {
   return age;
 }
 
-
-
 export default function PredictionView() {
   const userId = useParams();
   const [showProfile, setShowProfile] = useState(false);
   const [data, setData] = useState([]);
   const [churn, setChurn] = useState('');
   const [loading, setLoading] = useState(true);
-  const [BotResponse, setBotResponse] = useState('')
+  const [btnLoading, setBtnLoading] = useState(false);
+  const [BotResponse, setBotResponse] = useState([]);
 
-  
-  
+
   const HasCrCardOriginal = data.hasCrCard;
   const IsActiveMemberOriginal = data.isActiveMember;
   const Credit_LimitOriginal = data.creditLimit;
   const EstimatedSalaryOriginal = data.estimatedSalary;
   const BalanceOriginal = data.balance;
-  const Name = data.fullName
+  const UserName = data.fullName;
 
   const HasCrCard = parseInt(HasCrCardOriginal, 10);
   const IsActiveMember = parseInt(IsActiveMemberOriginal, 10);
@@ -52,31 +58,45 @@ export default function PredictionView() {
   const Balance = parseInt(BalanceOriginal, 10);
 
   const userIdentification = userId.uuid;
-  const Gender = GenderMain()
-  const Geography = GeographyMain()
+  const Gender = GenderMain();
+  const Geography = GeographyMain();
 
-  function GenderMain(){
+  function GenderMain() {
     const Genders = data.gender;
-    if (Genders === "M"){
-      return 1
+    if (Genders === 'M') {
+      return 1;
     }
   }
-  console.log(Gender)
 
-  function GeographyMain(){
+  function GeographyMain() {
     const Geographys = data.city;
-    if (Geographys !== " "){
-      return 1
+    if (Geographys !== ' ') {
+      return 1;
     }
   }
 
-  function CreateSentence() {
-    const sentence = `'Write an expert churn report and solution on the user ${Name}. with the details follwoing details:  Has credit card: ${HasCrCardOriginal}, Is an active member ${IsActiveMemberOriginal}. Note that al the 1s means Yes'`;
-    return sentence;
-  }
-  const message ="List the name of 10 customers who are in Kumasi"
-  
-console.log(CreateSentence())
+  useEffect(() => {
+    const fetchResult = async () => {
+      try {
+        const response = await axios.post(BOT_REPORT_URL, {
+          message: `Write a sample report on a customer called ${UserName} is has churn from GTBank`
+        });
+
+        console.log(response.data);
+        if (response.data.error) {
+          setBotResponse("The Bot is currently down. Please wait for a while!")
+        } else {
+          setBotResponse(response.data.result)
+        }
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    };
+
+    fetchResult();
+  },[UserName])
+
+
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -90,50 +110,19 @@ console.log(CreateSentence())
         });
 
         setData(response.data);
+        // console.log(response.data)
         setLoading(false);
+
       } catch (error) {
-        console.error('Error fetching data:', error);
+        console.error('Error fetching customer data:', error);
         setLoading(false);
       }
     };
 
     fetchData();
   }, [userId, userIdentification]);
-  
 
   useEffect(() => {
-    
-    const fetchData = async () => {
-      try {
-        const response = await axios.post(
-          BOT_URL,
-          JSON.stringify({
-            message
-          }),
-          {
-            headers: {
-              Authorization: localStorage.getItem('token'),
-            },
-          }
-        );
-
-        setBotResponse(response.data);
-        setLoading(false);
-      } catch (error) {
-        console.error('Error fetching data:', error);
-        setLoading(false);
-      }
-    };
-
-    fetchData();
-  }, [message]);
-  console.log(BotResponse)
-  console.log('Converted Request Body:',{
-    message
-  })
-
-  useEffect(() => {
-    
     const fetchData = async () => {
       try {
         const response = await axios.post(
@@ -145,8 +134,7 @@ console.log(CreateSentence())
             EstimatedSalary,
             Geography,
             Gender,
-            Balance
-            
+            Balance,
           },
           {
             headers: {
@@ -158,13 +146,13 @@ console.log(CreateSentence())
         setChurn(response.data);
         setLoading(false);
       } catch (error) {
-        console.error('Error fetching data:', error);
+        console.error('Error fetching churn analysis data:', error);
         setLoading(false);
       }
     };
 
     fetchData();
-  }, [HasCrCard, IsActiveMember, Credit_Limit, EstimatedSalary, Geography,Gender, Balance]);
+  }, [HasCrCard, IsActiveMember, Credit_Limit, EstimatedSalary, Geography, Gender, Balance]);
 
   const buttonStyle = {
     marginTop: -50,
@@ -173,10 +161,16 @@ console.log(CreateSentence())
   };
 
   const handleAnalyzeClick = () => {
-    setShowProfile(true);
+    setBtnLoading(true);
+
+    // Set a delay before setting btnLoading back to true
+    setTimeout(() => {
+      setBtnLoading(false);
+      setShowProfile(true);
+    }, 2000); // Replace with the actual duration you want
+
+
   };
-
-
 
   const age = calculateAge(data.birthday);
 
@@ -213,8 +207,6 @@ console.log(CreateSentence())
             </Grid>
 
             <Grid xs={12} md={6} lg={7}>
-              {console.log(data.cardType)}
-
               <AppCurrentBankDetails
                 title="Bank Details"
                 fullName={data.fullName}
@@ -235,8 +227,8 @@ console.log(CreateSentence())
               variant="contained"
               style={buttonStyle}
               onClick={handleAnalyzeClick}
-            >
-              Analyze User Data
+               >
+                {btnLoading ? <CircularProgress size={24} color="inherit" /> : 'Analyze User Data'}
             </Button>
 
             <Divider
@@ -278,7 +270,7 @@ console.log(CreateSentence())
                   title="Bot Report"
                   subheader="The A.I consultancy report on customer"
                   sx={{ flex: 1, lg: 10 }}
-                  botReport = {BotResponse}
+                  botReport={BotResponse}
                 />
               </Grid>
             </Grid>

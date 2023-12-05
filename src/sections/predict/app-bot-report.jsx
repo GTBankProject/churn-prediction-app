@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { Card, CardHeader, Typography } from '@mui/material';
 
 export default function AppBotReport({ title, subheader, botReport, ...other }) {
+    console.log(botReport)
     return (
         <Card {...other}>
             <CardHeader title={title} subheader={subheader} />

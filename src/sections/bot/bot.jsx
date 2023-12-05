@@ -5,7 +5,7 @@ import { Icon } from '@iconify/react';
 import { Box, Card, Grid, Paper, Stack, Button, Avatar, TextField, Container, Typography } from '@mui/material';
 
 import axios from 'src/api/axios';
-import { BOT_URL } from 'src/api/routes';
+import { BOT_ANALYZE_URL } from 'src/api/routes';
 
 
 
@@ -38,15 +38,15 @@ export default function ChatUI() {
 
   const onSendButton = async (data) => {
     try {
-      const response = await axios.post(BOT_URL, data, {
+      const response = await axios.post(BOT_ANALYZE_URL, data, {
         headers: {
           'Content-Type': 'application/json',
         },
       });
       if (response.status === 500) {
-        updateChatText({ name: 'bot', message: 'Bot internal server error!' })
+        updateChatText({ name: 'bot', message: 'Bot internal server error! Please wait for a while' })
       } else {
-        updateChatText({ name: 'bot', message: response.data.answer });
+        updateChatText({ name: 'bot', message: response.data.result });
       }
     } catch (error) {
       console.error('Error:', error);
