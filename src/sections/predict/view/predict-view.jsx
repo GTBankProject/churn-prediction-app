@@ -50,6 +50,7 @@ export default function PredictionView() {
   const EstimatedSalaryOriginal = data.estimatedSalary;
   const BalanceOriginal = data.balance;
   const UserName = data.fullName;
+  const Prediction = churn.prediction;
 
   const HasCrCard = parseInt(HasCrCardOriginal, 10);
   const IsActiveMember = parseInt(IsActiveMemberOriginal, 10);
@@ -79,7 +80,7 @@ export default function PredictionView() {
     const fetchResult = async () => {
       try {
         const response = await axios.post(BOT_REPORT_URL, {
-          message: `Write a sample report on a customer called ${UserName} is has churn from GTBank`
+          message: `write a sample report of why is ${UserName} is has ${Prediction} GTBank`
         });
 
         console.log(response.data);
@@ -94,7 +95,7 @@ export default function PredictionView() {
     };
 
     fetchResult();
-  },[UserName])
+  },[UserName, Prediction])
 
 
   useEffect(() => {
@@ -128,21 +129,21 @@ export default function PredictionView() {
         const response = await axios.post(
           CHURN_ANALYSIS,
           {
-            HasCrCard,
-            IsActiveMember,
-            Credit_Limit,
-            EstimatedSalary,
-            Geography,
-            Gender,
-            Balance,
+            "Geography": Geography,
+            "Gender": 1,
+            "HasCrCard": HasCrCard,
+            "IsActiveMember": IsActiveMember,
+            "Credit_Limit": Credit_Limit,
+            "EstimatedSalary": EstimatedSalary,
+            "Balance": Balance
           },
           {
             headers: {
-              Authorization: localStorage.getItem('token'),
+              Authorization: localStorage.getItem('token')
             },
           }
         );
-
+        console.log(response.data);
         setChurn(response.data);
         setLoading(false);
       } catch (error) {
@@ -153,6 +154,8 @@ export default function PredictionView() {
 
     fetchData();
   }, [HasCrCard, IsActiveMember, Credit_Limit, EstimatedSalary, Geography, Gender, Balance]);
+
+
 
   const buttonStyle = {
     marginTop: -50,
@@ -167,7 +170,7 @@ export default function PredictionView() {
     setTimeout(() => {
       setBtnLoading(false);
       setShowProfile(true);
-    }, 2000); // Replace with the actual duration you want
+    }, 7000); // Replace with the actual duration you want
 
 
   };
