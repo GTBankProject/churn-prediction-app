@@ -22,12 +22,15 @@ export default function SearchTableRow({ selected, item }) {
 
             <TableCell key={item.uuid}>
               {item.fullName}
-              Redeemer Dela
+            </TableCell>
+
+
+            <TableCell key={item.uuid}>
+              {item.gender}
             </TableCell>
 
             <TableCell key={item.uuid}>
               {item.branchMember}
-              Adenta
             </TableCell>
 
           </TableRow>
