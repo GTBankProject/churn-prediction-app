@@ -83,8 +83,8 @@ export default function PredictionView() {
           message: `write a sample report of why is ${UserName} is has ${Prediction} GTBank`
         });
 
-        console.log(response.data);
-        if (response.data.error) {
+        console.log(response);
+        if (!response.data.result) {
           setBotResponse("The Bot is currently down. Please wait for a while!")
         } else {
           setBotResponse(response.data.result)
