@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 
 import { Grid, Button, TextField } from '@mui/material';
 
-const UserSearchbar = ({ onSearch }) => {
+const UserSearchBar = ({ onSearch }) => {
   const [searchTerm, setSearchTerm] = useState('');
 
   const handleChange = (event) => {
@@ -12,17 +12,13 @@ const UserSearchbar = ({ onSearch }) => {
   };
 
   const handleSearch = () => {
-    // Log the data or perform any action before triggering the search
-    console.log('Search term:', searchTerm);
 
-    // Trigger the search callback if provided
     if (onSearch) {
       onSearch(searchTerm);
     }
   };
 
   const handleKeyPress = (event) => {
-    // Check if the Enter key is pressed
     if (event.key === 'Enter') {
       handleSearch();
     }
@@ -61,8 +57,8 @@ const UserSearchbar = ({ onSearch }) => {
   );
 };
 
-UserSearchbar.propTypes = {
+UserSearchBar.propTypes = {
   onSearch: PropTypes.func,
 };
 
-export default UserSearchbar;
+export default UserSearchBar;
