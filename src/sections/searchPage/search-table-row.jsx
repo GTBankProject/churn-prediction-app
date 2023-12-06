@@ -1,5 +1,7 @@
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 
+import { Button } from '@mui/material';
 import Stack from '@mui/material/Stack';
 import Avatar from '@mui/material/Avatar';
 import Popover from '@mui/material/Popover';
@@ -7,6 +9,13 @@ import TableRow from '@mui/material/TableRow';
 import TableCell from '@mui/material/TableCell';
 
 export default function SearchTableRow({ selected, item }) {
+
+  const buttonStyle = {
+    backgroundColor: '#eca796',
+    color: '#FFF',
+  };
+
+
   return (
     <>
           <TableRow key={item.uuid} hover tabIndex={-1} role="checkbox" selected={selected}>
@@ -38,6 +47,12 @@ export default function SearchTableRow({ selected, item }) {
                 {item.branchMember}
               </Stack>
             </TableCell>
+
+            <TableCell align="left">
+          <Button size="small" variant="contained" sx={buttonStyle} component={Link} to={`/predict/${item.uuid}`} >
+              View
+            </Button>
+          </TableCell>
           </TableRow>
 
       <Popover
